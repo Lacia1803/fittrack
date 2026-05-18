@@ -30,6 +30,21 @@ export default function Sidebar({ profile }: { profile: Profile | null }) {
   const supabase = createClient()
   const [isLight, setIsLight] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [isOnline, setIsOnline] = useState(true)
+
+  // Track online/offline status
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    setIsOnline(navigator.onLine)
+    const handleOnline = () => setIsOnline(true)
+    const handleOffline = () => setIsOnline(false)
+    window.addEventListener('online', handleOnline)
+    window.addEventListener('offline', handleOffline)
+    return () => {
+      window.removeEventListener('online', handleOnline)
+      window.removeEventListener('offline', handleOffline)
+    }
+  }, [])
 
   // Load saved theme
   useEffect(() => {
@@ -184,6 +199,17 @@ export default function Sidebar({ profile }: { profile: Profile | null }) {
               <p className="text-white text-sm font-medium truncate">
                 {profile?.full_name || 'User'}
               </p>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className={cn(
+                  "h-1.5 w-1.5 rounded-full shrink-0",
+                  isOnline 
+                    ? "bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" 
+                    : "bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.5)]"
+                )} />
+                <span className="text-[10px] text-slate-400 font-medium">
+                  {isOnline ? 'Trực tuyến' : 'Ngoại tuyến'}
+                </span>
+              </div>
             </div>
           </div>
           
