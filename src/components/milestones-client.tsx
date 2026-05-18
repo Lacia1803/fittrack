@@ -29,6 +29,11 @@ export default function MilestonesClient({
   const { toast } = useToast()
   const supabase = createClient()
 
+  // ===================================================================
+  // Real-time Event Subscription for Milestones Tracking & Toast Alerts
+  // ===================================================================
+  // Listens to insert changes on Supabase Postgres tables workout_sessions 
+  // and progress_photos. Automatically fires celebratory toast achievements.
   useEffect(() => {
     // Realtime subscription cho workout_sessions
     const channel = supabase
