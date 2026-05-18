@@ -14,6 +14,12 @@ export default function SeedDataButton() {
   const { toast } = useToast()
   const supabase = createClient()
 
+  // ===================================================================
+  // 1-Click Database Seeding Flow
+  // ===================================================================
+  // Pre-populates all necessary Postgres tables (workout_plans, workout_sessions,
+  // session_exercises, milestones, progress_photos) with 7 days of structured 
+  // fitness history for instantaneous presentation and verification.
   const handleSeed = async () => {
     setLoading(true)
     try {
