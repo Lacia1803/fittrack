@@ -39,6 +39,11 @@ export default function ProfileClient({ profile }: { profile: Profile | null }) 
     return { label: 'Béo phì', color: 'text-red-400' }
   }
 
+  // ===================================================================
+  // Native PDF Export (Print Stylesheet Optimization)
+  // ===================================================================
+  // Compiles bio metrics and workout history, opens a print-friendly iframe, 
+  // and triggers the browser's native Vector PDF printing dialog instantly.
   const handleExportReport = async () => {
     setLoading(true)
     try {
