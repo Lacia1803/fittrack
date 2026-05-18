@@ -1,0 +1,23 @@
+{
+  "name": "FitTrack - Theo dõi tập luyện chuyên nghiệp",
+  "short_name": "FitTrack",
+  "description": "Theo dõi tập luyện, calo, dinh dưỡng macro và tư vấn Huấn luyện viên AI chuyên nghiệp.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
