@@ -67,18 +67,26 @@ export default function NutritionTrackerPage() {
     localStorage.setItem(`nutrition_${todayDate}`, JSON.stringify(newIntake))
   }
 
+  // ==========================================
   // BMR & TDEE Calculations (Mifflin-St Jeor)
+  // ==========================================
+  // BMR (Basal Metabolic Rate): resting energy expenditure.
+  // Formula: BMR = 10 * weight (kg) + 6.25 * height (cm) - 5 * age + s (where s is +5 for men, -161 for women)
+  // TDEE (Total Daily Energy Expenditure): daily calorie burn factoring in Activity Levels.
   const weight = profile?.weight_kg || 70
   const height = profile?.height_cm || 170
-  const bmr = Math.round(10 * weight + 6.25 * height - 5 * 25 + 5) // assume 25 years old
+  const bmr = Math.round(10 * weight + 6.25 * height - 5 * 25 + 5) // assume average 25 years old
   const tdee = Math.round(bmr * activity)
 
-  // Calorie & Macros target based on Goal
+  // Calorie & Macros target based on Goal:
+  // - Cut: Caloric deficit (-500 kcal) for fat loss
+  // - Bulk: Caloric surplus (+300 kcal) for lean muscle growth
+  // - Maintain: Balanced energy intake matching TDEE
   let targetCal = tdee
   if (goal === 'cut') targetCal = tdee - 500
   if (goal === 'bulk') targetCal = tdee + 300
 
-  // 40% Carb - 30% Protein - 30% Fat split ratio for lifters
+  // 40% Carb - 30% Protein - 30% Fat split ratio optimized for lifters and bodybuilding
   const targetProt = Math.round((targetCal * 0.3) / 4)
   const targetCarbs = Math.round((targetCal * 0.4) / 4)
   const targetFats = Math.round((targetCal * 0.3) / 9)
