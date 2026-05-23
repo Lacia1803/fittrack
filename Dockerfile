@@ -1,31 +1,34 @@
-# Base image
-FROM node:18-alpine
+# Dependencies
+FROM node:18-alpine AS deps
 
 WORKDIR /app
-
-# Cài đặt thư viện hệ thống cần thiết
 RUN apk add --no-cache libc6-compat
-
-# Copy package configuration
 COPY package*.json ./
-
-# Cài đặt clean dependencies
 RUN npm ci
 
-# Copy toàn bộ mã nguồn dự án
+# Build
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+RUN apk add --no-cache libc6-compat
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Tắt telemetry của Next.js để tăng tốc độ và bảo mật
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_ENV=production
-ENV PORT=3000
-ENV HOST=0.0.0.0
-
-# Build ứng dụng Next.js sang bản production tối ưu hóa
 RUN npm run build
 
-# Mở cổng 3000
-EXPOSE 3000
+# Runtime
+FROM node:18-alpine AS runner
 
-# Chạy Next.js production server
+WORKDIR /app
+RUN apk add --no-cache libc6-compat
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOST=0.0.0.0
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.ts ./next.config.ts
+EXPOSE 3000
 CMD ["npm", "start"]

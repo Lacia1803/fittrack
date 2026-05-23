@@ -1,32 +1,35 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import { Toaster } from '@/components/ui/toaster'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import ServiceWorkerRegister from "@/components/service-worker-register";
 
-const inter = Inter({ subsets: ['latin', 'vietnamese'] })
+const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
 export const metadata: Metadata = {
-  title: 'FitTrack - Theo dõi tập luyện chuyên nghiệp',
-  description: 'Theo dõi tập luyện, calo, dinh dưỡng macro và tư vấn Huấn luyện viên AI chuyên nghiệp.',
-  manifest: '/manifest.json',
+  title: "FitTrack - Theo dõi tập luyện chuyên nghiệp",
+  description:
+    "Theo dõi tập luyện, calo, dinh dưỡng macro và tư vấn Huấn luyện viên AI chuyên nghiệp.",
+  manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'black-translucent',
-    title: 'FitTrack',
+    statusBarStyle: "black-translucent",
+    title: "FitTrack",
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="vi">
       <body className={inter.className}>
         {children}
         <Toaster />
+        <ServiceWorkerRegister />
       </body>
     </html>
-  )
+  );
 }
