@@ -31,8 +31,8 @@ export default function HomePage() {
           <span className="bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xxs sm:text-xs font-bold px-3.5 py-1.5 rounded-full uppercase tracking-widest inline-block mb-6">
             ✨ HỆ THỐNG FITNESS THẾ HỆ MỚI
           </span>
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-6 leading-tight tracking-tight">
-            NÂNG TẦM <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">THỂ HÌNH</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-6 leading-normal tracking-tight py-2">
+            NÂNG TẦM <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 inline-block py-1">THỂ HÌNH</span>
           </h1>
           <p className="text-base sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
             Ghi nhận hiệp tập chi tiết, theo dõi calories dinh dưỡng, phân tích tiến trình Volume tăng tiến tạ và đồng hành cùng Trợ lý Coach AI thông minh.
