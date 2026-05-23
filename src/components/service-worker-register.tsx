@@ -7,17 +7,18 @@ export default function ServiceWorkerRegister() {
     if (typeof window === "undefined" || !("serviceWorker" in navigator))
       return;
 
-    const handleLoad = () => {
-      navigator.serviceWorker
-        .register("/sw.js", { scope: "/" })
-        .then((registration) => {
-          registration.update();
-        })
-        .catch(() => {});
-    };
+    // Hard-kil all service workers and caches to completely purge old versions
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (const r of registrations) {
+        r.unregister();
+      }
+    });
 
-    window.addEventListener("load", handleLoad);
-    return () => window.removeEventListener("load", handleLoad);
+    if (window.caches) {
+      caches.keys().then((keys) => {
+        keys.forEach((key) => caches.delete(key));
+      });
+    }
   }, []);
 
   return null;

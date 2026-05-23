@@ -127,9 +127,9 @@ export default function HomePage() {
               <Sparkles className="h-3.5 w-3.5" /> AI-Powered Workout &
               Nutrition
             </span>
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white leading-[1.02] tracking-tight py-2">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white leading-[1.15] tracking-tight py-2">
               NÂNG TẦM{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 inline-block py-1">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600 inline-block pt-4 pb-2 -mt-4">
                 THỂ HÌNH
               </span>
             </h1>
