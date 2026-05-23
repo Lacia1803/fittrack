@@ -75,3 +75,69 @@ html.light-theme .text-slate-100 {
   color: var(--text-slate-200) !important;
 }
 
+/* 💎 Premium Glow Background Gradient (Linear & SaaS Inspired) */
+.premium-glow-bg {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.06) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, rgba(244, 63, 94, 0.04) 0px, transparent 40%),
+    radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+html.light-theme .premium-glow-bg {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, rgba(244, 63, 94, 0.02) 0px, transparent 40%),
+    radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.03) 0px, transparent 50%);
+}
+
+/* 💎 Glassmorphism Card Style */
+.premium-glass-card {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.light-theme .premium-glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.premium-glass-card:hover {
+  border-color: rgba(249, 115, 22, 0.25);
+  box-shadow: 0 10px 40px -10px rgba(249, 115, 22, 0.12);
+  transform: translateY(-2px);
+}
+
+/* 💎 Custom Webkit Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.4);
+}
+
+html.light-theme ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+html.light-theme ::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.4);
+}
+

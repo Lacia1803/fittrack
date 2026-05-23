@@ -1,0 +1,11 @@
+{
+  "kind": "critique-panel",
+  "score": 4,
+  "axes": {
+    "clarity": { "score": 4, "notes": "CTA và luồng điều hướng rõ ràng cho từng màn hình." },
+    "hierarchy": { "score": 4, "notes": "Hero, biểu đồ, và rest timer là điểm tập trung chính." },
+    "typography": { "score": 4, "notes": "Display + body phân cấp tốt, hỗ trợ tiếng Việt." },
+    "motion": { "score": 4, "notes": "Tương tác timer, chart toggle, chat đáp ứng tạo cảm giác sống." },
+    "brand": { "score": 5, "notes": "Dark slate + neon orange nhất quán, glassmorphism premium." }
+  }
+}

@@ -162,11 +162,21 @@ export default async function SessionDetailsPage({ params }: PageProps) {
 
                     {setsDetail ? (
                       <div className="space-y-2 pt-1">
-                        <span className="text-slate-500 text-xxs uppercase font-semibold tracking-wider">Thông số các hiệp:</span>
+                        <span className="text-slate-500 text-[10px] uppercase font-semibold tracking-wider block">Thông số các hiệp:</span>
                         <div className="flex flex-wrap gap-2">
                           {setsDetail.map((set: any, sIdx: number) => (
-                            <span key={sIdx} className="bg-slate-950/40 border border-slate-800/80 text-slate-300 text-xs px-2.5 py-1.5 rounded-lg font-mono">
-                              Set {sIdx + 1}: <span className="font-bold text-orange-400">{set.weight_kg === '' || set.weight_kg === 0 ? 'BW' : `${set.weight_kg}kg`}</span> × <span className="font-bold text-white">{set.reps || 0}</span>
+                            <span
+                              key={sIdx}
+                              className={`bg-slate-950/40 border text-xs px-2.5 py-1.5 rounded-lg font-mono flex items-center gap-1.5 ${
+                                set.completed ? 'border-orange-500/30 text-white' : 'border-slate-800/80 text-slate-500'
+                              }`}
+                            >
+                              <span>Hiệp {sIdx + 1}:</span>
+                              <span className="font-bold text-orange-400">{set.weight_kg === '' || set.weight_kg === 0 ? 'BW' : `${set.weight_kg}kg`}</span>
+                              <span>×</span>
+                              <span className="font-bold text-white">{set.reps || 0}</span>
+                              {set.rpe && <span className="text-slate-500 text-[10px]">(RPE {set.rpe})</span>}
+                              {set.completed && <span className="text-[10px] bg-orange-500/15 text-orange-400 px-1 rounded-sm">✓</span>}
                             </span>
                           ))}
                         </div>

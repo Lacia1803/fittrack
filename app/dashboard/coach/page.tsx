@@ -1,12 +1,14 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Bot, User, Send, Sparkles, Key, Loader2, Dumbbell, Award, Flame, Brain } from 'lucide-react'
+import { Bot, User, Send, Sparkles, Key, Loader2, Dumbbell, Award, Flame, Brain, Apple, Layers, RefreshCw } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { format } from 'date-fns'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -22,6 +24,8 @@ export default function AICoachPage() {
   const [showKeyInput, setShowKeyInput] = useState(false)
   const [profile, setProfile] = useState<any>(null)
   const [sessions, setSessions] = useState<any[]>([])
+  const [nutrition, setNutrition] = useState({ calories: 0 })
+  const [offlineCount, setOfflineCount] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const { toast } = useToast()
   const supabase = createClient()
@@ -50,13 +54,22 @@ export default function AICoachPage() {
     if (typeof window !== 'undefined') {
       const savedKey = localStorage.getItem('gemini_api_key') || ''
       setApiKey(savedKey)
+
+      const todayStr = format(new Date(), 'yyyy-MM-dd')
+      const savedNut = localStorage.getItem(`nutrition_${todayStr}`)
+      if (savedNut) {
+        setNutrition(JSON.parse(savedNut))
+      }
+
+      const pending = JSON.parse(localStorage.getItem('pending_sessions') || '[]')
+      setOfflineCount(pending.length)
     }
 
     // Welcoming message
     setMessages([
       {
         role: 'assistant',
-        content: `Xin chào! Tôi là **Coach AI**, huấn luyện viên thể hình cá nhân của bạn. 🏋️‍♂️\n\nTôi có thể đọc dữ liệu tập luyện của bạn để phân tích hiệu suất, nhận xét BMI, và lên thực đơn dinh dưỡng. Bạn có thể sử dụng các gợi ý nhanh bên dưới hoặc tự nhập câu hỏi nhé!`,
+        content: `Chào bạn! Hôm nay FitTrack ghi nhận ${sessions.length || 5} buổi tập liên tiếp. Bạn muốn tối ưu phần nào? Hỏi nhanh về bài tập, tempo, macro và lịch phục hồi.`,
         timestamp: new Date()
       }
     ])
@@ -210,91 +223,92 @@ Câu hỏi: "${textToSend}"`
   }
 
   const quickPrompts = [
-    { text: '📊 Phân tích thể trạng & BMI', prompt: 'Hãy phân tích chỉ số thể trạng và BMI của tôi' },
-    { text: '🏋️ Nhận xét hiệu suất tập luyện', prompt: 'Hãy đánh giá hiệu suất tập luyện gần đây của tôi' },
-    { text: '📅 Gợi ý lịch tập tối ưu', prompt: 'Gợi ý lịch tập tối ưu 3 ngày 1 tuần cho tôi' },
-    { text: '🥗 Tư vấn ăn uống tăng cơ', prompt: 'Tư vấn lượng Calo và Dinh dưỡng để tăng cơ' },
+    { text: 'Lịch tập 4 tuần', prompt: 'Lịch tập 4 tuần tăng cơ?' },
+    { text: 'Tempo set 3', prompt: 'Nên chỉnh tempo set 3 thế nào?' },
+    { text: 'Bữa ăn 1,900 kcal', prompt: 'Gợi ý bữa ăn 1,900 kcal' },
+    { text: 'Tăng tải?', prompt: 'Có nên tăng tải tuần này?' },
   ]
 
+  // Nutrition targets (match nutrition/page.tsx formula)
+  const weight = profile?.weight_kg || 70
+  const height = profile?.height_cm || 170
+  const bmr = Math.round(10 * weight + 6.25 * height - 5 * 25 + 5)
+  const tdee = Math.round(bmr * 1.375) // light activity
+  const targetCal = tdee
+  const remainingCal = Math.max(targetCal - (nutrition.calories || 0), 0)
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-120px)] max-h-[850px]">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[calc(100vh-140px)]">
       
-      {/* Cột trái: Stats & Key Setup */}
-      <div className="space-y-6 flex flex-col justify-between lg:col-span-1">
-        
-        {/* Profile Stats Quickcard */}
-        <Card className="bg-slate-900/40 border-slate-700/50 backdrop-blur-md">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-white text-lg flex items-center gap-2">
-              <Brain className="h-5 w-5 text-orange-500" />
-              Thông tin Huấn luyện
-            </CardTitle>
-            <CardDescription className="text-slate-400">Số liệu cơ thể dùng để phân tích</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="bg-slate-800/40 border border-slate-700/30 rounded-xl p-3">
-                <span className="text-slate-500 text-xs block">Chiều cao</span>
-                <span className="text-lg font-bold text-white mt-1 block">{profile?.height_cm || '—'} cm</span>
-              </div>
-              <div className="bg-slate-800/40 border border-slate-700/30 rounded-xl p-3">
-                <span className="text-slate-500 text-xs block">Cân nặng</span>
-                <span className="text-lg font-bold text-white mt-1 block">{profile?.weight_kg || '—'} kg</span>
-              </div>
+      {/* Cột trái (Sidebar) */}
+      <div className="lg:col-span-4 space-y-4">
+        <div className="bg-gradient-to-b from-white/8 to-white/2 border border-white/12 rounded-[20px] p-5 shadow-xl backdrop-blur-md space-y-4">
+          <div className="text-white font-bold text-sm tracking-wider uppercase flex items-center gap-2">
+            <Brain className="h-5 w-5 text-orange-500" />
+            Trạng thái tập luyện
+          </div>
+
+          <div className="space-y-3">
+            {/* Goal card */}
+            <div className="p-3.5 rounded-xl border border-white/8 bg-white/[0.02]">
+              <strong className="text-white text-sm block">Tuần 21 · Tăng cơ</strong>
+              <small className="text-slate-400 text-xs mt-0.5 block">AI Coach đang theo dõi volume tập của bạn</small>
             </div>
 
-            <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl p-3.5 flex items-center justify-between">
-              <div>
-                <span className="text-slate-500 text-xs block">Chỉ số BMI ước tính</span>
-                <span className="text-xl font-bold text-orange-500 mt-1 block">
-                  {profile?.weight_kg && profile?.height_cm
-                    ? (profile.weight_kg / Math.pow(profile.height_cm / 100, 2)).toFixed(1)
-                    : 'Chưa có'}
-                </span>
-              </div>
-              <Award className="h-8 w-8 text-orange-500/20" />
+            {/* Nutrition summary */}
+            <div className="p-3.5 rounded-xl border border-white/8 bg-white/[0.02]">
+              <strong className="text-white text-sm block">Dinh dưỡng hôm nay</strong>
+              <small className="text-slate-400 text-xs mt-0.5 block">
+                {nutrition.calories || 0} kcal ăn vào · Còn lại {remainingCal} kcal
+              </small>
             </div>
 
-            <div className="bg-slate-800/20 border border-slate-700/30 rounded-xl p-3.5 flex items-center justify-between">
-              <div>
-                <span className="text-slate-500 text-xs block">Tổng số buổi tập tích luỹ</span>
-                <span className="text-xl font-bold text-white mt-1 block">{sessions.length} buổi</span>
-              </div>
-              <Dumbbell className="h-8 w-8 text-slate-500/20" />
+            {/* Recommendation */}
+            <div className="p-3.5 rounded-xl border border-white/8 bg-white/[0.02]">
+              <strong className="text-white text-sm block">Gợi ý bài tập mới</strong>
+              <small className="text-slate-400 text-xs mt-0.5 block">Thay thế Dumbbell Incline Press → Cable Fly</small>
             </div>
-          </CardContent>
-        </Card>
+
+            {/* Offline Sync info */}
+            <div className="p-3.5 rounded-xl border border-white/8 bg-white/[0.02]">
+              <strong className="text-white text-sm block">Offline Sync</strong>
+              <small className="text-slate-400 text-xs mt-0.5 block">
+                Đã đồng bộ {sessions.length} buổi tập{offlineCount > 0 ? ` · ${offlineCount} buổi đang chờ` : ''}
+              </small>
+            </div>
+          </div>
+        </div>
 
         {/* API Key Panel */}
-        <Card className="bg-slate-900/40 border-slate-700/50 backdrop-blur-md">
-          <CardContent className="pt-6 space-y-3">
+        <Card className="premium-glass-card">
+          <CardContent className="pt-5 space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-white text-sm font-semibold flex items-center gap-2">
+              <span className="text-white text-xs font-semibold flex items-center gap-2">
                 <Key className="h-4 w-4 text-amber-500" />
-                Dịch vụ AI
+                Cấu hình API Key
               </span>
-              <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${apiKey ? 'bg-green-500/10 text-green-400' : 'bg-orange-500/10 text-orange-400'}`}>
+              <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${apiKey ? 'bg-green-500/10 text-green-400' : 'bg-orange-500/10 text-orange-400'}`}>
                 {apiKey ? 'Live AI Mode' : 'Local Expert Mode'}
               </span>
             </div>
             
-            <p className="text-slate-400 text-xs leading-relaxed">
+            <p className="text-slate-400 text-[11px] leading-normal">
               {apiKey 
-                ? 'Bạn đang trò chuyện tự do với trí tuệ nhân tạo Gemini 2.5 Flash cao cấp.' 
-                : 'Đang chạy mô phỏng chuyên gia thể hình tại chỗ. Dán Gemini API Key của bạn để trò chuyện tự do.'}
+                ? 'Đã cấu hình API key. Bạn đang trò chuyện trực tiếp với Gemini 2.5 Flash.' 
+                : 'Đang chạy chuyên gia thể hình tại chỗ. Dán Gemini API Key để trò chuyện không giới hạn.'}
             </p>
 
             <Button
               onClick={() => setShowKeyInput(!showKeyInput)}
               variant="outline"
               size="sm"
-              className="w-full border-slate-700 hover:bg-slate-800 text-slate-300 text-xs"
+              className="w-full border-slate-700 hover:bg-slate-800 text-slate-300 text-[11px]"
             >
               {apiKey ? '🔑 Thay đổi / Xoá API Key' : '🔑 Nhập Gemini API Key'}
             </Button>
 
             {showKeyInput && (
-              <div className="space-y-2.5 pt-2 border-t border-slate-800">
+              <div className="space-y-2 pt-2 border-t border-slate-800">
                 <Input
                   type="password"
                   placeholder="AIzaSy..."
@@ -318,83 +332,79 @@ Câu hỏi: "${textToSend}"`
         </Card>
       </div>
 
-      {/* Cột phải: Chat Interface */}
-      <Card className="lg:col-span-2 bg-slate-900/40 border-slate-700/50 backdrop-blur-md flex flex-col h-full overflow-hidden">
-        <CardHeader className="border-b border-slate-800/80 flex flex-row items-center gap-3 py-4">
-          <div className="bg-orange-500/10 p-2.5 rounded-xl text-orange-500">
-            <Bot className="h-6 w-6" />
-          </div>
+      {/* Cột phải (Chat Interface) */}
+      <div className="lg:col-span-8 flex flex-col h-[calc(100vh-140px)] min-h-[500px]">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4">
           <div>
-            <CardTitle className="text-white text-md">Huấn Luyện Viên Cá Nhân AI</CardTitle>
-            <CardDescription className="text-slate-500 text-xs">Phản hồi dựa trên khoa học thể thao & thể hình</CardDescription>
+            <h1 className="text-2xl font-bold text-white">AI Coach · Tư vấn theo ngữ cảnh</h1>
+            <p className="text-slate-400 text-xs">Hỏi nhanh về bài tập, tempo, macro và lịch phục hồi.</p>
           </div>
-        </CardHeader>
+          <Link href="/dashboard" className="text-slate-400 hover:text-white text-xs transition-colors underline">
+            Quay lại dashboard
+          </Link>
+        </div>
 
-        {/* Khung chat */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[350px]">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}
+        {/* Chips */}
+        <div className="flex flex-wrap gap-2 pb-4">
+          {quickPrompts.map((qp, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleSend(qp.prompt)}
+              disabled={loading}
+              className="px-3.5 py-1.5 rounded-full border border-white/10 text-slate-400 hover:text-orange-500 hover:border-orange-500/40 text-xs bg-white/[0.03] transition-colors active:scale-95 disabled:opacity-50"
             >
-              <div className={`p-2.5 rounded-xl flex items-center justify-center shrink-0 h-9 w-9 ${msg.role === 'user' ? 'bg-orange-500 text-white' : 'bg-slate-800 text-orange-500 border border-slate-700/30'}`}>
-                {msg.role === 'user' ? <User className="h-5 w-5" /> : <Bot className="h-5 w-5" />}
-              </div>
-              <div className={`rounded-2xl p-3 text-sm leading-relaxed ${msg.role === 'user' ? 'bg-orange-500 text-white rounded-tr-none' : 'bg-slate-800/50 border border-slate-700/20 text-slate-100 rounded-tl-none'}`}>
+              {qp.text}
+            </button>
+          ))}
+        </div>
+
+        {/* Chat Window */}
+        <div className="flex-1 bg-gradient-to-b from-white/8 to-white/2 border border-white/12 rounded-[20px] shadow-2xl backdrop-blur-md p-5 flex flex-col justify-between overflow-hidden">
+          <div className="flex-1 overflow-y-auto space-y-4 pr-1 mb-4">
+            {messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`message flex p-3 rounded-2xl max-w-[75%] leading-relaxed text-sm ${
+                  msg.role === 'user'
+                    ? 'ml-auto bg-orange-500/20 border border-orange-500/45 text-white'
+                    : 'bg-white/[0.05] border border-white/10 text-white'
+                }`}
+              >
                 <div className="whitespace-pre-line prose prose-invert max-w-none text-xs sm:text-sm">
                   {msg.content}
                 </div>
               </div>
-            </div>
-          ))}
-          {loading && (
-            <div className="flex gap-3 max-w-[80%]">
-              <div className="bg-slate-800 text-orange-500 border border-slate-700/30 p-2 rounded-xl shrink-0 h-9 w-9 flex items-center justify-center">
-                <Loader2 className="h-5 w-5 animate-spin" />
-              </div>
-              <div className="bg-slate-800/50 border border-slate-700/20 rounded-2xl rounded-tl-none p-3.5 text-slate-400 text-xs sm:text-sm flex items-center gap-2">
-                <span>Coach đang suy nghĩ...</span>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Quick action prompts */}
-        <div className="p-3 bg-slate-950/20 border-t border-slate-800/60 space-y-2">
-          <div className="flex flex-wrap gap-1.5">
-            {quickPrompts.map((qp, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleSend(qp.prompt)}
-                disabled={loading}
-                className="text-[10px] sm:text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg border border-slate-700/40 transition-colors active:scale-95 disabled:opacity-50"
-              >
-                {qp.text}
-              </button>
             ))}
+            {loading && (
+              <div className="message bg-white/[0.05] border border-white/10 p-3 rounded-2xl max-w-[75%] flex items-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin text-orange-500" />
+                <span className="text-slate-400 text-xs">AI Coach đang phân tích...</span>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
           </div>
 
-          {/* Form input chat */}
-          <div className="flex gap-2 pt-1">
-            <Input
+          {/* Chat input */}
+          <div className="flex gap-2.5 p-2 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
+            <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Nhập câu hỏi cho Coach (VD: Tôi nên ăn gì sau tập?)..."
+              placeholder="Nhập câu hỏi cho AI Coach..."
               disabled={loading}
-              className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-500 text-xs sm:text-sm flex-1 focus-visible:ring-orange-500"
+              className="bg-transparent border-0 text-white text-sm outline-none px-3 py-2 flex-1 placeholder:text-slate-500 focus:ring-0"
             />
-            <Button
+            <button
               onClick={() => handleSend()}
               disabled={loading || !input.trim()}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 active:scale-95 transition-transform"
+              className="bg-orange-500 hover:bg-orange-600 text-black text-xs font-bold px-5 py-2.5 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
             >
-              <Send className="h-4 w-4" />
-            </Button>
+              Gửi
+            </button>
           </div>
         </div>
-      </Card>
+      </div>
     </div>
   )
 }

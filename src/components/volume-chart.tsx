@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts'
 import { format } from 'date-fns'
 import { vi } from 'date-fns/locale'
@@ -23,6 +23,14 @@ interface Session {
 
 export default function VolumeProgressChart({ sessions }: { sessions: Session[] }) {
   const [selectedExercise, setSelectedExercise] = useState<string>('ALL')
+  const [metric, setMetric] = useState<'VOLUME' | '1RM'>('VOLUME')
+
+  // Auto fallback to VOLUME metric if "ALL" exercises is chosen
+  useEffect(() => {
+    if (selectedExercise === 'ALL') {
+      setMetric('VOLUME')
+    }
+  }, [selectedExercise])
 
   // Parse exercise notes to get correct volume
   const getExerciseVolume = (ex: Exercise) => {
@@ -41,6 +49,38 @@ export default function VolumeProgressChart({ sessions }: { sessions: Session[] 
     return (ex.sets || 0) * (ex.reps || 0) * (ex.weight_kg || 0)
   }
 
+  // Calculate y y học thể thao Brzycki 1-Rep Max (1RM)
+  const getExerciseOneRepMax = (ex: Exercise) => {
+    let max1RM = 0
+    if (ex.notes) {
+      try {
+        const parsed = JSON.parse(ex.notes)
+        if (parsed && typeof parsed === 'object' && Array.isArray(parsed.setsDetail)) {
+          parsed.setsDetail.forEach((s: any) => {
+            const w = Number(s.weight_kg) || 0
+            const r = Number(s.reps) || 0
+            if (w > 0 && r > 0) {
+              const oneRm = r === 1 ? w : w / (1.0278 - (0.0278 * r))
+              if (oneRm > max1RM) {
+                max1RM = oneRm
+              }
+            }
+          })
+          if (max1RM > 0) return Math.round(max1RM * 10) / 10
+        }
+      } catch (e) {
+        // Not JSON notes
+      }
+    }
+    const w = Number(ex.weight_kg) || 0
+    const r = Number(ex.reps) || 0
+    if (w > 0 && r > 0) {
+      const oneRm = r === 1 ? w : w / (1.0278 - (0.0278 * r))
+      return Math.round(oneRm * 10) / 10
+    }
+    return 0
+  }
+
   // Get list of all unique exercise names performed
   const uniqueExercises = useMemo(() => {
     const set = new Set<string>()
@@ -54,10 +94,10 @@ export default function VolumeProgressChart({ sessions }: { sessions: Session[] 
     return Array.from(set).sort()
   }, [sessions])
 
-  // Aggregate volume over time based on selected exercise
+  // Aggregate volume and 1RM over time based on selected exercise
   const chartData = useMemo(() => {
     // Group sessions by date
-    const dateMap: Record<string, { date: string; volume: number; name: string }> = {}
+    const dateMap: Record<string, { date: string; volume: number; oneRepMax: number; name: string }> = {}
 
     // Sort sessions ascending by date so progress flows left-to-right
     const sortedSessions = [...sessions].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
@@ -65,20 +105,29 @@ export default function VolumeProgressChart({ sessions }: { sessions: Session[] 
     sortedSessions.forEach(s => {
       const dateKey = s.date
       let vol = 0
+      let max1RM = 0
 
       s.session_exercises?.forEach(ex => {
         if (selectedExercise === 'ALL' || ex.exercise_name?.trim() === selectedExercise) {
           vol += getExerciseVolume(ex)
+          const single1RM = getExerciseOneRepMax(ex)
+          if (single1RM > max1RM) {
+            max1RM = single1RM
+          }
         }
       })
 
-      if (vol > 0) {
+      if (vol > 0 || max1RM > 0) {
         if (dateMap[dateKey]) {
           dateMap[dateKey].volume += vol
+          if (max1RM > dateMap[dateKey].oneRepMax) {
+            dateMap[dateKey].oneRepMax = max1RM
+          }
         } else {
           dateMap[dateKey] = {
             date: dateKey,
             volume: vol,
+            oneRepMax: max1RM,
             name: s.name,
           }
         }
@@ -109,6 +158,32 @@ export default function VolumeProgressChart({ sessions }: { sessions: Session[] 
           ))}
         </select>
       </div>
+
+      {/* Segmented Control Metric Selector */}
+      {selectedExercise !== 'ALL' && (
+        <div className="flex bg-slate-800/40 p-1 rounded-lg border border-slate-700/50 w-fit gap-1">
+          <button
+            onClick={() => setMetric('VOLUME')}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+              metric === 'VOLUME'
+                ? 'bg-orange-500 text-white shadow-md'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            📊 Tổng Volume (Tích luỹ)
+          </button>
+          <button
+            onClick={() => setMetric('1RM')}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all ${
+              metric === '1RM'
+                ? 'bg-orange-500 text-white shadow-md'
+                : 'text-slate-400 hover:text-white'
+            }`}
+          >
+            🎯 Sức mạnh tối đa (Estimated 1RM)
+          </button>
+        </div>
+      )}
 
       {chartData.length === 0 ? (
         <div className="h-[220px] flex items-center justify-center border border-dashed border-slate-800 rounded-xl bg-slate-900/10">
@@ -150,11 +225,14 @@ export default function VolumeProgressChart({ sessions }: { sessions: Session[] 
                   const item = items[0]?.payload
                   return `${item?.name || 'Buổi tập'} (${item?.date ? format(new Date(item.date), 'dd/MM/yyyy') : label})`
                 }}
-                formatter={(value) => [`${Number(value || 0).toLocaleString('vi-VN')} kg`, 'Tổng Volume'] }
+                formatter={(value) => [
+                  `${Number(value || 0).toLocaleString('vi-VN')} kg`, 
+                  metric === 'VOLUME' ? 'Tổng Volume' : 'Estimated 1RM'
+                ]}
               />
               <Line 
                 type="monotone" 
-                dataKey="volume" 
+                dataKey={metric === 'VOLUME' ? 'volume' : 'oneRepMax'} 
                 stroke="#f97316" 
                 strokeWidth={3} 
                 dot={{ r: 4, stroke: '#f97316', strokeWidth: 2, fill: '#0f172a' }}

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitTrack — Prototype Launcher</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.08);
+      --fg: #f3f6ff;
+      --muted: #9aa3b2;
+      --border: rgba(255, 255, 255, 0.12);
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
+      --radius: 20px;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --font-display: "Space Grotesk", "Sora", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+      --font-body: "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", "Cascadia Mono", ui-monospace, Menlo, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      letter-spacing: 0.01em;
+      text-wrap: pretty;
+    }
+    .page {
+      min-height: 100vh;
+      padding: 48px clamp(20px, 4vw, 72px) 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -10%;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle at 30% 30%, rgba(249, 115, 22, 0.28), transparent 65%);
+      filter: blur(10px);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .card {
+      padding: 22px;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 22px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .btn {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 600;
+      background: rgba(255,255,255,0.06);
+      transition: transform 0.2s ease, border 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(249,115,22,0.5);
+      background: rgba(249,115,22,0.12);
+    }
+    .note {
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 13px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 720px) {
+      header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="logo">FitTrack</div>
+        <div class="tagline">Premium prototype — dark mode, glassmorphism, neon orange accent</div>
+      </div>
+      <div class="tagline">Chọn màn hình để xem</div>
+    </header>
+
+    <div class="grid">
+      <article class="card glass">
+        <h3>Landing Page</h3>
+        <p>Hero “NÂNG TẦM THỂ HÌNH”, CTA đăng ký, tính năng FitTrack và demo tương tác.</p>
+        <a class="btn" href="landing.html">Mở landing</a>
+      </article>
+      <article class="card glass">
+        <h3>Dashboard</h3>
+        <p>Biểu đồ khối lượng, mục tiêu tuần, macro nutrition và bộ lọc thời gian.</p>
+        <a class="btn" href="dashboard.html">Mở dashboard</a>
+      </article>
+      <article class="card glass">
+        <h3>AI Coach Chat</h3>
+        <p>Chat huấn luyện viên AI, gợi ý tập luyện và phản hồi theo ngữ cảnh.</p>
+        <a class="btn" href="ai-chat.html">Mở AI chat</a>
+      </article>
+      <article class="card glass">
+        <h3>Workout Log</h3>
+        <p>Ghi từng set, rest timer, khối lượng tổng và trạng thái hoàn thành.</p>
+        <a class="btn" href="workout-log.html">Mở workout log</a>
+      </article>
+    </div>
+
+    <div class="note">Tất cả màn hình hỗ trợ tiếng Việt, dark mode thuần và accent màu #f97316.</div>
+  </div>
+</body>
+</html>

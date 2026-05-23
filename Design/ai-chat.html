@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitTrack — AI Coach</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.08);
+      --fg: #f3f6ff;
+      --muted: #9aa3b2;
+      --border: rgba(255, 255, 255, 0.12);
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
+      --radius: 20px;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --font-display: "Space Grotesk", "Sora", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+      --font-body: "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", "Cascadia Mono", ui-monospace, Menlo, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      text-wrap: pretty;
+    }
+    .layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+      padding: 24px;
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .sidebar {
+      padding: 20px;
+      display: grid;
+      gap: 16px;
+      height: fit-content;
+    }
+    .logo {
+      font-family: var(--font-display);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .chat-item {
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+    .chat-item strong { display: block; }
+    .chat-item small { color: var(--muted); }
+    .main {
+      display: grid;
+      gap: 16px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 28px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+    }
+    .chip:hover { color: var(--accent); border-color: rgba(249,115,22,0.4); }
+    .chat-window {
+      flex: 1;
+      display: grid;
+      gap: 12px;
+      padding: 20px;
+      min-height: 420px;
+      max-height: 520px;
+      overflow: auto;
+    }
+    .message {
+      padding: 12px 14px;
+      border-radius: 16px;
+      max-width: 70%;
+      line-height: 1.5;
+    }
+    .message.user {
+      margin-left: auto;
+      background: rgba(249,115,22,0.2);
+      border: 1px solid rgba(249,115,22,0.45);
+      color: var(--fg);
+    }
+    .message.ai {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--fg);
+    }
+    .input-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 12px;
+    }
+    .input-bar input {
+      background: transparent;
+      border: 0;
+      color: var(--fg);
+      font-size: 15px;
+      outline: none;
+    }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: #120a03;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    @media (max-width: 1000px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar glass">
+      <div class="logo">FitTrack</div>
+      <div class="chat-item">
+        <strong>Tuần 21 · Tăng cơ</strong>
+        <small>AI Coach theo dõi volume</small>
+      </div>
+      <div class="chat-item">
+        <strong>Dinh dưỡng hôm nay</strong>
+        <small>1,850 kcal · Còn 320 kcal</small>
+      </div>
+      <div class="chat-item">
+        <strong>Gợi ý mới</strong>
+        <small>Thay incline press → cable fly</small>
+      </div>
+      <div class="chat-item">
+        <strong>Offline sync</strong>
+        <small>Đã đồng bộ 3 buổi</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div>
+          <h1>AI Coach · Tư vấn theo ngữ cảnh</h1>
+          <div style="color: var(--muted);">Hỏi nhanh về bài tập, tempo, macro và lịch phục hồi.</div>
+        </div>
+        <a href="dashboard.html" style="color: var(--muted); text-decoration: none;">Quay lại dashboard</a>
+      </div>
+
+      <div class="chips">
+        <button class="chip" data-prompt="Lịch tập 4 tuần tăng cơ?">Lịch tập 4 tuần</button>
+        <button class="chip" data-prompt="Nên chỉnh tempo set 3 thế nào?">Tempo set 3</button>
+        <button class="chip" data-prompt="Gợi ý bữa ăn 1,900 kcal">Bữa ăn 1,900 kcal</button>
+        <button class="chip" data-prompt="Có nên tăng tải tuần này?">Tăng tải?</button>
+      </div>
+
+      <section class="chat-window glass" id="chat-window">
+        <div class="message ai">Chào bạn! Hôm nay FitTrack ghi nhận 5 buổi tập liên tiếp. Bạn muốn tối ưu phần nào?</div>
+        <div class="message user">Mình muốn tăng volume cho lưng.</div>
+        <div class="message ai">Gợi ý: tăng thêm 1 set cho pull-down, giữ rest 90s và tempo 2-1-2 để giữ form chuẩn.</div>
+      </section>
+
+      <div class="input-bar glass">
+        <input id="chat-input" type="text" placeholder="Nhập câu hỏi cho AI Coach..." />
+        <button class="btn" id="send-btn">Gửi</button>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const chatWindow = document.getElementById('chat-window');
+    const input = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chips = document.querySelectorAll('.chip');
+
+    function appendMessage(text, type) {
+      const msg = document.createElement('div');
+      msg.className = `message ${type}`;
+      msg.textContent = text;
+      chatWindow.appendChild(msg);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+      return msg;
+    }
+
+    function respond(userText) {
+      const typing = appendMessage('AI Coach đang phân tích...', 'ai');
+      setTimeout(() => {
+        typing.textContent = `Gợi ý nhanh: ${userText} — ưu tiên tăng 5–8% volume, giữ rest 90s và kiểm soát kỹ thuật.`;
+      }, 600);
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const value = input.value.trim();
+      if (!value) return;
+      appendMessage(value, 'user');
+      input.value = '';
+      respond(value);
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        appendMessage(chip.dataset.prompt, 'user');
+        respond(chip.dataset.prompt);
+      });
+    });
+  </script>
+</body>
+</html>

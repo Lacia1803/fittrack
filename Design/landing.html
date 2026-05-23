@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitTrack — Landing</title>
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.08);
+      --fg: #f3f6ff;
+      --muted: #9aa3b2;
+      --border: rgba(255, 255, 255, 0.12);
+      --accent: #f97316;
+      --accent-soft: rgba(249, 115, 22, 0.18);
+      --radius: 20px;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --font-display: "Space Grotesk", "Sora", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+      --font-body: "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", "Cascadia Mono", ui-monospace, Menlo, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      text-wrap: pretty;
+    }
+    .page {
+      min-height: 100vh;
+      padding: 28px clamp(20px, 4vw, 80px) 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      left: -120px;
+      top: -120px;
+      background: radial-gradient(circle at 30% 30%, rgba(249, 115, 22, 0.32), transparent 65%);
+      filter: blur(14px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .logo {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 18px;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+    nav a:hover { color: var(--fg); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s ease, border 0.2s ease, background 0.2s ease;
+    }
+    .btn.primary {
+      background: var(--accent);
+      color: #120a03;
+      box-shadow: 0 18px 40px rgba(249, 115, 22, 0.35);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(249, 115, 22, 0.12);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .hero {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 32px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 6vw, 86px);
+      line-height: 1.02;
+      margin: 16px 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 560px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+    .hero-card {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .stat-row strong { color: var(--fg); font-weight: 600; }
+    .timer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 28px;
+      letter-spacing: 0.08em;
+    }
+    .timer button {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: rgba(249, 115, 22, 0.18);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .email-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+    .email-form input {
+      background: transparent;
+      border: 0;
+      color: var(--fg);
+      font-size: 15px;
+      outline: none;
+    }
+    .email-msg {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+      min-height: 18px;
+    }
+    .feature-grid {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      position: relative;
+      z-index: 2;
+    }
+    .feature-card {
+      padding: 18px;
+      min-height: 180px;
+      display: grid;
+      gap: 10px;
+    }
+    .feature-card h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 18px;
+    }
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .ecosystem {
+      margin-top: 64px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .ecosystem .tile {
+      padding: 20px;
+      display: grid;
+      gap: 12px;
+    }
+    .cta {
+      margin-top: 64px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .cta h2 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+    }
+    .cta p { margin: 6px 0 0; color: var(--muted); }
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      nav { display: none; }
+      .cta { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 640px) {
+      .email-form { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="logo">FitTrack</div>
+      <nav>
+        <a href="#features">Tính năng</a>
+        <a href="#ecosystem">Hệ sinh thái</a>
+        <a href="#cta">Bắt đầu</a>
+      </nav>
+      <a class="btn primary" href="#cta">Dùng thử ngay</a>
+    </div>
+
+    <section class="hero">
+      <div>
+        <span class="pill">AI-Powered Workout & Nutrition</span>
+        <h1>NÂNG TẦM THỂ HÌNH</h1>
+        <p>Ghi từng set với rest timer, theo dõi macro dinh dưỡng và nhận tư vấn từ AI Coach — tất cả trong một hệ sinh thái tập luyện chuẩn premium.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="dashboard.html">Xem dashboard</a>
+          <a class="btn" href="workout-log.html">Vào workout log</a>
+        </div>
+        <div class="email-form glass">
+          <input type="email" id="email" placeholder="Email của bạn để nhận mời dùng thử" />
+          <button class="btn primary" id="submit-email" type="button">Nhận lời mời</button>
+        </div>
+        <div class="email-msg" id="email-msg">Không spam. Mời dùng thử sẽ gửi trong 24 giờ.</div>
+      </div>
+
+      <div class="hero-card glass">
+        <div class="stat-row"><span>Buổi tập hôm nay</span><strong>Pull Day · 6 bài</strong></div>
+        <div class="timer">
+          <span id="timer">01:30</span>
+          <button id="timer-toggle">Bắt đầu</button>
+        </div>
+        <div class="stat-row"><span>Set hiện tại</span><strong>Lat Pulldown · Set 3/5</strong></div>
+        <div class="stat-row"><span>AI Coach</span><strong>Giữ tempo 2-1-2 để tối ưu lưng</strong></div>
+        <div class="stat-row"><span>Macro hôm nay</span><strong>1,850 kcal · P140 C170 F55</strong></div>
+      </div>
+    </section>
+
+    <section id="features" class="feature-grid">
+      <article class="feature-card glass">
+        <h3>Per-set workout logs + rest timer</h3>
+        <p>Ghi từng set theo thời gian thực, tự động nhắc nghỉ giữa set để giữ hiệu suất ổn định.</p>
+      </article>
+      <article class="feature-card glass">
+        <h3>Progressive overload charts</h3>
+        <p>Biểu đồ khối lượng tuần tự động, giúp bạn tăng tải có kiểm soát.</p>
+      </article>
+      <article class="feature-card glass">
+        <h3>Contextual AI Coach</h3>
+        <p>AI hiểu lịch sử tập, nhịp nghỉ và mục tiêu để đưa lời khuyên chuẩn ngữ cảnh.</p>
+      </article>
+      <article class="feature-card glass">
+        <h3>Nutrition calculator</h3>
+        <p>Tính macro theo mục tiêu tăng cơ/giảm mỡ với gợi ý bữa ăn linh hoạt.</p>
+      </article>
+      <article class="feature-card glass">
+        <h3>Offline sync & PWA</h3>
+        <p>Ghi log offline, đồng bộ lại khi có mạng — sẵn sàng mọi nơi.</p>
+      </article>
+    </section>
+
+    <section id="ecosystem" class="ecosystem">
+      <div class="tile glass">
+        <h3>Workout Intelligence</h3>
+        <p>Tối ưu khối lượng, volume và nhịp nghỉ theo từng bài tập.</p>
+      </div>
+      <div class="tile glass">
+        <h3>Nutrition & Recovery</h3>
+        <p>Macro rõ ràng, nhắc hydration và theo dõi giấc ngủ.</p>
+      </div>
+      <div class="tile glass">
+        <h3>AI Coach 24/7</h3>
+        <p>Chat hỏi đáp nhanh, đề xuất thay thế bài tập và lịch phục hồi.</p>
+      </div>
+    </section>
+
+    <section id="cta" class="cta glass">
+      <div>
+        <h2>Gia nhập FitTrack ngay hôm nay</h2>
+        <p>Premium dark mode. Dữ liệu cá nhân hoá. Tương tác mượt.</p>
+      </div>
+      <a class="btn primary" href="ai-chat.html">Trải nghiệm AI Coach</a>
+    </section>
+  </div>
+
+  <script>
+    const emailInput = document.getElementById('email');
+    const emailMsg = document.getElementById('email-msg');
+    document.getElementById('submit-email').addEventListener('click', () => {
+      const value = emailInput.value.trim();
+      const ok = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value);
+      emailMsg.textContent = ok
+        ? 'Đã nhận! FitTrack sẽ gửi lời mời sớm.'
+        : 'Vui lòng nhập email hợp lệ để nhận lời mời.';
+      emailMsg.style.color = ok ? '#f97316' : '#9aa3b2';
+    });
+
+    let remaining = 90;
+    let running = false;
+    let timerId = null;
+    const timerEl = document.getElementById('timer');
+    const toggleBtn = document.getElementById('timer-toggle');
+
+    function renderTimer() {
+      const min = String(Math.floor(remaining / 60)).padStart(2, '0');
+      const sec = String(remaining % 60).padStart(2, '0');
+      timerEl.textContent = `${min}:${sec}`;
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      running = !running;
+      toggleBtn.textContent = running ? 'Tạm dừng' : 'Bắt đầu';
+      if (running) {
+        timerId = setInterval(() => {
+          if (remaining > 0) {
+            remaining -= 1;
+            renderTimer();
+          } else {
+            clearInterval(timerId);
+            running = false;
+            toggleBtn.textContent = 'Làm lại';
+          }
+        }, 1000);
+      } else {
+        clearInterval(timerId);
+      }
+      if (!running && remaining === 0) {
+        remaining = 90;
+        renderTimer();
+      }
+    });
+
+    renderTimer();
+  </script>
+</body>
+</html>
