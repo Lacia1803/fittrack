@@ -33,12 +33,11 @@ export default function RegisterPage() {
     })
     if (error) {
       toast({ title: 'Lỗi đăng ký', description: error.message, variant: 'destructive' })
+      setLoading(false)
     } else {
       toast({ title: 'Đăng ký thành công!', description: 'Chào mừng bạn đến với FitTrack' })
-      router.push('/dashboard')
-      router.refresh()
+      window.location.href = '/dashboard'
     }
-    setLoading(false)
   }
 
   return (

@@ -24,11 +24,10 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       toast({ title: 'Lỗi đăng nhập', description: error.message, variant: 'destructive' })
+      setLoading(false)
     } else {
-      router.push('/dashboard')
-      router.refresh()
+      window.location.href = '/dashboard'
     }
-    setLoading(false)
   }
 
   return (
