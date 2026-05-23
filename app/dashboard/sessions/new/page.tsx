@@ -225,6 +225,15 @@ export default function NewSessionPage() {
         .select("*")
         .eq("user_id", user!.id);
       setPlans(data || []);
+      
+      // Auto-select plan from URL if present
+      if (typeof window !== "undefined") {
+        const urlParams = new URLSearchParams(window.location.search);
+        const pId = urlParams.get("planId");
+        if (pId && data?.find(p => p.id === pId)) {
+          setPlanId(pId);
+        }
+      }
     };
     fetchPlans();
   }, []);
