@@ -2,8 +2,8 @@
 
 **Môn học:** Các công nghệ mới trong phát triển phần mềm
 **Lớp:** CTK46-PM — Công nghệ thông tin, Khoá 46, Chuyên ngành Kỹ thuật phần mềm
-**Họ và tên:** [Điền họ và tên của bạn]
-**Mã sinh viên:** [Điền mã sinh viên của bạn]
+**Họ và tên:** Phùng Võ Quốc Hiển
+**Mã sinh viên:** 2212364
 **Ngày nộp:** 29/05/2026
 
 ---
