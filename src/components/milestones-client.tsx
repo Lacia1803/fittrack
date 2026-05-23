@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { Trophy, Dumbbell, Camera, Zap } from 'lucide-react'
+import { Trophy, Dumbbell, Camera, Zap, Flame, Crown, Medal, Target, CalendarDays, Activity } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { useToast } from '@/hooks/use-toast'
 import { cn } from '@/lib/utils'
@@ -19,13 +19,16 @@ export default function MilestonesClient({
   userId,
   initialSessionCount,
   initialPhotoCount,
+  initialPlanCount,
 }: {
   userId: string
   initialSessionCount: number
   initialPhotoCount: number
+  initialPlanCount: number
 }) {
   const [sessionCount, setSessionCount] = useState(initialSessionCount)
   const [photoCount, setPhotoCount] = useState(initialPhotoCount)
+  const [planCount, setPlanCount] = useState(initialPlanCount)
   const { toast } = useToast()
   const supabase = createClient()
 
@@ -44,7 +47,7 @@ export default function MilestonesClient({
         (payload) => {
           setSessionCount((prev) => {
             const next = prev + 1
-            const milestones = [1, 5, 10, 20, 50, 100]
+            const milestones = [1, 5, 10, 20, 50, 100, 200, 365, 500, 1000]
             if (milestones.includes(next)) {
               toast({
                 title: `🏆 Milestone đạt được!`,
@@ -58,8 +61,15 @@ export default function MilestonesClient({
       .on(
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'progress_photos', filter: `user_id=eq.${userId}` },
-        () => {
+        (payload) => {
           setPhotoCount((prev) => prev + 1)
+        }
+      )
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'workout_plans', filter: `user_id=eq.${userId}` },
+        (payload) => {
+          setPlanCount((prev) => prev + 1)
         }
       )
       .subscribe()
@@ -68,14 +78,27 @@ export default function MilestonesClient({
   }, [userId])
 
   const milestones: Milestone[] = [
-    { label: 'Buổi tập đầu tiên', target: 1, current: sessionCount, icon: Dumbbell, color: 'text-orange-500' },
-    { label: '5 buổi tập', target: 5, current: sessionCount, icon: Dumbbell, color: 'text-orange-500' },
-    { label: '10 buổi tập', target: 10, current: sessionCount, icon: Dumbbell, color: 'text-orange-500' },
-    { label: '20 buổi tập', target: 20, current: sessionCount, icon: Trophy, color: 'text-yellow-500' },
-    { label: '50 buổi tập', target: 50, current: sessionCount, icon: Trophy, color: 'text-yellow-500' },
-    { label: '100 buổi tập', target: 100, current: sessionCount, icon: Zap, color: 'text-purple-500' },
-    { label: 'Ảnh đầu tiên', target: 1, current: photoCount, icon: Camera, color: 'text-blue-500' },
-    { label: '5 progress photos', target: 5, current: photoCount, icon: Camera, color: 'text-blue-500' },
+    // Workout Sessions
+    { label: 'Buổi tập đầu tiên', target: 1, current: sessionCount, icon: Dumbbell, color: 'text-zinc-400' },
+    { label: 'Khởi động (5 buổi)', target: 5, current: sessionCount, icon: Zap, color: 'text-orange-400' },
+    { label: 'Vào guồng (10 buổi)', target: 10, current: sessionCount, icon: Flame, color: 'text-orange-500' },
+    { label: 'Kiên trì (20 buổi)', target: 20, current: sessionCount, icon: Target, color: 'text-rose-500' },
+    { label: 'Thói quen (50 buổi)', target: 50, current: sessionCount, icon: Medal, color: 'text-yellow-400' },
+    { label: 'Thợ săn tạ (100 buổi)', target: 100, current: sessionCount, icon: Trophy, color: 'text-yellow-500' },
+    { label: 'Sát thủ phòng gym (200 buổi)', target: 200, current: sessionCount, icon: Crown, color: 'text-purple-500' },
+    { label: 'Kỷ luật thép (1 năm / 365 buổi)', target: 365, current: sessionCount, icon: Crown, color: 'text-purple-600' },
+    { label: 'Lão làng (500 buổi)', target: 500, current: sessionCount, icon: Activity, color: 'text-red-500' },
+
+    // Workout Plans
+    { label: 'Lên kế hoạch đầu tiên', target: 1, current: planCount, icon: CalendarDays, color: 'text-blue-400' },
+    { label: 'Chiến lược gia (5 plans)', target: 5, current: planCount, icon: CalendarDays, color: 'text-blue-500' },
+    { label: 'Huấn luyện viên (10 plans)', target: 10, current: planCount, icon: CalendarDays, color: 'text-indigo-500' },
+
+    // Progress Photos
+    { label: 'Ghi nhận bắt đầu (Ảnh 1)', target: 1, current: photoCount, icon: Camera, color: 'text-teal-400' },
+    { label: 'Dấu hiệu thay đổi (5 ảnh)', target: 5, current: photoCount, icon: Camera, color: 'text-teal-500' },
+    { label: 'Hành trình lột xác (10 ảnh)', target: 10, current: photoCount, icon: Camera, color: 'text-emerald-500' },
+    { label: 'Minh chứng rõ rệt (20 ảnh)', target: 20, current: photoCount, icon: Camera, color: 'text-cyan-500' },
   ]
 
   return (

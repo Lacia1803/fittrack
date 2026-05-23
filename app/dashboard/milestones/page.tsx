@@ -15,6 +15,11 @@ export default async function MilestonesPage() {
     .select('*', { count: 'exact', head: true })
     .eq('user_id', user!.id)
 
+  const { count: planCount } = await supabase
+    .from('workout_plans')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user!.id)
+
   return (
     <div className="space-y-6">
       <div>
@@ -25,6 +30,7 @@ export default async function MilestonesPage() {
         userId={user!.id}
         initialSessionCount={sessionCount || 0}
         initialPhotoCount={photoCount || 0}
+        initialPlanCount={planCount || 0}
       />
     </div>
   )
