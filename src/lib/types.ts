@@ -4,6 +4,10 @@ export interface Profile {
   avatar_url: string | null;
   weight_kg: number | null;
   height_cm: number | null;
+  gender?: string | null;
+  experience_level?: string | null;
+  fitness_goal?: string | null;
+  bio?: string | null;
   created_at: string;
 }
 
