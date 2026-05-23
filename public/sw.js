@@ -1,5 +1,5 @@
-const STATIC_CACHE = "fittrack-static-v1";
-const RUNTIME_CACHE = "fittrack-runtime-v1";
+const STATIC_CACHE = "fittrack-static-v2";
+const RUNTIME_CACHE = "fittrack-runtime-v2";
 
 const APP_SHELL = [
   "/",
@@ -29,6 +29,7 @@ self.addEventListener("activate", (event) => {
         ),
       ),
   );
+  self.clients.claim();
 });
 
 const cacheFirst = async (request) => {
