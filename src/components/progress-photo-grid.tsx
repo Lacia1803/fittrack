@@ -24,6 +24,18 @@ export default function ProgressPhotoGrid({ photos }: { photos: Photo[] }) {
   const { toast } = useToast()
   const supabase = createClient()
 
+  // Group photos by Month and Year
+  const groupedPhotos = photos.reduce((acc, photo) => {
+    const d = new Date(photo.taken_at)
+    // Format: "Tháng 5 năm 2026"
+    const monthYear = format(d, "'Tháng' MM 'năm' yyyy", { locale: vi })
+    if (!acc[monthYear]) {
+      acc[monthYear] = []
+    }
+    acc[monthYear].push(photo)
+    return acc
+  }, {} as Record<string, Photo[]>)
+
   const handleDelete = async (photo: Photo) => {
     if (!confirm('Xóa ảnh này?')) return
     await supabase.storage.from('progress-photos').remove([photo.photo_url])
@@ -34,23 +46,34 @@ export default function ProgressPhotoGrid({ photos }: { photos: Photo[] }) {
   }
 
   return (
-    <>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {photos.map((photo) => (
-          <div
-            key={photo.id}
-            onClick={() => setSelected(photo)}
-            className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group border border-slate-700 hover:border-orange-500 transition-colors"
-          >
-            <Image src={photo.signed_url} alt={photo.caption || 'Progress'} fill className="object-cover" />
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-              <p className="text-white text-xs">
-                {format(new Date(photo.taken_at), 'dd/MM/yyyy', { locale: vi })}
-              </p>
-            </div>
+    <div className="space-y-10">
+      {Object.entries(groupedPhotos).map(([monthYear, monthPhotos]) => (
+        <div key={monthYear} className="space-y-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-white">{monthYear}</h2>
+            <div className="h-px bg-slate-700 flex-1 ml-4" />
           </div>
-        ))}
-      </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {monthPhotos.map((photo) => (
+              <div
+                key={photo.id}
+                onClick={() => setSelected(photo)}
+                className="relative aspect-square rounded-xl overflow-hidden cursor-pointer group border border-slate-700 hover:border-orange-500 transition-colors"
+              >
+                <Image src={photo.signed_url} alt={photo.caption || 'Progress'} fill className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                  <p className="text-white text-xs font-medium">
+                    {format(new Date(photo.taken_at), 'dd/MM/yyyy', { locale: vi })}
+                  </p>
+                  {photo.caption && (
+                    <p className="text-slate-300 text-xs mt-1 line-clamp-1">{photo.caption}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
 
       {/* Lightbox */}
       {selected && (
@@ -96,6 +119,6 @@ export default function ProgressPhotoGrid({ photos }: { photos: Photo[] }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
