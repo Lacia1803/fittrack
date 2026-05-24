@@ -279,6 +279,20 @@ WITH CHECK (auth.uid() = user_id);
 
 Ngay tại tầng Database Engine (PostgreSQL), biến `auth.uid()` (được giải mã an toàn từ JWT Token của request) sẽ không khớp với cột `user_id` của bản ghi đó. Truy vấn bị từ chối truy cập ngay lập tức, báo lỗi bảo mật và hacker không thể sửa đổi.
 
+### 4.5. Luồng dữ liệu nghiệp vụ end-to-end
+
+Để nhìn rõ cách FitTrack vận hành xuyên suốt từ giao diện đến cơ sở dữ liệu, có thể mô tả luồng nghiệp vụ tổng quát như sau:
+
+1. Người dùng truy cập ứng dụng và được middleware kiểm tra phiên đăng nhập.
+2. Nếu chưa xác thực, hệ thống chuyển hướng sang trang đăng nhập.
+3. Sau khi đăng nhập thành công, dữ liệu hồ sơ và thống kê cá nhân được tải từ Supabase về server component.
+4. Các trang dashboard hiển thị dữ liệu theo từng module: hồ sơ, dinh dưỡng, kế hoạch tập, buổi tập, tiến độ, ảnh progress và AI Coach.
+5. Khi người dùng tạo buổi tập mới, dữ liệu được nhập trên client component, kiểm tra hợp lệ rồi gửi xuống Supabase.
+6. Nếu kết nối mạng ổn định, bản ghi được lưu trực tiếp; nếu không có mạng, buổi tập được đưa vào hàng đợi offline tạm thời.
+7. Dữ liệu sau đó có thể được đọc lại để vẽ biểu đồ volume, tổng hợp báo cáo và cấp ngữ cảnh cho AI Coach.
+
+Luồng này giúp hệ thống vừa đảm bảo trải nghiệm mượt mà trên giao diện người dùng, vừa giữ được tính nhất quán của dữ liệu ở tầng backend.
+
 ---
 
 ## CHƯƠNG 5: TRIỂN KHAI KỸ THUẬT VÀ MÃ NGUỒN CỐT LÕI
@@ -468,6 +482,20 @@ Xây dựng cơ chế chịu lỗi mạng.
 Khi ấn lưu, kiểm tra `navigator.onLine`. Nếu `false`, đẩy payload vào `localStorage.setItem('pending_sessions', JSON.stringify(data))`.
 Tại Sidebar (thành phần luôn tồn tại ở mọi trang), chạy một `useEffect` lắng nghe sự kiện `window.addEventListener('online', syncSessions)`. Khi có mạng trở lại, hàm `syncSessions` lấy mảng từ bộ nhớ cục bộ, thực hiện gọi API Supabase, và xóa bộ nhớ cục bộ. Tính năng này chứng minh tính ứng dụng PWA hoàn hảo của đồ án.
 
+### 5.9. Danh mục các module chính trong dự án
+
+Để triển khai đồng bộ, hệ thống được chia thành các nhóm module rõ ràng:
+
+- **Nhóm xác thực:** xử lý đăng ký, đăng nhập, callback và middleware bảo vệ phiên.
+- **Nhóm dashboard:** hiển thị số liệu tổng quan, shortcut, thống kê và các card chức năng.
+- **Nhóm kế hoạch tập:** tạo, xem, chỉnh sửa và xóa workout plans.
+- **Nhóm buổi tập:** log workout sessions, session exercises, đồng hồ nghỉ và share card.
+- **Nhóm dinh dưỡng:** BMR, TDEE, macro calculator và hiển thị gợi ý mục tiêu.
+- **Nhóm tiến độ:** upload progress photos, xem ảnh trước/sau và thống kê tiến bộ.
+- **Nhóm AI Coach:** chat cá nhân hóa, tóm tắt ngữ cảnh hồ sơ, lịch tập và hạn chế trả lời dạng markdown.
+
+Việc chia module theo chức năng giúp codebase dễ bảo trì, dễ mở rộng và giảm độ phức tạp khi tích hợp thêm tính năng mới.
+
 ---
 
 ## CHƯƠNG 6: ĐÓNG GÓI VÀ TRIỂN KHAI (DOCKER & DEPLOYMENT)
@@ -512,6 +540,19 @@ Quá trình đưa hệ thống từ máy tính lập trình lên Internet bao g�
 3. **Cấu hình Reverse Proxy:** Cài đặt Nginx Web Server. Thiết lập cấu hình ảo (Virtual Host) lắng nghe port 80 (HTTP). Mọi yêu cầu từ tên miền `fittrack.example.com` sẽ được Nginx tiếp nhận và chuyển tiếp an toàn (proxy_pass) xuống `http://127.0.0.1:3000`. Cấu hình này giấu kiến trúc backend khỏi người dùng bên ngoài, tăng tốc độ phân phối nội dung tĩnh.
 4. **Cấp phát chứng chỉ bảo mật:** Cài đặt `certbot`. Lệnh `certbot --nginx` sẽ tự động xác minh quyền sở hữu tên miền thông qua giao thức ACME với tổ chức Let's Encrypt. Chứng chỉ SSL được sinh ra và cấu hình tự động vào Nginx. Giao tiếp từ đó hoàn toàn mã hóa bằng chuẩn HTTPS, ổ khóa xanh xuất hiện. Hệ thống PWA chính thức được phép hoạt động trên mọi thiết bị di động.
 
+### 6.4. Checklist trước khi chốt production
+
+Trước khi coi bản deploy là bản nộp cuối cùng, cần kiểm tra một số tiêu chí thực tế:
+
+- File `.env.local` không được đẩy lên repo công khai.
+- Các biến môi trường sản xuất phải được nhập lại trên VPS hoặc dịch vụ host.
+- Lệnh `npm run build` phải chạy thành công trước khi container hóa.
+- Supabase URL, anon key và Gemini key phải hoạt động đúng ở môi trường production.
+- Các trang có dữ liệu riêng tư phải được kiểm tra lại RLS bằng ít nhất một tài khoản thử nghiệm.
+- Link demo production phải mở trực tiếp được từ trình duyệt máy khác và có HTTPS hợp lệ.
+
+Checklist này giúp giảm rủi ro “chạy được ở máy local nhưng lỗi ở server”.
+
 ---
 
 ## CHƯƠNG 7: KIỂM THỬ HỆ THỐNG (TESTING)
@@ -543,6 +584,17 @@ Quá trình kiểm thử là khâu không thể thiếu để đảm bảo chấ
 
 Kết quả này chứng minh chính sách Row Level Security đã ngăn truy cập chéo giữa các người dùng, đúng mục tiêu bảo mật dữ liệu cá nhân của FitTrack.
 
+### 7.4. Kiểm thử build và tính sẵn sàng triển khai
+
+Ngoài kiểm thử hành vi trên giao diện và database, dự án còn được kiểm tra ở mức xây dựng sản phẩm:
+
+- Chạy build production để xác nhận code TypeScript, React Server Components và route handlers biên dịch thành công.
+- Kiểm tra các trang có truy vấn Supabase xem có lỗi quyền truy cập hay không.
+- Kiểm tra đường dẫn route quan trọng như `/auth/login`, `/dashboard`, `/dashboard/workouts`, `/dashboard/coach`, `/dashboard/nutrition`.
+- Đảm bảo các nút AI, upload, share card và logout không phụ thuộc vào trạng thái dev server.
+
+Kết quả kiểm thử build cho thấy hệ thống đã sẵn sàng cho môi trường production sau khi cấu hình đầy đủ biến môi trường và domain.
+
 ---
 
 ## CHƯƠNG 8: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
@@ -570,6 +622,19 @@ Từ nền tảng công nghệ vững chắc đã xây dựng, FitTrack có ti�
 - **Phát triển Native App:** Sử dụng mã nguồn React sẵn có, tiến hành chuyển đổi (refactor) một phần sang React Native (Expo) để biên dịch thành ứng dụng gốc trên App Store và Google Play, tận dụng khả năng truy cập sâu hơn vào phần cứng (Haptic Engine - rung phản hồi, Background Location).
 - **Huấn luyện mô hình AI tự trị (Fine-tuning):** Xây dựng một AI Model nhỏ gọn chạy trực tiếp trên Server (hoặc sử dụng kỹ thuật RAG - Retrieval-Augmented Generation) kết hợp với kho dữ liệu các bài báo khoa học về thể thao để biến FitTrack thành một "Chuyên gia y sinh học" đáng tin cậy.
 
+### 8.4. Đối chiếu nhanh với quy chế môn học
+
+Đối chiếu với quy chế thi cuối kỳ, dự án FitTrack hiện đã bao phủ các đầu mục quan trọng sau:
+
+- **Frontend hiện đại:** sử dụng Next.js App Router, Server Components và Client Components.
+- **Backend đúng chuẩn:** toàn bộ dữ liệu chính lưu ở Supabase, có RLS và Storage.
+- **Containerization:** đã có Dockerfile và Docker Compose.
+- **AI trong phát triển:** có phụ lục prompt riêng tại [DOCS-BAO-CAO-AI.md](DOCS-BAO-CAO-AI.md).
+- **Kiểm thử và bảo mật:** có test RLS thủ công, kiểm tra hành vi anon/auth và chặn dữ liệu chéo.
+- **Báo cáo học thuật:** có phần kiến trúc, chức năng, công nghệ, kiểm thử, kết luận và hướng phát triển.
+
+Hai điểm còn cần hoàn thiện theo quy chế nộp bài là bản PDF/Word xuất ra từ báo cáo và link demo production có domain + SSL thực tế.
+
 ---
 
 ## 9. TÀI LIỆU THAM KHẢO
@@ -585,3 +650,118 @@ Từ nền tảng công nghệ vững chắc đã xây dựng, FitTrack có ti�
 ---
 
 _(Hết báo cáo toàn văn)_
+
+---
+
+## PHỤ LỤC A: Biến môi trường (ENV variables)
+
+File `.env.example` (đã cung cấp trong repository) chứa các biến môi trường mẫu. Danh sách đầy đủ biến môi trường cần có cho môi trường phát triển và production:
+
+- `NEXT_PUBLIC_SUPABASE_URL` — Supabase project URL (public)
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` — Supabase anon key (public)
+- `SUPABASE_SERVICE_ROLE_KEY` — Service role key (server only)
+- `GEMINI_API_KEY` — API key cho AI/LLM (server only)
+- `PORT` — cổng chạy ứng dụng (production)
+- `NODE_ENV` — `development` hoặc `production`
+
+Hướng dẫn: Sao chép `.env.example` thành `.env.local` khi phát triển cục bộ, và cấu hình biến môi trường trên VPS/host (systemd, Docker secrets hoặc môi trường quản lý của nhà cung cấp).
+
+## PHỤ LỤC B: API Endpoints (Route Handlers & Server Actions)
+
+Dưới đây là tóm tắt các API route/handler quan trọng trong dự án:
+
+- `GET /api/ai/coach` — Endpoint chuyển tiếp tới LLM, trả về câu trả lời dạng stream
+- `POST /api/ai/suggest` — Tạo gợi ý bài tập/dinh dưỡng từ AI
+- `POST /api/sessions` — Tạo buổi tập mới (Server Action)
+- `PATCH /api/sessions/:id` — Cập nhật buổi tập
+- `POST /api/upload` — Upload ảnh tạm (gọi Supabase Storage)
+
+Lưu ý: Tất cả endpoint tương tác với dữ liệu người dùng đều kiểm tra phiên via middleware và tuân thủ RLS ở tầng DB.
+
+## PHỤ LỤC C: Một số đoạn SQL & Schema quan trọng
+
+Dưới đây là các ví dụ SQL minh họa cấu trúc bảng và chỉ mục đề xuất:
+
+```sql
+-- Bảng progress_photos
+CREATE TABLE IF NOT EXISTS public.progress_photos (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id uuid REFERENCES public.profiles(id) ON DELETE CASCADE,
+  photo_url text NOT NULL,
+  caption text,
+  taken_at timestamptz,
+  created_at timestamptz DEFAULT now()
+);
+
+-- Chỉ mục tìm theo user
+CREATE INDEX IF NOT EXISTS idx_progress_photos_user ON public.progress_photos(user_id);
+```
+
+Bạn nên chạy file `supabase/rls_policies.sql` trên Supabase SQL Editor để kích hoạt RLS cho các bảng cốt lõi.
+
+## PHỤ LỤC D: Lệnh Triển khai mẫu (VPS)
+
+Ví dụ các lệnh nhanh để deploy lên VPS (Ubuntu 22.04):
+
+```bash
+# Cập nhật gói và cài docker
+sudo apt update && sudo apt install -y docker.io docker-compose certbot python3-certbot-nginx
+
+# Kéo repo và khởi chạy
+git clone https://github.com/Lacia1803/fittrack.git
+cd fittrack
+cp .env.example .env.local
+# sửa .env.local tương ứng với production values (Supabase keys, GEMINI_API_KEY)
+docker compose up -d --build
+
+# Cấu hình Nginx (ví dụ file /etc/nginx/sites-available/fittrack)
+# Sau khi cấu hình hostname và proxy_pass tới http://127.0.0.1:3000
+sudo systemctl reload nginx
+
+# Cấp SSL
+sudo certbot --nginx -d yourdomain.example
+```
+
+## PHỤ LỤC E: Test Logs & Kiểm thử (tóm tắt)
+
+Trong quá trình kiểm thử, nhóm đã thực hiện các bước sau:
+
+- Kiểm tra RLS bằng script `supabase/test-rls.js` với 2 tài khoản và `service_role` key. Kết quả: RLS chặn truy cập chéo.
+- Thử chức năng Offline Sync: tạo session khi offline -> lưu vào `localStorage` -> đồng bộ khi online.
+- Kiểm tra upload ảnh: upload đến bucket `progress-photos` và tạo record trong `progress_photos`.
+
+Một vài log mẫu (tóm lược):
+
+```
+INFO: Connected to Supabase as anon
+INFO: Anon select progress_photos -> 0 rows (expected)
+INFO: UserA inserted session -> 1 row inserted
+INFO: SyncService: pending_sessions count=2 -> successfully pushed
+```
+
+## PHỤ LỤC F: Danh sách Prompts (tóm tắt)
+
+Danh sách prompts chi tiết đã được lưu trong `DOCS-BAO-CAO-AI.md`. Tóm tắt 6 prompts chính đã dùng:
+
+1. Per-Set Logging serialization strategy (JSON in `notes`)
+2. TDEE/BMR & Macros allocation algorithm
+3. Web Audio API Rest Timer synthesis
+4. Canvas Social Card generator + `toLocaleString('vi-VN')`
+5. Theme mapping using CSS Variables for Tailwind v4
+6. Mobile responsive Sidebar Drawer implementation
+
+Tài liệu `DOCS-BAO-CAO-AI.md` chứa prompt text, lý do sử dụng và kết quả mỗi prompt.
+
+---
+
+## Hướng dẫn nộp bài nhanh (Checklist)
+
+- Đảm bảo deploy production hoạt động qua HTTPS và domain mở được từ trình duyệt.
+- Đảm bảo README và `.env.example` rõ ràng để giảng viên có thể chạy project trên VPS nếu cần.
+- Xuất `BAO_CAO_TOAN_VAN.md` thành PDF theo định dạng Times New Roman 13, spacing 1.5 và đảm bảo >= 30 trang.
+
+Nếu bạn muốn, tôi có thể:
+
+- tự động tạo file `.env.example` (đã xong),
+- xuất `BAO_CAO_TOAN_VAN.md` thành PDF theo format in sẵn (cần Python/LaTeX hoặc công cụ local),
+- hay tạo PR lên repository GitHub với các thay đổi (bạn cần cấp quyền nếu repo private).

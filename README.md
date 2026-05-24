@@ -44,14 +44,24 @@
    ```bash
    npm install
    ```
-3. Cấu hình biến môi trường: Tạo file `.env.local` ở thư mục gốc và thêm:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   GEMINI_API_KEY=your_gemini_api_key
-   AI_RATE_LIMIT_MAX=20
-   AI_RATE_LIMIT_WINDOW_MS=3600000
+3. Cấu hình biến môi trường: Sao chép file mẫu và điền giá trị thực tế:
+
+   ```bash
+   cp .env.example .env.local
+   # rồi mở .env.local và gán giá trị thực tế (Supabase, Gemini, ...)
    ```
+
+   Ví dụ các biến cần điền (xem thêm `.env.example`):
+
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=
+   GEMINI_API_KEY=
+   SUPABASE_SERVICE_ROLE_KEY=
+   ```
+
+   Lưu ý: Tuyệt đối không commit file `.env.local` chứa secrets lên GitHub. Thay vào đó, dùng `.env.example` làm mẫu và cấu hình biến môi trường trên VPS/host.
+
 4. Khởi chạy máy chủ cục bộ:
    ```bash
    npm run dev
