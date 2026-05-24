@@ -17,6 +17,7 @@ import {
   RotateCcw,
   Timer,
   Sparkles,
+  Loader2,
 } from "lucide-react";
 import { buildExerciseNotes } from "@/lib/exercise-notes";
 import Link from "next/link";
@@ -211,9 +212,39 @@ export default function NewSessionPage() {
   ]);
   const [plans, setPlans] = useState<WorkoutPlan[]>([]);
   const [loading, setLoading] = useState(false);
+  const [generatingNotes, setGeneratingNotes] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
   const supabase = createClient();
+
+  const handleGenerateNotes = async () => {
+    if (!name) {
+      toast({ title: "Hãy nhập tên buổi tập trước", variant: "destructive" });
+      return;
+    }
+    setGeneratingNotes(true);
+    try {
+      const res = await fetch("/api/ai/suggest", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "session_notes", context: { name } }),
+      });
+      const data = await res.json();
+      if (data.suggestion) {
+        setNotes(data.suggestion);
+      } else {
+        throw new Error(data.error || "Gợi ý thất bại");
+      }
+    } catch (e: any) {
+      toast({
+        title: "Lỗi AI",
+        description: e.message,
+        variant: "destructive",
+      });
+    } finally {
+      setGeneratingNotes(false);
+    }
+  };
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -225,12 +256,12 @@ export default function NewSessionPage() {
         .select("*")
         .eq("user_id", user!.id);
       setPlans(data || []);
-      
+
       // Auto-select plan from URL if present
       if (typeof window !== "undefined") {
         const urlParams = new URLSearchParams(window.location.search);
         const pId = urlParams.get("planId");
-        if (pId && data?.find(p => p.id === pId)) {
+        if (pId && data?.find((p) => p.id === pId)) {
           setPlanId(pId);
         }
       }
@@ -519,7 +550,23 @@ export default function NewSessionPage() {
               )}
 
               <div className="space-y-2">
-                <Label className="text-slate-300 text-xs">Ghi chú</Label>
+                <div className="flex items-center justify-between">
+                  <Label className="text-slate-300 text-xs">Ghi chú</Label>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleGenerateNotes}
+                    disabled={generatingNotes || !name}
+                    className="h-6 text-[10px] text-purple-400 hover:text-purple-300 hover:bg-purple-900/20 px-2 py-0"
+                  >
+                    {generatingNotes ? (
+                      <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                    ) : (
+                      <Sparkles className="h-3 w-3 mr-1" />
+                    )}
+                    AI Gợi ý ghi chú
+                  </Button>
+                </div>
                 <Textarea
                   placeholder="Cảm giác hôm nay, năng lượng, chấn thương..."
                   value={notes}

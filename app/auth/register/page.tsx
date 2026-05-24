@@ -1,44 +1,60 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Dumbbell } from 'lucide-react'
-import { useToast } from '@/hooks/use-toast'
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Dumbbell } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function RegisterPage() {
-  const [fullName, setFullName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
-  const { toast } = useToast()
-  const supabase = createClient()
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
+  const supabase = createClient();
 
   const handleRegister = async () => {
     if (!fullName || !email || !password) {
-      toast({ title: 'Vui lòng điền đầy đủ thông tin', variant: 'destructive' })
-      return
+      toast({
+        title: "Vui lòng điền đầy đủ thông tin",
+        variant: "destructive",
+      });
+      return;
     }
-    setLoading(true)
+    setLoading(true);
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { full_name: fullName } },
-    })
+    });
     if (error) {
-      toast({ title: 'Lỗi đăng ký', description: error.message, variant: 'destructive' })
-      setLoading(false)
+      toast({
+        title: "Lỗi đăng ký",
+        description: error.message,
+        variant: "destructive",
+      });
+      setLoading(false);
     } else {
-      toast({ title: 'Đăng ký thành công!', description: 'Chào mừng bạn đến với FitTrack' })
-      window.location.href = '/dashboard'
+      toast({
+        title: "Đăng ký thành công!",
+        description: "Chào mừng bạn đến với FitTrack",
+      });
+      window.location.href = "/dashboard";
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
@@ -48,7 +64,9 @@ export default function RegisterPage() {
             <Dumbbell className="h-10 w-10 text-orange-500" />
           </div>
           <CardTitle className="text-white text-2xl">Tạo tài khoản</CardTitle>
-          <CardDescription className="text-slate-400">Bắt đầu hành trình fitness của bạn</CardDescription>
+          <CardDescription className="text-slate-400">
+            Bắt đầu hành trình fitness của bạn
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
@@ -77,7 +95,7 @@ export default function RegisterPage() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleRegister()}
+              onKeyDown={(e) => e.key === "Enter" && handleRegister()}
               className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
             />
           </div>
@@ -86,16 +104,19 @@ export default function RegisterPage() {
             disabled={loading}
             className="w-full bg-orange-500 hover:bg-orange-600 text-white"
           >
-            {loading ? 'Đang tạo tài khoản...' : 'Đăng ký'}
+            {loading ? "Đang tạo tài khoản..." : "Đăng ký"}
           </Button>
           <p className="text-center text-slate-400 text-sm">
-            Đã có tài khoản?{' '}
-            <Link href="/auth/login" className="text-orange-400 hover:underline">
+            Đã có tài khoản?{" "}
+            <Link
+              href="/auth/login"
+              className="text-orange-400 hover:underline"
+            >
               Đăng nhập
             </Link>
           </p>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

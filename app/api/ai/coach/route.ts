@@ -112,10 +112,18 @@ export async function POST(request: NextRequest) {
     )
     .join(", ");
 
+  const today = new Date().toLocaleDateString("vi-VN", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   const contextPrompt = `Ban la Coach AI - huan luyen vien ca nhan cua FitTrack.
+Hom nay la: ${today}.
 Thong tin hoc vien: Cao ${height}cm, Nang ${weight}kg, BMI ${bmi}.
 Lich su tap luyen gan day: ${sessionSummary || "Chua co buoi tap nao"}.
-Hay tra loi cau hoi sau mot cach ngan gon, suc tich, co dong luc, su dung Markdown tieng Viet:
+Hay tra loi cau hoi sau mot cach ngan gon, suc tich, co dong luc bang tieng Viet. TUYET DOI KHONG su dung markdown (khong dung bieu tuong ** hay *). Chi dung van ban thuan (plain text):
 Cau hoi: "${message}"`;
 
   const response = await fetch(
@@ -134,11 +142,14 @@ Cau hoi: "${message}"`;
   }
 
   const resData = await response.json();
-  const aiReply = resData.candidates?.[0]?.content?.parts?.[0]?.text;
+  let aiReply = resData.candidates?.[0]?.content?.parts?.[0]?.text;
 
   if (!aiReply) {
     return NextResponse.json({ error: "AI_EMPTY_RESPONSE" }, { status: 502 });
   }
+
+  // Xóa mọi dấu * còn sót lại trong trường hợp AI vẫn cố tình trả về
+  aiReply = aiReply.replace(/\*/g, "");
 
   return NextResponse.json({ reply: aiReply, remaining: rate.remaining });
 }

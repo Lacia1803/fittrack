@@ -99,19 +99,19 @@ export default function AICoachPage() {
       const bmiNum = parseFloat(bmi);
       if (bmiNum < 18.5) {
         bmiAdvice =
-          "Thể trạng của bạn đang ở mức **Thiếu cân**. Bạn nên tập trung vào giáo án tăng cơ (Bulking), bổ sung thặng dư calo (+300 - 500 kcal/ngày) và ăn nhiều protein (khoảng 1.6g - 2g/kg trọng lượng cơ thể).";
+          "Thể trạng của bạn đang ở mức Thiếu cân. Bạn nên tập trung vào giáo án tăng cơ (Bulking), bổ sung thặng dư calo (+300 - 500 kcal/ngày) và ăn nhiều protein (khoảng 1.6g - 2g/kg trọng lượng cơ thể).";
       } else if (bmiNum < 25) {
         bmiAdvice =
-          "Thể trạng của bạn đang ở mức **Bình thường (Cân đối)**. Đây là nền tảng tuyệt vời! Bạn có thể chọn hướng tăng cơ nạc (Lean Bulking) hoặc giảm mỡ giữ cơ (Recomposition) tuỳ mục tiêu cá nhân.";
+          "Thể trạng của bạn đang ở mức Bình thường (Cân đối). Đây là nền tảng tuyệt vời! Bạn có thể chọn hướng tăng cơ nạc (Lean Bulking) hoặc giảm mỡ giữ cơ (Recomposition) tuỳ mục tiêu cá nhân.";
       } else if (bmiNum < 30) {
         bmiAdvice =
-          "Thể trạng của bạn đang ở mức **Thừa cân**. Lời khuyên là hãy tập luyện kháng lực đều đặn kết hợp thâm hụt calo nhẹ (-300 kcal/ngày) để giảm mỡ dần mà không mất đi khối lượng cơ bắp.";
+          "Thể trạng của bạn đang ở mức Thừa cân. Lời khuyên là hãy tập luyện kháng lực đều đặn kết hợp thâm hụt calo nhẹ (-300 kcal/ngày) để giảm mỡ dần mà không mất đi khối lượng cơ bắp.";
       } else {
         bmiAdvice =
-          "Thể trạng của bạn đang ở mức **Béo phì**. Bạn cần ưu tiên chế độ ăn thâm hụt calo kiểm soát chặt chẽ (-500 kcal/ngày), tăng cường vận động hàng ngày và tập tạ kết hợp các buổi Cardio nhẹ để bảo vệ tim mạch.";
+          "Thể trạng của bạn đang ở mức Béo phì. Bạn cần ưu tiên chế độ ăn thâm hụt calo kiểm soát chặt chẽ (-500 kcal/ngày), tăng cường vận động hàng ngày và tập tạ kết hợp các buổi Cardio nhẹ để bảo vệ tim mạch.";
       }
 
-      return `📊 **PHÂN TÍCH THỂ TRẠNG CỦA BẠN:**\n\n- Chiều cao: **${height} cm**\n- Cân nặng: **${weight} kg**\n- Chỉ số BMI của bạn là: **${bmi}**\n\n💡 **Nhận xét chuyên môn:**\n${bmiAdvice}`;
+      return `📊 PHÂN TÍCH THỂ TRẠNG CỦA BẠN:\n\n- Chiều cao: ${height} cm\n- Cân nặng: ${weight} kg\n- Chỉ số BMI của bạn là: ${bmi}\n\n💡 Nhận xét chuyên môn:\n${bmiAdvice}`;
     }
 
     if (
@@ -121,10 +121,10 @@ export default function AICoachPage() {
       p.includes("lịch sử")
     ) {
       if (sessions.length === 0) {
-        return '🏋️ **ĐÁNH GIÁ TẬP LUYỆN:**\n\nBạn chưa log buổi tập nào trên hệ thống FitTrack. Hãy nhấn nút **"Tạo dữ liệu mẫu nhanh"** trên Dashboard hoặc tự tạo một buổi tập mới để tôi có thể phân tích chi tiết hiệu suất cho bạn nhé!';
+        return '🏋️ ĐÁNH GIÁ TẬP LUYỆN:\n\nBạn chưa log buổi tập nào trên hệ thống FitTrack. Hãy nhấn nút "Tạo dữ liệu mẫu nhanh" trên Dashboard hoặc tự tạo một buổi tập mới để tôi có thể phân tích chi tiết hiệu suất cho bạn nhé!';
       }
 
-      return `🏋️ **ĐÁNH GIÁ TẬP LUYỆN CHI TIẾT:**\n\n- Tổng số buổi đã tập: **${sessions.length} buổi**\n- Tổng Volume tích luỹ: **${totalVolume.toLocaleString("vi-VN")} kg**\n- Buổi tập gần nhất: **${sessions[0]?.name}** (${sessions[0]?.date})\n\n💡 **Phân tích hiệu suất:**\nBuổi tập gần đây nhất của bạn đạt hiệu năng rất tốt. Để kích thích cơ bắp phát triển liên tục, hãy áp dụng nguyên tắc **Tăng tiến quá tải (Progressive Overload)** bằng cách thử tăng nhẹ 1-2kg tạ hoặc thêm 1 rep ở hiệp cuối cùng trong buổi tập tiếp theo nhé!`;
+      return `🏋️ ĐÁNH GIÁ TẬP LUYỆN CHI TIẾT:\n\n- Tổng số buổi đã tập: ${sessions.length} buổi\n- Tổng Volume tích luỹ: ${totalVolume.toLocaleString("vi-VN")} kg\n- Buổi tập gần nhất: ${sessions[0]?.name} (${sessions[0]?.date})\n\n💡 Phân tích hiệu suất:\nBuổi tập gần đây nhất của bạn đạt hiệu năng rất tốt. Để kích thích cơ bắp phát triển liên tục, hãy áp dụng nguyên tắc Tăng tiến quá tải (Progressive Overload) bằng cách thử tăng nhẹ 1-2kg tạ hoặc thêm 1 rep ở hiệp cuối cùng trong buổi tập tiếp theo nhé!`;
     }
 
     if (
@@ -132,7 +132,7 @@ export default function AICoachPage() {
       p.includes("giáo án") ||
       p.includes("lịch trình")
     ) {
-      return "📅 **GỢI Ý LỊCH TẬP TỐI ƯU (3 BUỔI/TUẦN - PUSH/PULL/LEGS):**\n\n*Đây là lịch tập phổ biến và hiệu quả nhất cho mọi cấp độ giúp tối ưu hoá thời gian phục hồi cơ bắp:*\n\n1. **Ngày 1 - PUSH DAY (Ngực, Vai, Tay sau)**:\n   - Flat Bench Press: 4 hiệp × 6-8 reps\n   - Dumbbell Shoulder Press: 3 hiệp × 8-10 reps\n   - Incline Dumbbell Fly: 3 hiệp × 12 reps\n   - Tricep Pushdown: 3 hiệp × 12 reps\n\n2. **Ngày 2 - PULL DAY (Lưng, Xô, Tay trước)**:\n   - Barbell Row hoặc Lat Pulldown: 4 hiệp × 8-10 reps\n   - Single Arm Dumbbell Row: 3 hiệp × 10 reps\n   - Bicep Dumbbell Curl: 3 hiệp × 12 reps\n   - Face Pulls (Vai sau): 3 hiệp × 15 reps\n\n3. **Ngày 3 - LEG DAY (Đùi trước, Mông, Đùi sau)**:\n   - Back Squat (Gánh đùi): 4 hiệp × 8 reps\n   - Romanian Deadlift (Đùi sau): 3 hiệp × 10 reps\n   - Leg Press: 3 hiệp × 12 reps\n   - Calf Raises (Bắp chuối): 3 hiệp × 15 reps";
+      return "📅 GỢI Ý LỊCH TẬP TỐI ƯU (3 BUỔI/TUẦN - PUSH/PULL/LEGS):\n\n*Đây là lịch tập phổ biến và hiệu quả nhất cho mọi cấp độ giúp tối ưu hoá thời gian phục hồi cơ bắp:*\n\n1. Ngày 1 - PUSH DAY (Ngực, Vai, Tay sau):\n   - Flat Bench Press: 4 hiệp × 6-8 reps\n   - Dumbbell Shoulder Press: 3 hiệp × 8-10 reps\n   - Incline Dumbbell Fly: 3 hiệp × 12 reps\n   - Tricep Pushdown: 3 hiệp × 12 reps\n\n2. Ngày 2 - PULL DAY (Lưng, Xô, Tay trước):\n   - Barbell Row hoặc Lat Pulldown: 4 hiệp × 8-10 reps\n   - Single Arm Dumbbell Row: 3 hiệp × 10 reps\n   - Bicep Dumbbell Curl: 3 hiệp × 12 reps\n   - Face Pulls (Vai sau): 3 hiệp × 15 reps\n\n3. Ngày 3 - LEG DAY (Đùi trước, Mông, Đùi sau):\n   - Back Squat (Gánh đùi): 4 hiệp × 8 reps\n   - Romanian Deadlift (Đùi sau): 3 hiệp × 10 reps\n   - Leg Press: 3 hiệp × 12 reps\n   - Calf Raises (Bắp chuối): 3 hiệp × 15 reps";
     }
 
     if (
@@ -143,10 +143,10 @@ export default function AICoachPage() {
     ) {
       const bmr = Math.round(10 * weight + 6.25 * height - 5 * 25 + 5);
       const tdee = Math.round(bmr * 1.375);
-      return `🥗 **TƯ VẤN DINH DƯỠNG CÁ NHÂN HÓA:**\n\nDựa trên cân nặng **${weight}kg** và chiều cao **${height}cm** của bạn:\n\n- Lượng Calo duy trì ước tính (TDEE): **~${tdee} kcal/ngày**\n\n💡 **Đề xuất phân bổ Macros hàng ngày (Tăng cơ nạc):**\n- **Protein (Chất đạm)**: ~${Math.round(weight * 2)}g (${Math.round(weight * 2 * 4)} kcal) -> Giúp phục hồi và xây dựng sợi cơ.\n- **Carbs (Tinh bột)**: ~${Math.round(weight * 3.5)}g -> Cung cấp năng lượng tập luyện năng nổ.\n- **Fats (Chất béo tốt)**: ~${Math.round(weight * 0.8)}g -> Hỗ trợ điều hòa hormone nội tiết.\n\n*Mẹo: Hãy uống đủ 2-3 lít nước mỗi ngày và ăn một bữa ăn chứa tinh bột hấp thu nhanh + protein trước tập 1.5 tiếng để có hiệu suất tập cao nhất!*`;
+      return `🥗 TƯ VẤN DINH DƯỠNG CÁ NHÂN HÓA:\n\nDựa trên cân nặng ${weight}kg và chiều cao ${height}cm của bạn:\n\n- Lượng Calo duy trì ước tính (TDEE): ~${tdee} kcal/ngày\n\n💡 Đề xuất phân bổ Macros hàng ngày (Tăng cơ nạc):\n- Protein (Chất đạm): ~${Math.round(weight * 2)}g (${Math.round(weight * 2 * 4)} kcal) -> Giúp phục hồi và xây dựng sợi cơ.\n- Carbs (Tinh bột): ~${Math.round(weight * 3.5)}g -> Cung cấp năng lượng tập luyện năng nổ.\n- Fats (Chất béo tốt): ~${Math.round(weight * 0.8)}g -> Hỗ trợ điều hòa hormone nội tiết.\n\n*Mẹo: Hãy uống đủ 2-3 lít nước mỗi ngày và ăn một bữa ăn chứa tinh bột hấp thu nhanh + protein trước tập 1.5 tiếng để có hiệu suất tập cao nhất!*`;
     }
 
-    return "🤖 Cảm ơn câu hỏi của bạn! Tôi có thể hỗ trợ bạn sâu sắc nhất về: \n1. **Phân tích BMI & thể trạng**\n2. **Đánh giá hiệu suất tập luyện thực tế**\n3. **Gợi ý Lịch tập**\n4. **Thực đơn dinh dưỡng**.\n\n*Khi AI server bận, tôi sẽ phản hồi bằng chế độ chuyên gia cục bộ để bạn vẫn có tư vấn nhanh.*";
+    return "🤖 Cảm ơn câu hỏi của bạn! Tôi có thể hỗ trợ bạn sâu sắc nhất về: \n1. Phân tích BMI & thể trạng\n2. Đánh giá hiệu suất tập luyện thực tế\n3. Gợi ý Lịch tập\n4. Thực đơn dinh dưỡng.\n\n*Khi AI server bận, tôi sẽ phản hồi bằng chế độ chuyên gia cục bộ để bạn vẫn có tư vấn nhanh.*";
   };
 
   const handleSend = async (customPrompt?: string) => {
