@@ -42,6 +42,12 @@ export async function POST(request: NextRequest) {
     prompt = `Dựa vào hồ sơ: "${bioInfo}" và tên chương trình: "${context.name || ""}". Hãy viết một GHI CHÚ/MÔ TẢ (khoảng 2-3 câu) giải thích cách thực hiện chương trình này. Dùng tiếng Việt tự nhiên, chuyên nghiệp.`;
   } else if (type === "session_notes") {
     prompt = `Dựa vào hồ sơ: "${bioInfo}" và tên buổi tập hiện tại: "${context.name || ""}". Hãy viết GHI CHÚ (notes) hoặc chiến thuật cho buổi tập này (khoảng 2-3 câu), ví dụ khuyên nên khởi động thế nào hoặc tập trung vào nhóm cơ nào. Dùng tiếng Việt ngắn gọn.`;
+  } else if (type === "food_stats") {
+    prompt = `Bạn là chuyên gia dinh dưỡng. Khi tôi đưa một món ăn: "${context.mealName}", hãy trả về chính xác 4 con số theo định dạng JSON: { "calories": X, "protein": Y, "carbs": Z, "fats": W }. 
+    Lưu ý: 
+    - Trả về JSON THUẦN, không giải thích gì thêm, không bọc trong markdown block.
+    - Con số là số nguyên ước tính cho một khẩu phần thông thường (VD: 1 bát phở, 1 dĩa cơm tấm).
+    - Đơn vị: calories (kcal), protein (g), carbs (g), fats (g).`;
   } else {
     prompt = `Hãy cho một lời khuyên ngắn gọn về tập luyện xoay quanh bối cảnh: ${JSON.stringify(context)}`;
   }

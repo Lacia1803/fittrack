@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
-import { Sparkles, Loader2, Brain } from "lucide-react";
+import { Sparkles, Loader2, Brain, Trash2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 
@@ -62,6 +62,22 @@ export default function AICoachPage() {
         localStorage.getItem("pending_sessions") || "[]",
       );
       setOfflineCount(pending.length);
+
+      // Load chat history
+      const savedMessages = localStorage.getItem("fittrack_chat_history");
+      if (savedMessages) {
+        try {
+          const parsed = JSON.parse(savedMessages);
+          const hydrated = parsed.map((m: any) => ({
+            ...m,
+            timestamp: new Date(m.timestamp),
+          }));
+          setMessages(hydrated);
+          return; // Skip initial welcome message if history exists
+        } catch (e) {
+          console.error("Failed to load chat history", e);
+        }
+      }
     }
 
     setMessages([
@@ -72,6 +88,13 @@ export default function AICoachPage() {
       },
     ]);
   }, []);
+
+  // Save chat history to localStorage
+  useEffect(() => {
+    if (messages.length > 0) {
+      localStorage.setItem("fittrack_chat_history", JSON.stringify(messages));
+    }
+  }, [messages]);
 
   // Auto-scroll chat
   useEffect(() => {
@@ -189,7 +212,26 @@ export default function AICoachPage() {
       }
 
       if (!response.ok) {
-        throw new Error("AI server error");
+        const errData = await response.json().catch(() => ({}));
+        toast({
+          title: "Lỗi từ AI",
+          description:
+            errData.error ||
+            errData.message ||
+            "Máy chủ AI trả về lỗi. Đang chuyển sang phản hồi cục bộ.",
+          variant: "destructive",
+        });
+
+        const localResponse = getLocalResponse(textToSend);
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: localResponse,
+            timestamp: new Date(),
+          },
+        ]);
+        return;
       }
 
       const resData = await response.json();
@@ -218,6 +260,19 @@ export default function AICoachPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const clearChat = () => {
+    if (!confirm("Bạn có chắc chắn muốn xoá toàn bộ lịch sử tư vấn?")) return;
+
+    localStorage.removeItem("fittrack_chat_history");
+    const initialMsg: Message = {
+      role: "assistant",
+      content: `Chào bạn! Hôm nay FitTrack ghi nhận ${sessions.length || 0} buổi tập liên kết. Bạn muốn tối ưu phần nào? Hỏi nhanh về bài tập, tempo, macro và lịch phục hồi.`,
+      timestamp: new Date(),
+    };
+    setMessages([initialMsg]);
+    toast({ title: "Đã xoá lịch sử chat" });
   };
 
   const quickPrompts = [
@@ -320,12 +375,22 @@ export default function AICoachPage() {
               Hỏi nhanh về bài tập, tempo, macro và lịch phục hồi.
             </p>
           </div>
-          <Link
-            href="/dashboard"
-            className="text-slate-400 hover:text-white text-xs transition-colors underline"
-          >
-            Quay lại dashboard
-          </Link>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={clearChat}
+              className="text-slate-500 hover:text-red-400 transition-colors flex items-center gap-1.5 text-xs"
+              title="Xoá lịch sử"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+              Xoá lịch sử
+            </button>
+            <Link
+              href="/dashboard"
+              className="text-slate-400 hover:text-white text-xs transition-colors underline"
+            >
+              Quay lại dashboard
+            </Link>
+          </div>
         </div>
 
         {/* Chips */}
