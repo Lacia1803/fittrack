@@ -92,3 +92,58 @@ Toàn bộ dữ liệu được bảo vệ nghiêm ngặt bằng cơ chế **Row
 ---
 
 _Developed as a Final Project Submission._
+
+---
+
+## Tóm tắt hành trình Deploy FitTrack với Domain + SSL
+
+## 🎯 Mục tiêu
+
+Deploy ứng dụng FitTrack lên VPS với Domain + SSL (HTTPS)
+
+---
+
+## 📋 Các bước đã thực hiện
+
+### 1. Tạo Domain miễn phí với DuckDNS
+
+- Đăng ký tại duckdns.org
+- Tạo subdomain: `healfittrack.duckdns.org`
+- Trỏ về IP VPS: `54.254.195.231`
+
+### 2. Cài Nginx làm Reverse Proxy
+
+- Cài Nginx trên VPS
+- Cấu hình proxy từ domain → `localhost:3000` (Docker app)
+- Mở port 80, 443 trên Security Group / Firewall
+
+### 3. Lấy SSL Certificate (Let's Encrypt)
+
+- Thử Certbot HTTP challenge → **thất bại** do DuckDNS DNS timeout
+- Thử Cloudflare → **thất bại** vì subdomain không đổi được nameserver
+- Dùng **DNS challenge với plugin certbot-dns-duckdns** → **✅ thành công**
+
+### 4. Cấu hình Nginx với HTTPS
+
+- Gắn certificate vào Nginx
+- Redirect HTTP → HTTPS tự động
+
+---
+
+## ✅ Kết quả cuối cùng
+
+|                |                                    |
+| -------------- | ---------------------------------- |
+| **URL**        | `https://healfittrack.duckdns.org` |
+| **VPS**        | VPS (ví dụ: AWS/Oracle/EC2)        |
+| **SSL**        | Let's Encrypt 🔒                   |
+| **Auto-renew** | ✅ Tự động renew 90 ngày           |
+| **Chi phí**    | **$0 hoàn toàn miễn phí**          |
+
+---
+
+## 💡 Bài học rút ra
+
+- DuckDNS không hỗ trợ HTTP challenge → phải dùng **DNS challenge**
+- Cloudflare không hoạt động với subdomain miễn phí trong một số trường hợp
+- Plugin `certbot-dns-duckdns` là giải pháp phù hợp nhất cho trường hợp này
