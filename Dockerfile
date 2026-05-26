@@ -1,13 +1,14 @@
 # Dependencies
-FROM node:18-alpine AS deps
+FROM node:20-alpine AS deps
 
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
 COPY package*.json ./
 RUN npm ci
 
+RUN npm install @tailwindcss/oxide-linux-x64-musl
 # Build
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 RUN apk add --no-cache libc6-compat
@@ -17,7 +18,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # Runtime
-FROM node:18-alpine AS runner
+FROM node:20-alpine AS runner
 
 WORKDIR /app
 RUN apk add --no-cache libc6-compat

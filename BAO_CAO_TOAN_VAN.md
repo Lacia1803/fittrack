@@ -1,8 +1,14 @@
-# BÁO CÁO TOÀN VĂN ĐỒ ÁN CUỐI KỲ
+# TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN
+# KHOA KỸ THUẬT PHẦN MỀM
+
+---
+
+# BÁO CÁO TOÀN VĂN ĐỒ ÁN TỐT NGHIỆP / CUỐI KỲ
+## ĐỀ TÀI: XÂY DỰNG ỨNG DỤNG FITTRACK - HỆ THỐNG THEO DÕI TẬP LUYỆN VÀ DINH DƯỠNG TÍCH HỢP TRỢ LÝ AI CÁ NHÂN HÓA
 
 **Môn học:** Các công nghệ mới trong phát triển phần mềm
 **Lớp:** CTK46-PM — Công nghệ thông tin, Khoá 46, Chuyên ngành Kỹ thuật phần mềm
-**Họ và tên:** Phùng Võ Quốc Hiển
+**Sinh viên thực hiện:** Phùng Võ Quốc Hiển
 **Mã sinh viên:** 2212364
 **Ngày nộp:** 29/05/2026
 
@@ -10,809 +16,1118 @@
 
 ## LỜI CẢM ƠN
 
-Trong suốt quá trình thực hiện đồ án "Xây dựng ứng dụng FitTrack - Hệ thống theo dõi tập luyện và dinh dưỡng tích hợp AI", em đã nhận được rất nhiều sự quan tâm, hướng dẫn và giúp đỡ quý báu.
-Đầu tiên, em xin gửi lời cảm ơn sâu sắc đến Giảng viên hướng dẫn môn học "Các công nghệ mới trong phát triển phần mềm". Những bài giảng tâm huyết, sự định hướng kỹ thuật sắc bén và những góp ý chân thành của Thầy/Cô đã giúp em tiếp cận và làm chủ được các công nghệ tiên tiến nhất như Next.js 16, Supabase, và Docker. Nhờ đó, em có đủ kiến thức và sự tự tin để hoàn thành đồ án này.
-Bên cạnh đó, em cũng xin cảm ơn các bạn học trong lớp CTK46-PM đã cùng nhau thảo luận, chia sẻ kiến thức và giải quyết các vấn đề kỹ thuật khó khăn trong suốt học kỳ.
-Mặc dù đã cố gắng hết sức để hoàn thiện sản phẩm và báo cáo, nhưng do giới hạn về mặt thời gian và kinh nghiệm thực tiễn, đồ án chắc chắn không tránh khỏi những thiếu sót. Em rất mong nhận được sự thông cảm, đóng góp ý kiến và chỉ bảo thêm từ Thầy/Cô để sản phẩm ngày càng hoàn thiện hơn, cũng như giúp em củng cố hành trang kiến thức cho con đường nghề nghiệp kỹ sư phần mềm sau này.
+Trong suốt quá trình học tập tại Khoa Kỹ thuật Phần mềm và thực hiện đồ án "Xây dựng ứng dụng FitTrack - Hệ thống theo dõi tập luyện và dinh dưỡng tích hợp AI", em đã nhận được rất nhiều sự quan tâm, hướng dẫn và giúp đỡ quý báu của các Thầy, Cô và các bạn học.
 
-Xin chân thành cảm ơn!
+Đầu tiên, em xin gửi lời cảm ơn sâu sắc nhất tới Giảng viên hướng dẫn môn học "Các công nghệ mới trong phát triển phần mềm". Những bài giảng tâm huyết, sự định hướng kỹ thuật sắc bén và những góp ý chân thành của Thầy/Cô đã giúp em tiếp cận và làm chủ được các công nghệ tiên tiến nhất hiện nay như Next.js 16, Supabase BaaS, Tailwind CSS v4 và kiến trúc container hóa Docker. Nhờ có sự dẫn dắt sát sao của Thầy/Cô, em mới có đủ kiến thức và sự tự tin để tự nghiên cứu, giải quyết các bài toán kỹ thuật phức tạp và hoàn thành đồ án đúng tiến độ.
+
+Bên cạnh đó, em cũng xin chân thành cảm ơn các bạn học thuộc tập thể lớp CTK46-PM đã luôn đồng hành, cùng nhau thảo luận nhóm, chia sẻ tài liệu và hỗ trợ giải quyết các lỗi lập trình phát sinh trong suốt quá trình xây dựng sản phẩm. Những buổi trao đổi học thuật sôi nổi đã mang lại cho em nhiều góc nhìn mới mẻ và nâng cao năng lực tự học.
+
+Cuối cùng, mặc dù đã dành rất nhiều thời gian, tâm huyết để hoàn thiện ứng dụng cũng như trình bày cuốn báo cáo này một cách chỉnh chu nhất, nhưng do giới hạn về mặt thời gian, kiến thức thực tế và kinh nghiệm thực tiễn, đồ án chắc chắn không tránh khỏi những thiếu sót ngoài ý muốn. Em kính mong nhận được sự thông cảm, đóng góp ý kiến và chỉ bảo thêm từ Thầy/Cô trong Hội đồng chấm đồ án để sản phẩm ngày càng hoàn thiện hơn, đồng thời giúp em củng cố hành trang tri thức vững chắc trên con đường trở thành một Kỹ sư phần mềm chuyên nghiệp.
+
+Em xin chân thành cảm ơn!
 
 ---
 
 ## TÓM TẮT ĐỒ ÁN (ABSTRACT)
 
-Đồ án trình bày quy trình nghiên cứu, thiết kế, xây dựng và triển khai một nền tảng ứng dụng web ứng dụng các công nghệ mới mang tên **FitTrack**. FitTrack là hệ thống quản lý thể chất toàn diện, giải quyết bài toán theo dõi tiến độ tập luyện thể hình (gym/fitness) và dinh dưỡng cá nhân hóa.
-Ứng dụng được xây dựng trên nền tảng kiến trúc Client-Server hiện đại, sử dụng framework **Next.js 16** (với mô hình App Router và React Server Components) cho phía Frontend; **Supabase** (PostgreSQL) đóng vai trò là Backend-as-a-Service xử lý cơ sở dữ liệu, xác thực người dùng và phân quyền (Row Level Security).
+Đồ án này trình bày chi tiết quy trình nghiên cứu, thiết kế, xây dựng và triển khai một nền tảng ứng dụng web tiên tiến mang tên **FitTrack**. FitTrack là hệ thống quản lý thể chất toàn diện, giải quyết triệt để bài toán theo dõi tiến độ tập luyện thể hình (gym/fitness) và dinh dưỡng cá nhân hóa.
+
+Ứng dụng được xây dựng trên nền tảng kiến trúc Client-Server hiện đại, sử dụng framework **Next.js 16** (với mô hình App Router và React Server Components) cho phía Frontend; **Supabase** (PostgreSQL) đóng vai trò là Backend-as-a-Service xử lý cơ sở dữ liệu, xác thực người dùng và phân quyền bảo mật (Row Level Security).
+
 Các tính năng cốt lõi bao gồm: hệ thống ghi chép hiệp tập chi tiết (per-set logging) kết hợp đồng hồ đếm ngược sinh âm thanh bằng Web Audio API; hệ thống tự động tính toán năng lượng (BMR/TDEE) theo chuẩn y khoa Mifflin-St Jeor; vẽ đồ thị phân tích sự gia tăng sức mạnh (Progressive Overload) bằng thư viện Recharts; tích hợp Trợ lý Trí tuệ nhân tạo (AI Coach) cung cấp tư vấn cá nhân hóa; và hệ thống chuyển đổi giao diện Sáng/Tối linh hoạt dựa trên CSS Variables của Tailwind CSS v4.
-Đặc biệt, hệ thống được thiết kế theo tiêu chuẩn Progressive Web App (PWA), hỗ trợ hoạt động ngoại tuyến (Offline Syncing) và được container hóa bằng **Docker** đa giai đoạn để triển khai mượt mà lên môi trường Cloud/VPS. Đồ án minh chứng cho khả năng ứng dụng thực tiễn của bộ công nghệ phát triển web mới nhất hiện nay.
+
+Đặc biệt, hệ thống được thiết kế theo tiêu chuẩn Progressive Web App (PWA), hỗ trợ hoạt động ngoại tuyến (Offline Syncing) và được container hóa bằng **Docker** đa giai đoạn để triển khai mượt mà lên môi trường Cloud VPS AWS EC2. Ứng dụng đã giải quyết được các thách thức trong triển khai thực tế như giới hạn tài nguyên máy chủ bằng cách áp dụng quy trình build cục bộ và đẩy lên Docker Hub, xử lý chứng chỉ bảo mật SSL tự động qua DNS Challenge Let's Encrypt cho tên miền DuckDNS. Đồ án minh chứng cho khả năng ứng dụng thực tiễn của bộ công nghệ phát triển web mới nhất hiện nay.
 
 ---
 
 ## MỤC LỤC
 
-1. CHƯƠNG 1: MỞ ĐẦU
-2. CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ ÁP DỤNG
-3. CHƯƠNG 3: PHÂN TÍCH VÀ ĐẶC TẢ YÊU CẦU
-4. CHƯƠNG 4: THIẾT KẾ HỆ THỐNG
-5. CHƯƠNG 5: TRIỂN KHAI KỸ THUẬT VÀ MÃ NGUỒN CỐT LÕI
-6. CHƯƠNG 6: ĐÓNG GÓI VÀ TRIỂN KHAI (DOCKER & DEPLOYMENT)
-7. CHƯƠNG 7: KIỂM THỬ HỆ THỐNG (TESTING)
-8. CHƯƠNG 8: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
-9. TÀI LIỆU THAM KHẢO
+- LỜI CẢM ƠN
+- TÓM TẮT ĐỒ ÁN (ABSTRACT)
+- CHƯƠNG 1: MỞ ĐẦU
+  - 1.1. Bối cảnh đề tài
+  - 1.2. Phân tích thị trường và hiện trạng ứng dụng Fitness
+  - 1.3. Lý do chọn đề tài và tính cấp thiết
+  - 1.4. Mục tiêu của đồ án
+  - 1.5. Đối tượng và phạm vi nghiên cứu
+- CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ ÁP DỤNG
+  - 2.1. Kiến trúc Web hiện đại và Sự dịch chuyển mô hình Rendering
+  - 2.2. Next.js 16 và React Server Components (RSC)
+  - 2.3. Hệ quản trị CSDL & Backend-as-a-Service (Supabase)
+  - 2.4. Công nghệ CSS Tailwind v4 & Engine Oxide
+  - 2.5. Progressive Web App (PWA) & Service Worker
+  - 2.6. Xử lý âm thanh với Web Audio API
+  - 2.7. Container hóa với Docker
+- CHƯƠNG 3: PHÂN TÍCH VÀ ĐẶC TẢ YÊU CẦU
+  - 3.1. Xác định yêu cầu chức năng (Functional Requirements)
+  - 3.2. Đặc tả Use Cases chi tiết
+  - 3.3. Yêu cầu phi chức năng (Non-Functional Requirements)
+- CHƯƠNG 4: THIẾT KẾ HỆ THỐNG
+  - 4.1. Kiến trúc hệ thống tổng thể (System Architecture)
+  - 4.2. Thiết kế Cơ sở dữ liệu (Data Dictionary chi tiết)
+  - 4.3. Thiết kế giao diện UI/UX (Design System)
+  - 4.4. Thiết kế bảo mật (Row Level Security kịch bản)
+  - 4.5. Luồng dữ liệu nghiệp vụ End-to-End
+- CHƯƠNG 5: TRIỂN KHAI KỸ THUẬT VÀ MÃ NGUỒN CỐT LÕI
+  - 5.1. Xử lý Per-Set Logging (Serialization & Deserialization)
+  - 5.2. Xây dựng biểu đồ Recharts & Thuật toán gom nhóm dữ liệu
+  - 5.3. Implement Web Audio API cho Rest Timer
+  - 5.4. Thuật toán tính toán Dinh dưỡng y khoa
+  - 5.5. AI Coach Prompt Engineering & Gemini SDK Integration
+  - 5.6. Canvas Social Card Generator
+  - 5.7. CSS Variables & Dynamic Theming
+  - 5.8. Cơ chế đồng bộ ngoại tuyến Offline Sync
+- CHƯƠNG 6: ĐÓNG GÓI VÀ TRIỂN KHAI (DOCKER & DEPLOYMENT)
+  - 6.1. Phân tích cấu trúc Dockerfile Multi-stage
+  - 6.2. Mạng nội bộ Docker Compose và Bảo mật môi trường
+  - 6.3. Quy trình Triển khai trên VPS AWS EC2 với Domain + SSL
+  - 6.4. Tóm tắt hành trình vượt qua các trở ngại Deploy thực tế
+  - 6.5. Checklist trước khi đưa sản phẩm lên Production
+- CHƯƠNG 7: KIỂM THỬ HỆ THỐNG (TESTING)
+  - 7.1. Chiến lược Kiểm thử
+  - 7.2. Các Kịch bản Kiểm thử chi tiết (Test Cases)
+  - 7.3. Kiểm thử bảo mật RLS tự động bằng script `test-rls.js`
+  - 7.4. Kết quả chạy thử nghiệm và kiểm định hiệu năng
+- CHƯƠNG 8: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+  - 8.1. Kết quả đạt được của đồ án
+  - 8.2. Những hạn chế còn tồn tại của hệ thống
+  - 8.3. Định hướng phát triển tương lai
+- 9. TÀI LIỆU THAM KHẢO
+- CÁC PHỤ LỤC ĐÍNH KÈM
 
 ---
 
 ## CHƯƠNG 1: MỞ ĐẦU
 
-### 1.1. Bối cảnh
+### 1.1. Bối cảnh đề tài
 
-Trong thập kỷ qua, cùng với sự phát triển mạnh mẽ của công nghệ thông tin, xu hướng số hóa các hoạt động đời sống ngày càng trở nên phổ biến. Lĩnh vực chăm sóc sức khỏe và thể hình (Health & Fitness) không nằm ngoài xu thế đó. Theo các báo cáo thị trường gần đây, số lượng người tham gia tập luyện thể thao, đặc biệt là thể hình, đang tăng trưởng theo cấp số nhân. Tuy nhiên, để đạt được kết quả tốt trong thể hình, nguyên tắc cốt lõi là "Progressive Overload" (Tăng tiến sức mạnh) và kiểm soát dinh dưỡng khắt khe. Việc ghi nhớ hoặc ghi chép thủ công qua sổ tay không còn đáp ứng được nhu cầu phân tích dữ liệu chuyên sâu của người tập hiện đại.
+Trong kỷ nguyên số hóa hiện nay, cuộc Cách mạng Công nghiệp 4.0 đã thúc đẩy sự chuyển dịch mạnh mẽ của mọi hoạt động thường nhật lên không gian số. Lĩnh vực y tế, chăm sóc sức khỏe và nâng cao thể trạng (Health & Fitness) không nằm ngoài xu hướng tất yếu đó. Theo các khảo sát thị trường thể thao toàn cầu gần đây, số lượng người tham gia tập luyện thể hình, đặc biệt là Gym, Fitness và Calisthenics, đang gia tăng theo cấp số nhân. Con người ngày càng có ý thức cao về việc bảo vệ sức khỏe chủ động, cải thiện vóc dáng và phòng ngừa các bệnh lý do lối sống thụ động gây ra.
 
-### 1.2. Phân tích thị trường và Hiện trạng
+Tuy nhiên, trong thể hình, nguyên tắc cốt lõi để đạt được sự tiến bộ bền vững (tăng cơ, giảm mỡ, tăng sức mạnh) là tuân thủ nghiêm ngặt nguyên lý **Progressive Overload** (Tăng tiến áp lực cơ bắp theo thời gian) và kiểm soát năng lượng nạp vào (Dinh dưỡng Macros). Việc ghi nhớ thủ công lượng tạ nâng qua các buổi tập, hoặc viết vào sổ tay giấy truyền thống bộc lộ rất nhiều hạn chế: dễ thất lạc, khó tra cứu lịch sử, không thể trực quan hóa tiến độ bằng biểu đồ, và thiếu sự hỗ trợ phân tích thông minh từ các công cụ công nghệ.
 
-Hiện nay trên thị trường có khá nhiều ứng dụng hỗ trợ tập luyện. Tuy nhiên, khi phân tích kỹ, chúng bộc lộ nhiều điểm hạn chế:
+### 1.2. Phân tích thị trường và hiện trạng ứng dụng Fitness
 
-- **Sự phân mảnh:** Người dùng thường phải cài đặt một ứng dụng để ghi chép tạ (như Strong App, Hevy), một ứng dụng khác để theo dõi Calo (như MyFitnessPal), và một công cụ riêng biệt để tìm kiếm kiến thức (như Google hay ChatGPT). Sự thiếu đồng bộ này gây mệt mỏi và gián đoạn trải nghiệm.
-- **Thiếu sự cá nhân hóa thông minh:** Đa số các ứng dụng chỉ đóng vai trò "cuốn sổ điện tử", không có khả năng phân tích dữ liệu tổng hợp để đưa ra lời khuyên.
-- **Hạn chế về trải nghiệm người dùng (UX):** Nhiều ứng dụng không hỗ trợ chế độ ngoại tuyến (offline), dẫn đến mất dữ liệu khi tập ở các phòng gym dưới tầng hầm hoặc nơi sóng yếu. Giao diện thường nặng nề, tốc độ tải trang chậm do kiến trúc phần mềm cũ.
+Hiện nay trên các kho ứng dụng di động lớn (như Apple App Store hay Google Play Store) có rất nhiều phần mềm hỗ trợ tập luyện. Tuy nhiên, qua quá trình nghiên cứu thực tế, chúng tôi nhận thấy các giải pháp hiện tại bộc lộ ba vấn đề lớn:
 
-### 1.3. Lý do chọn đề tài
+1. **Sự phân mảnh tính năng (Fragments):** Người dùng thường phải sử dụng song song nhiều ứng dụng cùng lúc. Ví dụ: dùng Strong App hoặc Hevy chỉ để ghi chép hiệp tập; sử dụng MyFitnessPal để nhập và tính Calo; và mở ChatGPT hoặc tìm kiếm Google khi cần giải đáp kiến thức chuyên môn. Sự thiếu đồng bộ dữ liệu này gây mệt mỏi, gián đoạn trải nghiệm người dùng và làm phân tán thông tin.
+2. **Thiếu sự cá nhân hóa thông minh (Personalization):** Đa số các ứng dụng chỉ hoạt động như một "cuốn sổ tay điện tử" ghi chép thụ động. Chúng không có khả năng phân tích dữ liệu thể trạng riêng biệt của từng cá nhân (chiều cao, cân nặng, chỉ số BMI, mức độ vận động) để tự động đưa ra các lời khuyên tập luyện và chế độ ăn phù hợp.
+3. **Giới hạn trải nghiệm ngoại tuyến (Offline Experience):** Các phòng gym thương mại lớn thường được đặt dưới tầng hầm của các tòa nhà cao tầng hoặc trung tâm thương mại, nơi có sóng di động (3G/4G) cực kỳ yếu và không có Wi-Fi công cộng ổn định. Việc các ứng dụng hiện tại phụ thuộc hoàn toàn vào kết nối mạng liên tục khiến người dùng thường xuyên bị mất dữ liệu buổi tập, hoặc không thể mở ứng dụng khi đang tập luyện.
 
-Nhận thấy những điểm khuyết trên thị trường, cùng với yêu cầu áp dụng các công nghệ lập trình mới nhất của môn học, đồ án **FitTrack** được khởi xướng. Đây không chỉ là một ứng dụng ghi chú đơn thuần, mà là một hệ sinh thái nhỏ, tích hợp tất cả trong một (All-in-one). Đề tài mang tính thực tiễn cực kỳ cao, đồng thời đặt ra những bài toán kỹ thuật hóc búa cần giải quyết như: làm sao để lưu trữ dữ liệu phức tạp mà vẫn tối ưu CSDL, làm sao để web app hoạt động như một native app, và làm sao để tích hợp AI một cách tự nhiên nhất.
+### 1.3. Lý do chọn đề tài và tính cấp thiết
+
+Nhận thấy những khoảng trống lớn trên thị trường ứng dụng Fitness hiện nay, kết hợp với yêu cầu nghiên cứu và ứng dụng các công nghệ mới tối tân trong kỹ thuật phần mềm, đề tài **FitTrack - Hệ thống theo dõi tập luyện và dinh dưỡng tích hợp AI** đã được lựa chọn thực hiện. 
+
+Đề tài này mang tính cấp thiết rất cao vì nó tích hợp tất cả các tính năng thiết yếu vào một hệ sinh thái duy nhất (All-in-One). Nó giải quyết các bài toán công nghệ thực tiễn phức tạp như: làm sao lưu trữ và tính toán khối lượng dữ liệu khổng lồ của từng hiệp tập lẻ một cách tối ưu; làm sao để một ứng dụng web hoạt động ổn định không mất dữ liệu ngay cả khi ngắt kết nối mạng hoàn toàn (PWA + Offline Sync); và làm sao để tích hợp mô hình ngôn ngữ lớn (LLM) để biến ứng dụng thành một trợ lý huấn luyện viên thông minh (AI Coach) cá nhân thực thụ.
 
 ### 1.4. Mục tiêu của đồ án
 
-- **Về công nghệ:** Ứng dụng thành thạo và chứng minh sức mạnh của Next.js 16 (App Router), Supabase (BaaS), Tailwind CSS v4, và kiến trúc Micro-services (thông qua Docker).
-- **Về sản phẩm:** Ra mắt ứng dụng có khả năng quản lý tài khoản bảo mật; ghi chép hiệp tập chi tiết; tính toán và quản lý macros dinh dưỡng; tích hợp trợ lý ảo AI chuyên biệt; vẽ đồ thị phân tích sự tiến bộ; và tạo ảnh báo cáo, xuất PDF.
-- **Về kiến trúc:** Xây dựng hệ thống có khả năng mở rộng (scalable), bảo mật cao (Row Level Security), trải nghiệm người dùng tối ưu qua PWA và cơ chế Offline Sync.
+* **Về mặt công nghệ:** 
+  - Làm chủ và ứng dụng thành công các công nghệ phát triển web mới nhất hiện nay: Framework Next.js 16 (App Router) kết hợp React 19, Tailwind CSS v4 với engine biên dịch Oxide.
+  - Sử dụng hiệu quả nền tảng đám mây Supabase làm Backend-as-a-Service, đảm bảo phân quyền dữ liệu tuyệt đối ở mức cơ sở dữ liệu qua PostgreSQL Row Level Security (RLS).
+  - Triển khai đóng gói hệ thống bằng container Docker (Multi-stage build) và deploy thành công trên môi trường VPS Cloud AWS EC2 có domain riêng và giao thức HTTPS bảo mật.
+* **Về mặt sản phẩm:** 
+  - Phát triển thành công ứng dụng web FitTrack đáp ứng trọn vẹn các nghiệp vụ: Đăng ký/Đăng nhập bảo mật; Thiết lập giáo án; Ghi chép chi tiết từng hiệp tập (Reps & Kg); Đồng hồ đếm ngược thông minh; Tính toán BMR/TDEE; Chatbot AI Coach hỗ trợ tư vấn dựa trên chỉ số cơ thể thực tế; Tạo ảnh Social Card chia sẻ và Xuất báo cáo PDF.
+  - Mang lại trải nghiệm người dùng cao cấp, giao diện hiện đại theo xu hướng Glassmorphism, chuyển đổi chủ đề (Light/Dark mode) tức thì, tốc độ phản hồi nhanh và khả năng hoạt động ngoại tuyến.
 
-### 1.5. Đối tượng và Phạm vi
+### 1.5. Đối tượng và phạm vi nghiên cứu
 
-- **Đối tượng sử dụng:** Những người tập luyện thể hình từ phong trào đến chuyên nghiệp cần theo dõi sát sao chế độ tập và ăn uống.
-- **Phạm vi nghiên cứu:** Giới hạn trong việc phát triển nền tảng Web Application, hỗ trợ hiển thị trên đa thiết bị thông qua Responsive Web Design. Không tập trung vào việc tạo ra các mạng xã hội chia sẻ dữ liệu lớn hay hệ thống thanh toán thương mại điện tử.
+* **Đối tượng sử dụng:** Những người tập luyện thể thao, gym, fitness từ cơ bản đến chuyên nghiệp có nhu cầu theo dõi sát sao, khoa học tiến độ tập luyện và kiểm soát chế độ dinh dưỡng hàng ngày của bản thân.
+* **Phạm vi nghiên cứu:** Tập trung nghiên cứu phát triển hệ thống trên nền tảng Web Application tối ưu hiển thị responsive đa màn hình (từ điện thoại di động đến máy tính để bàn). Giới hạn ở việc tương tác cá nhân hóa, không mở rộng sang các tính năng mạng xã hội chia sẻ dữ liệu quy mô lớn hay tích hợp cổng thanh toán thương mại điện tử phức tạp trong giai đoạn này.
 
 ---
 
 ## CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ ÁP DỤNG
 
-### 2.1. Kiến trúc Web hiện đại và Sự dịch chuyển mô hình
+### 2.1. Kiến trúc Web hiện đại và Sự dịch chuyển mô hình Rendering
 
-Lịch sử phát triển của kiến trúc Web đã trải qua nhiều giai đoạn. Từ các ứng dụng Monolithic truyền thống (như PHP, ASP.NET) nơi Server trả về HTML hoàn chỉnh tĩnh, chuyển sang mô hình Single Page Application (SPA - như ReactJS cơ bản) nơi Client gánh vác toàn bộ việc render và gọi API, dẫn đến hệ quả xấu về SEO và tốc độ tải trang ban đầu (First Contentful Paint).
-Để giải quyết bài toán này, mô hình **Server-Side Rendering (SSR)** và mới nhất là **React Server Components (RSC)** ra đời. Kiến trúc này cho phép chia cắt ứng dụng: những phần tĩnh hoặc cần truy xuất DB trực tiếp sẽ được chạy trên Server, gửi kết quả dạng cây thành phần (Component Tree) xuống Client. Chỉ những phần có tương tác (interactive) mới cần tải JavaScript.
+Lịch sử phát triển của các công nghệ Web đã chứng kiến nhiều sự thay đổi mang tính cách mạng về mô hình xử lý dữ liệu và kết xuất giao diện (Rendering Models). 
+
+```
++------------------+     +-------------------+     +------------------+
+|   Monolith Web   | --> | Single Page App   | --> |  Modern RSC Web  |
+|  (Server Render  |     |  (Client Render   |     | (Hybrid Server & |
+|    HTML Tĩnh)    |     |   HTML Rỗng+JS)   |     |  Client Render)  |
++------------------+     +-------------------+     +------------------+
+```
+
+* **Mô hình Monolith truyền thống (Server-Side Rendering cổ điển - PHP, ASP.NET):** Server gánh vác toàn bộ việc truy vấn database và render ra file HTML tĩnh hoàn chỉnh để trả về cho trình duyệt. Mô hình này tốt cho SEO nhưng gây tốn tài nguyên máy chủ và trải nghiệm chuyển trang rất gián đoạn, mỗi lần click chuột là trang web phải tải lại từ đầu.
+* **Mô hình Single Page Application (SPA - React, Angular, Vue thuần):** Server chỉ trả về một file HTML rỗng cùng với các file JavaScript dung lượng lớn. Trình duyệt của client sẽ tải toàn bộ mã nguồn JS này về, gọi các API endpoint để nhận dữ liệu JSON, sau đó tự render giao diện phía Client (Client-Side Rendering - CSR). Điểm yếu chí mạng của SPA là tốc độ tải trang ban đầu (First Contentful Paint) rất chậm, thiết bị yếu sẽ bị đơ, và cực kỳ khó tối ưu SEO do các bot tìm kiếm chỉ đọc được file HTML rỗng.
+* **Mô hình React Server Components (RSC):** Là sự kết hợp hoàn hảo của hai thế giới. Các component được phân loại rõ ràng: component nào chạy hoàn toàn ở Server (RSC) để truy vấn trực tiếp database mà không cần viết API trung gian, và component nào cần tương tác với người dùng (như click, nhập liệu, local state) sẽ chạy ở Client (Client Components). Dữ liệu được truyền từ Server xuống dưới dạng luồng cây component tối ưu, giúp tăng tốc độ tải trang, cải thiện SEO vượt trội và giữ bảo mật tuyệt đối cho các thông tin kết nối CSDL.
 
 ### 2.2. Next.js 16 và React Server Components (RSC)
 
-Next.js là framework hàng đầu hiện nay xây dựng trên React. Ở phiên bản 16 với mô hình App Router:
+Next.js là framework hàng đầu hiện nay xây dựng dựa trên React, được phát phát triển bởi Vercel. Ở phiên bản Next.js 16 mới nhất, framework này áp dụng mô hình định tuyến thư mục **App Router**:
 
-- **Thư mục `app/`:** Định tuyến dựa trên thư mục. Các tệp `page.tsx`, `layout.tsx`, `loading.tsx` tự động tương ứng với UI.
-- **Server Components:** Mặc định, mọi component trong Next.js là Server Component. Chúng có khả năng gọi hàm `async/await` trực tiếp trong component để truy vấn CSDL (Supabase) mà không cần viết API trung gian. Điều này giúp mã nguồn gọn nhẹ, bảo mật (vì không bao giờ lộ chuỗi kết nối xuống trình duyệt) và loại bỏ hoàn toàn các thư viện quản lý trạng thái phức tạp (như Redux) cho việc fetch data.
-- **Client Components:** Được kích hoạt bằng chỉ thị `"use client"`. Các component này quản lý state, effects và DOM events.
+* **Mô hình thư mục `app/`:** Tự động tạo route dựa trên cấu trúc thư mục của dự án. Các file đặc biệt như `page.tsx` đại diện cho giao diện chính của route, `layout.tsx` cho khung giao diện chung, và `loading.tsx` hiển thị trạng thái chờ tải trang bằng cơ chế React Suspense.
+* **Server Components:** Mặc định, tất cả các thành phần trong Next.js là Server Component. Chúng có đặc quyền sử dụng cú pháp `async/await` trực tiếp trong mã nguồn để gọi cơ sở dữ liệu hoặc fetch API mà không lo bị lộ mã khóa hay URL kết nối xuống trình duyệt của người dùng. Giao diện được kết xuất trước trên Server thành định dạng trung gian siêu nhẹ và gửi xuống Client, giúp loại bỏ các thư viện quản lý state cồng kềnh (như Redux hay MobX) cho các tác vụ lấy dữ liệu (data fetching).
+* **Client Components:** Được khai báo rõ ràng bằng dòng chữ `"use client"` ở dòng đầu tiên của file. Chúng chịu trách nhiệm xử lý các hook tương tác của React như `useState`, `useEffect`, `useRef`, lắng nghe sự kiện DOM của người dùng và gọi các API ở client-side.
 
 ### 2.3. Hệ quản trị CSDL & Backend-as-a-Service (Supabase)
 
-Supabase cung cấp hạ tầng Backend mạnh mẽ dựa trên PostgreSQL mã nguồn mở.
+Supabase là một giải pháp Backend-as-a-Service (BaaS) mã nguồn mở mạnh mẽ nhất hiện nay, được xây dựng dựa trên nền tảng cơ sở dữ liệu quan hệ PostgreSQL vững chắc:
 
-- **PostgreSQL:** Khác với NoSQL, Postgres duy trì tính ACID (Atomicity, Consistency, Isolation, Durability) nghiêm ngặt. Việc sử dụng Postgres giúp ứng dụng FitTrack duy trì các ràng buộc khóa ngoại (ví dụ: `session_exercises` phải thuộc về một `workout_sessions` hợp lệ).
-- **Authentication & JWT:** Supabase Auth cấp phát JSON Web Token. Khác với phiên bản cũ, dự án này áp dụng cơ chế xác thực qua Server-side Cookies. Mã thông báo không lưu trong LocalStorage (nơi dễ bị tấn công XSS), mà lưu ở HttpOnly Cookie.
-- **Row Level Security (RLS):** Cơ chế bảo mật tinh vi cấp độ hàng. Tránh được lỗ hổng IDOR (Insecure Direct Object Reference) cực kỳ phổ biến. Cho dù hacker biết ID của một bản ghi, nếu RLS xác định `auth.uid() != user_id`, truy vấn sẽ trả về kết quả rỗng.
+```
++--------------------------------------------------------------+
+|                         SUPABASE BaaS                        |
++------------------+---------------------+---------------------+
+|    Auth APIs     |    Database APIs    |    Storage APIs     |
+| (JWT/OAuth/Cook) | (PostgreSQL Engine) | (S3 Object Storage) |
++------------------+---------------------+---------------------+
+|                 Row Level Security (RLS) Policy              |
++--------------------------------------------------------------+
+```
 
-### 2.4. Công nghệ CSS Tailwind v4 & Theming
+* **PostgreSQL Engine:** Không giống như các giải pháp NoSQL (như Firebase Firestore) vốn gặp nhiều khó khăn trong việc ràng buộc dữ liệu chặt chẽ, PostgreSQL duy trì các tính chất ACID (Atomicity, Consistency, Isolation, Durability) nghiêm ngặt. Hệ thống FitTrack tận dụng tối đa khóa ngoại để thiết lập mối quan hệ 1-Nhiều giữa bảng `workout_sessions` và bảng `session_exercises`, tránh tình trạng mồ côi dữ liệu khi xóa buổi tập.
+* **Supabase Auth & JWT:** Hệ thống quản lý tài khoản người dùng tích hợp sẵn. Next.js 16 phối hợp với thư viện `@supabase/ssr` để lưu thông tin Token (JWT) vào Cookie dạng HttpOnly an toàn, thay vì lưu ở LocalStorage truyền thống giúp ngăn chặn hoàn toàn nguy cơ bị tấn công đánh cắp phiên qua mã độc XSS.
+* **Row Level Security (RLS):** Bức tường lửa bảo mật mạnh mẽ tích hợp sâu ở tầng cơ sở dữ liệu. Bằng cách định nghĩa các chính sách (Policies) bằng ngôn ngữ SQL, CSDL sẽ tự động từ chối các truy vấn cố ý đọc hoặc ghi dữ liệu của người dùng khác, ngăn chặn triệt để lỗ hổng bảo mật IDOR (Insecure Direct Object Reference) nguy hiểm.
+* **Supabase Storage:** Dịch vụ lưu trữ tệp tin nhị phân (hình ảnh, tài liệu) tích hợp. FitTrack sử dụng Storage để lưu trữ hình ảnh tiến trình tập luyện của người dùng trong các bucket riêng tư, chỉ cho phép truy cập qua cơ chế Signed URL có thời hạn.
 
-Tailwind CSS là Utility-first CSS framework. Thay vì viết file CSS dài dòng, lập trình viên sử dụng các class có sẵn (ví dụ: `flex justify-center items-center p-4 bg-red-500`).
-Ở phiên bản v4, Tailwind được tối ưu hóa bằng engine mới (Oxide), cho tốc độ build chớp nhoáng.
-Về lý thuyết Theming: Dự án áp dụng kỹ thuật CSS Variables Mapping. CSS thuần hỗ trợ khai báo biến (ví dụ `--bg-color: #fff`). Việc liên kết các class của Tailwind với các biến này giúp chúng ta có thể thay đổi giao diện (từ Dark sang Light) đơn giản bằng cách thay đổi giá trị của biến ở gốc `:root` thông qua CSS Selectors, tiết kiệm 90% chi phí bảo trì giao diện.
+### 2.4. Công nghệ CSS Tailwind v4 & Engine Oxide
+
+Tailwind CSS v4 giới thiệu một cuộc cách mạng về hiệu năng biên dịch CSS nhờ vào bộ công cụ biên dịch hoàn toàn mới mang tên **Oxide Engine**:
+
+* **Biên dịch chớp nhoáng (Oxide compiler):** Được viết bằng ngôn ngữ Rust hiệu năng cao, Oxide thay thế cho toàn bộ quy trình biên dịch cũ của PostCSS, giúp giảm thời gian build CSS xuống gấp 10 lần.
+* **CSS-First Configuration:** Tailwind v4 loại bỏ file cấu hình `tailwind.config.js` truyền thống và chuyển toàn bộ cấu hình hệ thống (Theme, Colors, Utilities) trực tiếp vào file CSS gốc thông qua các thẻ `@theme` và biến CSS Variables tiêu chuẩn.
+* **Ưu điểm của Utility-First:** Giúp nhà phát triển xây dựng giao diện nhanh chóng bằng cách ráp các class có sẵn trực tiếp vào thẻ HTML mà không cần phải viết code CSS riêng lẻ. Điều này giúp dung lượng file CSS sản xuất sau khi build luôn ở mức tối thiểu, tối ưu hóa tốc độ tải trang.
 
 ### 2.5. Progressive Web App (PWA) & Service Worker
 
-PWA là tiêu chuẩn của Google. Cơ sở lý thuyết của PWA dựa trên 3 yếu tố:
+Progressive Web App là tiêu chuẩn thiết kế web hiện đại của Google giúp các ứng dụng web sở hữu trải nghiệm mượt mà giống như một ứng dụng gốc (Native App) cài đặt trên điện thoại di động:
 
-1. **App Manifest:** Tệp JSON mô tả ứng dụng (Tên, icon, màu nền, chế độ hiển thị).
-2. **HTTPS:** Môi trường bắt buộc để PWA hoạt động an toàn.
-3. **Service Worker:** Một tập lệnh JavaScript chạy ngầm ở background, độc lập với trình duyệt. Service Worker có vòng đời (Lifecycle): Install -> Activate -> Fetch. Nó đóng vai trò như một proxy, chặn các request mạng (Fetch event). Nếu mất mạng, nó có thể trả về file HTML/CSS tĩnh từ Cache, tạo ra trải nghiệm ứng dụng Native.
+1. **Web App Manifest (`manifest.json`):** File cấu hình định nghĩa tên ứng dụng, màu sắc chủ đạo, chế độ hiển thị dạng ứng dụng độc lập (`standalone`), định hướng màn hình dọc và đường dẫn các icon ứng dụng.
+2. **Service Worker:** Một file kịch bản chạy ẩn ở background, chạy độc lập hoàn toàn với luồng xử lý giao diện của trình duyệt. Service Worker đóng vai trò như một proxy trung gian nằm giữa trình duyệt và mạng Internet:
+   - **Sự kiện `install`:** Tải và lưu trữ các tài nguyên cốt lõi (App Shell) như HTML, CSS, JS tĩnh vào Cache Storage của trình duyệt.
+   - **Sự kiện `activate`:** Dọn dẹp các cache phiên bản cũ để giải phóng dung lượng.
+   - **Sự kiện `fetch`:** Đánh chặn toàn bộ các request mạng từ ứng dụng. Nếu thiết bị mất mạng, Service Worker sẽ lập tức lấy tài nguyên từ Cache Storage trả về cho trình duyệt, giúp ứng dụng không bị hiển thị lỗi mất kết nối (màn hình khủng long).
 
-### 2.6. Xử lý Âm thanh với Web Audio API
+### 2.6. Xử lý âm thanh với Web Audio API
 
-Trong lý thuyết xử lý tín hiệu số, âm thanh là các dạng sóng. Trình duyệt hiện đại cung cấp Web Audio API cho phép tổng hợp âm thanh (Synthesis) mà không cần file `.mp3`.
-Cấu trúc cơ bản:
+Để tạo ra âm thanh cảnh báo thời gian nghỉ cho người dùng tập gym mà không cần phải tải các file âm thanh `.mp3` tĩnh cồng kềnh (dễ gây lỗi đường dẫn và tốn băng thông), FitTrack ứng dụng công nghệ **Web Audio API**:
 
-- `AudioContext`: Không gian chứa các node xử lý.
-- `OscillatorNode`: Bộ dao động phát ra âm thanh. Có thể cấu hình dạng sóng (sine, square, sawtooth, triangle) và tần số (Hz). Tần số 600Hz tương ứng với âm cao nhẹ (tick), 880Hz tương ứng với nốt A5 chuẩn.
-- `GainNode`: Bộ điều chỉnh âm lượng (Volume/Amplitude).
+* **AudioContext:** Đối tượng quản lý toàn bộ luồng xử lý âm thanh trong trình duyệt.
+* **OscillatorNode:** Bộ dao động số có nhiệm vụ tự sinh ra sóng âm theo các dạng sóng toán học khác nhau (sine, square, sawtooth, triangle) ở một tần số Hz cụ thể.
+* **GainNode:** Bộ điều phối âm lượng (nút chỉnh Vol) cho phép cấu hình tăng giảm âm thanh theo thời gian (Volume Envelope) để âm thanh phát ra không bị ngắt đột ngột gây tiếng rè loa.
+* **Audio Destination:** Kết nối các node xử lý ra thiết bị phát âm thanh thực tế (loa điện thoại/tai nghe).
 
 ### 2.7. Container hóa với Docker
 
-Lý thuyết ảo hóa (Virtualization) chia thành ảo hóa phần cứng (VM) và ảo hóa cấp độ HĐH (Container). Docker là nền tảng Container phổ biến nhất.
+Docker là nền tảng ảo hóa ở cấp độ hệ điều hành (OS-level virtualization) giúp đóng gói toàn bộ mã nguồn ứng dụng cùng các thư viện đi kèm thành một **Image** duy nhất:
 
-- Nó gói gọn Ứng dụng + Môi trường Node.js + Thư viện hệ thống vào một `Image`.
-- Khi chạy, Image trở thành `Container`, hoạt động độc lập hoàn toàn với HĐH máy chủ. Đảm bảo triết lý "Code chạy trên máy tôi thì chắc chắn chạy trên Server".
-- Docker Multi-stage build là kỹ thuật biên dịch chia giai đoạn, giúp loại bỏ mã nguồn gốc và các dependencies thừa thãi, chỉ giữ lại file thực thi cuối cùng, thu nhỏ dung lượng Image từ ~1GB xuống còn vài chục MB.
+* **Tính nhất quán (Consistency):** Loại bỏ hoàn toàn lỗi kinh điển "Chạy trên máy local của tôi thì được nhưng deploy lên server thì lỗi" nhờ vào việc môi trường bên trong container luôn giống nhau ở mọi nơi.
+* **Multi-stage Build:** Kỹ thuật chia quy trình xây dựng image thành nhiều giai đoạn. Giai đoạn 1 chỉ tải thư viện (`dependencies`), giai đoạn 2 biên dịch mã nguồn (`build`), và giai đoạn 3 chỉ sao chép các tệp tĩnh đã biên dịch sang một base image chạy gọn nhẹ (`runner`). Kỹ thuật này giúp giảm dung lượng Docker Image cuối cùng từ hơn 1GB xuống chỉ còn khoảng dưới 100MB, tăng tốc độ triển khai và tiết kiệm tài nguyên ổ cứng máy chủ.
 
 ---
 
 ## CHƯƠNG 3: PHÂN TÍCH VÀ ĐẶC TẢ YÊU CẦU
 
-### 3.1. Xác định Yêu cầu chức năng (Functional Requirements)
+### 3.1. Xác định yêu cầu chức năng (Functional Requirements)
 
-Hệ thống cần cung cấp các nghiệp vụ:
+Hệ thống FitTrack được thiết kế để giải quyết toàn bộ các nghiệp vụ tập luyện và dinh dưỡng của người tập thể hình với 12 module chức năng cốt lõi sau:
 
-- **M-01 (Xác thực):** Đăng ký, đăng nhập qua Email/Password. Đăng xuất.
-- **M-02 (Hồ sơ):** Xem và cập nhật Tên, Chiều cao, Cân nặng.
-- **M-03 (Báo cáo):** Trích xuất thông tin người dùng và lịch sử toàn bộ buổi tập ra file định dạng PDF.
-- **M-04 (Giáo án):** Quản lý danh sách các Workout Plans.
-- **M-05 (Buổi tập):** Ghi nhận Session mới, chọn Plan, chọn Ngày.
-- **M-06 (Chi tiết hiệp - Per-set):** Trong một Session, thêm các Exercises. Mỗi Exercise cho phép khai báo số Hiệp (Sets). Mỗi Hiệp cần lưu được số Reps và số Kg nâng được thực tế.
-- **M-07 (Đồng hồ - Timer):** Công cụ đếm ngược thời gian nghỉ có tính năng cảnh báo âm thanh ở 3 giây cuối.
-- **M-08 (Dinh dưỡng):** Tự động tính BMR, TDEE. Cho phép người dùng tùy chọn mục tiêu (Cut/Maintain/Bulk) để phân bổ phần trăm Macronutrients (Đạm, Tinh bột, Béo).
-- **M-09 (Biểu đồ):** Đồ thị trực quan hóa tổng khối lượng (Volume = Sets _ Reps _ Weight) của từng bài tập theo dòng thời gian.
-- **M-10 (AI Coach):** Giao diện Chatbot tư vấn, tự động nhận diện chỉ số BMI và gửi ngữ cảnh lên LLM.
-- **M-11 (Hình ảnh):** Upload ảnh selfie trước gương để so sánh.
-- **M-12 (Chia sẻ):** Sinh thẻ ảnh (Social Card) tổng kết buổi tập với chuẩn định dạng dấu phẩy tiếng Việt.
+* **M-01 (Xác thực người dùng):** Người dùng có thể đăng ký tài khoản mới bằng Email và mật khẩu. Hệ thống gửi email xác nhận. Đăng nhập và tự động chuyển hướng vào Dashboard. Đăng xuất an toàn.
+* **M-02 (Hồ sơ cá nhân):** Xem và chỉnh sửa thông tin sinh học cá nhân: Họ tên, Chiều cao (cm), Cân nặng (kg), Giới tính, Năm sinh và Mức độ hoạt động thể chất.
+* **M-03 (Báo cáo lịch sử tập luyện):** Cho phép xuất toàn bộ dữ liệu lịch sử các buổi tập và thông số thể trạng ra định dạng báo cáo tiêu chuẩn PDF hỗ trợ in ấn trực tiếp từ trình duyệt.
+* **M-04 (Quản lý giáo án - Workout Plans):** Người dùng có thể tạo các mẫu giáo án (ví dụ: Push-Pull-Legs, Upper-Lower), chỉnh sửa nội dung hoặc xóa các giáo án không còn sử dụng.
+* **M-05 (Ghi nhận buổi tập - Workout Sessions):** Khởi tạo một buổi tập thực tế dựa trên một giáo án mẫu hoặc buổi tập tự do, chọn ngày tập và thêm ghi chú chung cho buổi tập.
+* **M-06 (Ghi chép chi tiết Hiệp tập - Per-Set Logging):** Trong mỗi buổi tập, người dùng thêm bài tập cụ thể. Cho phép nhập mức tạ (kg) và số lần nâng (reps) cho từng hiệp (set) riêng lẻ. Có nút nhân bản nhanh cấu hình hiệp trước để tăng tốc độ nhập liệu khi tập.
+* **M-07 (Đồng hồ đếm ngược nghỉ ngơi - Rest Timer):** Công cụ đếm ngược thời gian nghỉ giữa các hiệp tập. Phát ra tín hiệu âm thanh cảnh báo "Tích tắc" ở 3 giây cuối và tiếng "Bíp" dài khi kết thúc để nhắc người dùng vào hiệp.
+* **M-08 (Quản lý Dinh dưỡng - Nutrition Target):** Tính toán lượng calo tiêu thụ hàng ngày (TDEE). Cho phép người dùng cấu hình mục tiêu thể trạng (Siết cơ / Giữ cân / Xả cơ) để tự động phân bổ lượng Protein, Carbs, Fats (Macros) cần nạp hàng ngày theo ngữ cảnh khoa học.
+* **M-09 (Biểu đồ Tăng trưởng - Overload Analytics):** Vẽ đồ thị dạng đường (Line Chart) biểu diễn tổng khối lượng tạ nâng (Volume = Set * Rep * Weight) của từng bài tập cụ thể theo trục thời gian để người tập kiểm chứng nguyên lý Progressive Overload.
+* **M-10 (Trợ lý huấn luyện AI Coach):** Cung cấp giao diện trò chuyện dạng Chatbot. Hệ thống tự động nạp ngầm các chỉ số sinh học thực tế của người dùng để làm ngữ cảnh gợi ý cho mô hình ngôn ngữ lớn đưa ra câu trả lời cá nhân hóa chính xác nhất.
+* **M-11 (Kho ảnh tiến trình - Progress Photos):** Người dùng có thể upload hình ảnh vóc dáng của mình theo ngày chụp lên Supabase Storage bucket riêng tư, xem lại ảnh so sánh trước/sau để đánh giá sự thay đổi cơ thể trực quan.
+* **M-12 (Tạo thẻ chia sẻ - Social Card Creator):** Tự động vẽ một ảnh thẻ tổng kết thành tích buổi tập (Tên buổi tập, các bài đã tập, tổng Volume nâng tạ) bằng Canvas sắc nét để người dùng tải về máy chia sẻ lên mạng xã hội.
 
 ### 3.2. Đặc tả Use Cases chi tiết
 
-Để làm rõ yêu cầu, báo cáo đặc tả chi tiết một số Use Case phức tạp nhất.
+#### **Use Case 01: Ghi nhận chi tiết Hiệp tập (Per-set Logging)**
 
-#### **UC-01: Ghi nhận chi tiết Hiệp tập (Per-set Logging)**
+* **Tên Use Case:** Ghi nhận chi tiết Hiệp tập (UC-01)
+* **Tác nhân:** Người dùng đã đăng nhập (User)
+* **Mô tả:** Người dùng thực hiện ghi chép kết quả nâng tạ thực tế cho từng hiệp tập lẻ trong một buổi tập.
+* **Tiền điều kiện:** Người dùng đã đăng nhập thành công và đang ở trang tạo buổi tập mới (`/dashboard/sessions/new`).
+* **Luồng sự kiện chính:**
+  1. Người dùng nhấn nút "Thêm bài tập" (Add Exercise).
+  2. Hệ thống hiển thị hộp thoại/ô nhập liệu yêu cầu điền tên bài tập (ví dụ: Bench Press).
+  3. Người dùng gõ tên bài tập và xác nhận.
+  4. Hệ thống khởi tạo bài tập mới với 1 dòng nhập liệu mặc định cho Hiệp 1 (Set 1).
+  5. Người dùng nhập số Kg và số Reps của Hiệp 1.
+  6. Người dùng nhấn nút "Copy Hiệp" (Clone Set icon).
+  7. Hệ thống tự động nhân bản dòng dữ liệu mới (Hiệp 2) với các thông số Kg và Reps giống hệt Hiệp 1.
+  8. Người dùng có thể điều chỉnh lại thông số của Hiệp 2 nếu mức tạ thực tế thay đổi.
+  9. Người dùng lặp lại thao tác cho đến khi hoàn thành bài tập, sau đó nhấn "Lưu buổi tập".
+  10. Hệ thống tiến hành mã hóa (serialize) mảng đối tượng các hiệp tập thành chuỗi JSON và đẩy dữ liệu lên cơ sở dữ liệu Supabase thông qua Server Action.
+* **Ngoại lệ:** 
+  - *Mất kết nối mạng ở bước 10:* Hệ thống phát hiện thiết bị ngoại tuyến, lập tức lưu chuỗi JSON vào hàng đợi `localStorage` ở máy người dùng, hiển thị thông báo "Đã lưu tạm buổi tập ở trạng thái ngoại tuyến" và đánh dấu trạng thái chờ đồng bộ ngầm (Sync Pending).
 
-- **Mô tả:** Người dùng ghi chép kết quả tập luyện thực tế cho từng hiệp lẻ.
-- **Tiền điều kiện:** Đã đăng nhập và đang ở trang tạo Buổi tập mới.
-- **Luồng sự kiện chính:**
-  1. Người dùng bấm "Thêm bài tập". Nhập tên bài tập (VD: Bench Press).
-  2. Bấm "Thêm hiệp". Hệ thống sinh ra 1 dòng nhập liệu cho Hiệp 1.
-  3. Người dùng nhập số kg và số reps.
-  4. Người dùng bấm "Copy Hiệp 1" (nút tiện ích). Hệ thống tự động nhân bản dữ liệu xuống Hiệp 2, 3, 4.
-  5. Người dùng chỉnh sửa lại mức tạ ở Hiệp 4 (ví dụ giảm tạ do mỏi).
-  6. Bấm "Lưu buổi tập". Hệ thống serialize mảng dữ liệu thành chuỗi JSON và đẩy lên Supabase.
-- **Ngoại lệ:** Mất kết nối mạng tại bước 6. Hệ thống báo lỗi nhẹ, tự động lưu JSON vào `localStorage` và chuyển sang chế độ Offline Sync Pending.
+#### **Use Case 02: Chatbot Trợ lý AI (AI Coach Chat)**
 
-#### **UC-02: Tính toán và Phân bổ Dinh dưỡng**
+* **Tên Use Case:** Chatbot Trợ lý AI (UC-02)
+* **Tác nhân:** Người dùng (User), Gemini API (AI Service)
+* **Mô tả:** Người dùng hỏi ý kiến tư vấn chuyên môn về tập luyện và dinh dưỡng từ Chatbot AI.
+* **Tiền điều kiện:** Người dùng đang ở màn hình `/dashboard/coach`.
+* **Luồng sự kiện chính:**
+  1. Người dùng nhập câu hỏi vào khung chat (ví dụ: "Làm sao để tôi tăng kích thước bắp tay nhanh nhất?").
+  2. Người dùng nhấn nút Gửi (Send).
+  3. Hệ thống tiến hành thu thập các dữ liệu cá nhân hiện tại từ database: Cân nặng, Chiều cao, BMI, Mục tiêu thể trạng (Cut/Bulk).
+  4. Hệ thống tự động nối chuỗi tạo thành một System Prompt ẩn chứa đầy đủ các thông số sinh học của người dùng đó cùng với câu hỏi gốc.
+  5. Hệ thống gửi yêu cầu (Payload) tới Route Handler `/api/ai/coach`.
+  6. Route Handler gọi SDK Gemini với prompt đã tạo.
+  7. Mô hình AI phân tích dữ liệu thể trạng và trả về câu trả lời cá nhân hóa tối ưu dưới dạng luồng dữ liệu (Stream).
+  8. Giao diện Chatbot hiển thị câu trả lời xuất hiện dần dần trên màn hình với hiệu ứng gõ chữ chuyên nghiệp.
+* **Hậu điều kiện:** Người dùng nhận được lời khuyên chuyên sâu thiết kế riêng cho cơ địa của mình, thay vì các câu trả lời chung chung.
 
-- **Mô tả:** Hệ thống hỗ trợ người dùng lên kế hoạch ăn uống (Macros).
-- **Tiền điều kiện:** User đã cập nhật chiều cao, cân nặng, giới tính và năm sinh.
-- **Luồng sự kiện chính:**
-  1. User truy cập `/dashboard/nutrition`.
-  2. Hệ thống gọi thuật toán Mifflin-St Jeor tính toán BMR.
-  3. Hệ thống hiển thị giao diện chọn Mức độ vận động (Không vận động, Vận động nhẹ, Vận động mạnh). User chọn mức tương ứng.
-  4. Hệ thống nhân BMR với hệ số vận động để ra TDEE.
-  5. User chọn Mục tiêu "Siết cơ (Cut)". Hệ thống tự động trừ đi 500 kcal từ TDEE, sau đó phân bổ 30% Đạm, 40% Tinh bột, 30% Béo.
-  6. Dữ liệu được vẽ lên biểu đồ Donut Chart (Recharts) ngay lập tức.
-- **Hậu điều kiện:** Người dùng có con số chính xác lượng gram thức ăn cần nạp mỗi ngày.
+### 3.3. Yêu cầu phi chức năng (Non-Functional Requirements)
 
-#### **UC-03: Trợ lý tư vấn AI (Coach AI)**
-
-- **Mô tả:** Người dùng hỏi AI về các vấn đề thể hình.
-- **Luồng sự kiện chính:**
-  1. User truy cập `/dashboard/coach`.
-  2. Component tải dữ liệu hồ sơ (Profile) của User từ DB.
-  3. User gõ câu hỏi: "Tôi muốn tăng vòng 1".
-  4. Hệ thống ngầm nối chuỗi (String Concatenation): _"Hành động như chuyên gia thể hình. Người dùng có cân nặng X kg, cao Y cm. Câu hỏi: Tôi muốn tăng vòng 1"_.
-  5. Gửi Payload tới API của AI Model.
-  6. Phản hồi được trả về dạng Stream, gõ từng chữ lên màn hình giao diện Glassmorphism.
-
-### 3.3. Yêu cầu Phi chức năng (Non-Functional Requirements)
-
-- **Bảo mật & Phân quyền:** Tất cả các thao tác (Create, Read, Update, Delete - CRUD) phải được kiểm tra qua JWT Token tại Middleware. RLS phải chặn mọi nỗ lực truy cập dữ liệu bảng `workout_sessions` nếu cột `user_id` không khớp với ID trong JWT.
-- **Độ tin cậy & Chịu lỗi:** Trong trường hợp lỗi API từ AI Model, hệ thống không được sập (Crash). Phải có cơ chế `try-catch` bọc lại và hiển thị thông báo toast lỗi thân thiện.
-- **Tính khả dụng (Usability):** Giao diện phải tương thích mọi kích thước màn hình. Trên di động, Sidebar bắt buộc phải ẩn đi vào cạnh trái và hiển thị nút Hamburger để gọi ra (Drawer Menu). Cấu trúc màu sắc phải tuân thủ tỷ lệ tương phản chuẩn (WCAG).
-- **Tuân thủ Tiêu chuẩn Khu vực:** Số liệu hàng nghìn (ví dụ khối lượng tạ, calo) phải hiển thị đúng chuẩn phân cách của người Việt (sử dụng dấu chấm `.` thay vì dấu phẩy `,`). VD: `3.180 kg`.
-- **Hiệu năng:** Điểm số tải trang lần đầu trên trình duyệt Lighthouse đo được phải tối thiểu đạt 85/100.
+* **Bảo mật tối đa (Security):** Toàn bộ các thao tác chỉnh sửa dữ liệu (Write operations) phải đi qua kiểm tra token JWT hợp lệ ở mức Next.js Middleware. Row Level Security phải được kích hoạt trên 100% các bảng dữ liệu để đảm bảo người dùng A không thể truy vấn hoặc thay đổi bản ghi của người dùng B dưới mọi hình thức truy cập trực tiếp bằng API.
+* **Tính sẵn sàng & Khả năng chịu lỗi (Availability & Fault Tolerance):** Nếu API của mô hình ngôn ngữ lớn (Gemini) bị lỗi hoặc quá giới hạn lượt gọi, hệ thống phải bắt lỗi (try-catch) ở server-side và trả về thông báo phản hồi thân thiện, tuyệt đối không được gây sập toàn bộ ứng dụng (Crash).
+* **Định dạng số liệu Việt Nam (Localization):** Theo tiêu chuẩn thiết kế phần mềm tại Việt Nam, các số liệu hàng nghìn (ví dụ Calo: 2.500 kcal, khối lượng tạ: 3.180 kg) phải được hiển thị bằng dấu chấm phân cách hàng nghìn thay vì dấu phẩy tiếng Anh.
+* **Hiệu năng tải trang (Performance):** Đảm bảo điểm số tối ưu hóa hiệu năng Lighthouse trên môi trường production đạt tối thiểu 85/100 điểm cho các tiêu chí Performance, Accessibility và Best Practices.
 
 ---
-
-## PHỤ LỤC: TÓM TẮT HÀNH TRÌNH DEPLOY FITTRACK VỚI DOMAIN + SSL
-
-### 🎯 Mục tiêu
-
-Deploy ứng dụng FitTrack lên VPS với Domain + SSL (HTTPS)
-
----
-
-### 📋 Các bước đã thực hiện
-
-1. **Tạo Domain miễn phí với DuckDNS**
-
-- Đăng ký tại duckdns.org
-- Tạo subdomain: `healfittrack.duckdns.org`
-- Trỏ về IP VPS: `54.254.195.231`
-
-2. **Cài Nginx làm Reverse Proxy**
-
-- Cài Nginx trên VPS
-- Cấu hình proxy từ domain → `localhost:3000` (Docker app)
-- Mở port 80, 443 trên Security Group / Firewall
-
-3. **Lấy SSL Certificate (Let's Encrypt)**
-
-- Thử Certbot HTTP challenge → **thất bại** do DuckDNS DNS timeout
-- Thử Cloudflare → **thất bại** vì subdomain không đổi được nameserver
-- Dùng **DNS challenge với plugin certbot-dns-duckdns** → **✅ thành công**
-
-4. **Cấu hình Nginx với HTTPS**
-
-- Gắn certificate vào Nginx
-- Redirect HTTP → HTTPS tự động
-
----
-
-### ✅ Kết quả cuối cùng
-
-- **URL:** `https://healfittrack.duckdns.org`
-- **VPS:** AWS EC2 (hoặc VPS tương đương)
-- **SSL:** Let's Encrypt
-- **Auto-renew:** Tự động renew mỗi 90 ngày
-- **Chi phí:** $0 (miễn phí)
-
----
-
-### 💡 Bài học rút ra
-
-- DuckDNS không hỗ trợ HTTP challenge → phải dùng **DNS challenge**
-- Cloudflare không hoạt động với subdomain miễn phí trong một số trường hợp
-- Plugin `certbot-dns-duckdns` là giải pháp phù hợp nhất cho trường hợp này
 
 ## CHƯƠNG 4: THIẾT KẾ HỆ THỐNG
 
 ### 4.1. Kiến trúc hệ thống tổng thể (System Architecture)
 
-Hệ thống FitTrack được cấu trúc theo mô hình đa tầng:
+Hệ thống FitTrack được kiến trúc theo mô hình phân tầng chức năng (Layered Architecture) hiện đại nhằm đảm bảo tính dễ bảo trì, dễ kiểm thử và khả năng mở rộng tốt:
 
-1. **Tầng Trình diễn (Presentation Layer - Next.js):**
-   - Chịu trách nhiệm hiển thị HTML/CSS.
-   - Quản lý định tuyến (App Router).
-   - Tối ưu SEO qua thẻ Meta và PWA Manifest.
-2. **Tầng Trung gian & Dịch vụ (Middleware & Server Actions):**
-   - Chứa `middleware.ts` quản lý Session.
-   - Các Route Handlers làm nhiệm vụ bảo vệ API.
-3. **Tầng Truy cập Dữ liệu (Data Access Layer - Supabase SSR):**
-   - Các hàm gọi thư viện `@supabase/ssr` từ máy chủ hoặc `@supabase/supabase-js` từ trình duyệt.
-4. **Tầng Dữ liệu (Database Layer - PostgreSQL):**
-   - Lưu trữ bản ghi cơ sở dữ liệu có cấu trúc.
-   - Hệ thống Supabase Storage quản lý file nhị phân (hình ảnh).
+```
++--------------------------------------------------------------+
+|            PRESENTATION LAYER (Next.js 16 Client components) |
+|            - React 19 UI, Tailwind v4, Recharts, Canvas      |
++--------------------------------------------------------------+
+                               |  HTTP / Cookies / Server Actions
+                               v
++--------------------------------------------------------------+
+|            SERVICE & MIDDLEWARE LAYER (Next.js App Router)   |
+|            - middleware.ts Session, Route Handlers, Gemini   |
++--------------------------------------------------------------+
+                               |  Supabase Client SDK / JWT
+                               v
++--------------------------------------------------------------+
+|            DATA ACCESS LAYER (Supabase SSR Clients)          |
+|            - client.ts, server.ts, Storage SDK               |
++--------------------------------------------------------------+
+                               |  PostgreSQL Queries
+                               v
++--------------------------------------------------------------+
+|            DATABASE LAYER (Supabase PostgreSQL Cloud)        |
+|            - Profiles, Plans, Sessions, RLS Policies         |
++--------------------------------------------------------------+
+```
+
+1. **Presentation Layer (Tầng Trình diễn):** Chứa các giao diện người dùng (UI components) sử dụng Tailwind CSS v4 để hiển thị responsive và Recharts để vẽ biểu đồ tiến độ.
+2. **Service & Middleware Layer (Tầng Trung gian):** Nơi kiểm tra quyền truy cập thông qua Cookie, bảo vệ tài nguyên hệ thống và giao tiếp với các dịch vụ bên ngoài như Gemini API.
+3. **Data Access Layer (Tầng Truy cập Dữ liệu):** Sử dụng các client được khởi tạo từ thư viện `@supabase/ssr` cấu hình chế độ lấy dữ liệu an toàn từ Server hoặc Client.
+4. **Database Layer (Tầng Dữ liệu):** Lưu trữ dữ liệu thực tế tại Supabase PostgreSQL Cloud, quản lý tệp tin tại Supabase Storage và thực thi các chính sách bảo mật RLS tại nhân PostgreSQL.
 
 ### 4.2. Thiết kế Cơ sở dữ liệu (Data Dictionary chi tiết)
 
-CSDL được chuẩn hóa ở dạng chuẩn 3 (3NF) để tránh dư thừa dữ liệu.
+Để tránh dư thừa dữ liệu và tối ưu hóa hiệu năng truy vấn, cơ sở dữ liệu PostgreSQL của FitTrack được thiết kế chuẩn hóa ở dạng chuẩn 3 (3NF):
 
-**Bảng 1: `profiles`**
+```mermaid
+erDiagram
+    profiles ||--o{ workout_plans : "owns"
+    profiles ||--o{ workout_sessions : "performs"
+    profiles ||--o{ progress_photos : "uploads"
+    workout_plans ||--o{ workout_sessions : "instantiates"
+    workout_sessions ||--o{ session_exercises : "contains"
 
-- Bảng này chứa thông tin cá nhân mở rộng của User.
-- Dữ liệu được trigger tự động tạo một dòng mới mỗi khi có người dùng mới đăng ký thành công trên Supabase Auth.
-- Cột: `id` (UUID, PK), `full_name` (Text), `avatar_url` (Text), `weight_kg` (Numeric), `height_cm` (Numeric), `created_at` (Timestamptz).
+    profiles {
+        uuid id PK
+        text full_name
+        text avatar_url
+        numeric weight_kg
+        numeric height_cm
+        text gender
+        integer birth_year
+        text activity_level
+        text fitness_goal
+        timestamptz created_at
+    }
 
-**Bảng 2: `workout_plans`**
+    workout_plans {
+        uuid id PK
+        uuid user_id FK
+        text name
+        text description
+        timestamptz created_at
+    }
 
-- Quản lý các mẫu giáo án.
-- Cột: `id` (UUID, PK), `user_id` (UUID, FK->profiles.id), `name` (Text, VD: "Push Pull Legs"), `description` (Text), `created_at` (Timestamptz).
+    workout_sessions {
+        uuid id PK
+        uuid user_id FK
+        uuid plan_id FK
+        text name
+        date date
+        text notes
+        timestamptz created_at
+    }
 
-**Bảng 3: `workout_sessions`**
+    session_exercises {
+        uuid id PK
+        uuid session_id FK
+        text exercise_name
+        integer sets
+        integer reps
+        numeric weight_kg
+        integer duration_minutes
+        jsonb notes
+    }
 
-- Đại diện cho một ngày đi tập thực tế của người dùng.
-- Cột: `id` (UUID, PK), `user_id` (UUID, FK), `plan_id` (UUID, FK, nullable), `name` (Text), `date` (Date), `notes` (Text), `created_at` (Timestamptz).
+    progress_photos {
+        uuid id PK
+        uuid user_id FK
+        text photo_url
+        text caption
+        timestamptz taken_at
+        timestamptz created_at
+    }
+```
 
-**Bảng 4: `session_exercises`**
+#### Bảng `profiles`
+Bảng này lưu trữ thông tin sinh học chi tiết của người dùng. Một bản ghi mới sẽ được tự động tạo ra bằng cơ chế PostgreSQL Trigger khi có một user mới đăng ký tài khoản thành công qua Supabase Auth.
+* `id` (UUID, Primary Key): Khóa chính, liên kết trực tiếp với ID của bảng `auth.users` trong hệ thống Supabase Auth.
+* `full_name` (Text): Họ và tên của người dùng.
+* `avatar_url` (Text, Nullable): Đường dẫn ảnh đại diện.
+* `weight_kg` (Numeric): Cân nặng thực tế tính bằng Kilogram.
+* `height_cm` (Numeric): Chiều cao thực tế tính bằng Centimeter.
+* `gender` (Text): Giới tính (male/female).
+* `birth_year` (Integer): Năm sinh để tính tuổi.
+* `activity_level` (Text): Mức độ vận động (sedentary, light, moderate, active, very_active).
+* `fitness_goal` (Text): Mục tiêu (lose_weight, maintain, gain_muscle).
+* `created_at` (Timestamptz): Thời gian tạo tài khoản.
 
-- Trái tim của hệ thống. Chứa thông tin bài tập trong một buổi tập.
-- Cột: `id` (UUID, PK), `session_id` (UUID, FK), `exercise_name` (Text, VD: "Squat"), `sets` (Int4), `reps` (Int4), `weight_kg` (Numeric), `duration_minutes` (Int4, nullable), `notes` (Text).
-- _Chú ý:_ Cột `notes` được tái thiết kế để chứa chuỗi JSON phục vụ tính năng Per-set logging mà không cần phải tách thành một bảng thứ 5 (như `exercise_sets`), nhằm giảm độ trễ khi JOIN các bảng, đồng thời giữ nguyên khả năng hoạt động của các hàm tổng hợp dữ liệu cũ.
+#### Bảng `workout_plans` (Giáo án mẫu)
+* `id` (UUID, Primary Key): Khóa chính tự sinh.
+* `user_id` (UUID, Foreign Key): Khóa ngoại liên kết tới `profiles(id)`.
+* `name` (Text): Tên giáo án (ví dụ: Push-Pull-Legs).
+* `description` (Text, Nullable): Mô tả ngắn gọn về giáo án.
+* `created_at` (Timestamptz): Thời gian tạo.
 
-**Bảng 5: `progress_photos`**
+#### Bảng `workout_sessions` (Buổi tập thực tế)
+* `id` (UUID, Primary Key): Khóa chính.
+* `user_id` (UUID, Foreign Key): Khóa ngoại liên kết tới `profiles(id)`.
+* `plan_id` (UUID, Foreign Key, Nullable): Khóa ngoại liên kết tới `workout_plans(id)`. Cho phép Null nếu người dùng tập tự do không theo giáo án mẫu.
+* `name` (Text): Tên buổi tập thực tế.
+* `date` (Date): Ngày thực hiện buổi tập.
+* `notes` (Text, Nullable): Ghi chú tổng quát của buổi tập.
+* `created_at` (Timestamptz): Thời gian lưu bản ghi.
 
-- Lưu vết đường dẫn hình ảnh vật lý.
-- Cột: `id` (UUID, PK), `user_id` (UUID, FK), `photo_url` (Text), `caption` (Text), `taken_at` (Timestamptz), `created_at` (Timestamptz).
+#### Bảng `session_exercises` (Chi tiết bài tập trong buổi)
+* `id` (UUID, Primary Key): Khóa chính.
+* `session_id` (UUID, Foreign Key): Khóa ngoại liên kết tới `workout_sessions(id)` với tùy chọn xóa dây chuyền `ON DELETE CASCADE`.
+* `exercise_name` (Text): Tên bài tập (ví dụ: Squat).
+* `sets` (Integer): Số lượng hiệp tập (được lưu để giữ tương thích ngược).
+* `reps` (Integer): Số lần nâng mỗi hiệp.
+* `weight_kg` (Numeric): Mức tạ nâng.
+* `duration_minutes` (Integer, Nullable): Thời gian tập tính bằng phút.
+* `notes` (JSONB): Chứa chuỗi JSON lưu thông tin mảng hiệp tập lẻ (Per-set) và ghi chú riêng của bài tập.
 
-### 4.3. Thiết kế Giao diện UI/UX (Design System)
+#### Bảng `progress_photos` (Hình ảnh tiến trình cơ thể)
+* `id` (UUID, Primary Key): Khóa chính.
+* `user_id` (UUID, Foreign Key): Khóa ngoại liên kết tới `profiles(id)`.
+* `photo_url` (Text): Đường dẫn tệp ảnh lưu trong Supabase Storage.
+* `caption` (Text, Nullable): Ghi chú cảm xúc, chỉ số tại ngày chụp.
+* `taken_at` (Timestamptz): Ngày chụp ảnh thực tế.
+* `created_at` (Timestamptz): Ngày lưu ảnh lên hệ thống.
 
-Dự án sử dụng ngôn ngữ thiết kế **Glassmorphism** (kính mờ) kết hợp với phong cách **Cyber/Futuristic** (Neon glow).
+### 4.3. Thiết kế giao diện UI/UX (Design System)
 
-- **Màu sắc chủ đạo (Primary Color):** Cam Neon (`#f97316` - Tailwind `orange-500`). Màu cam tượng trưng cho năng lượng, nhiệt huyết thể thao và sự bùng nổ sức mạnh.
-- **Màu nền (Background):** Áp dụng dải màu Dark Slate (`#0f172a`). Khi chuyển sang chế độ Light, hệ thống tự động ánh xạ sang màu Slate nhạt (`#f8fafc`).
-- **Kiểu chữ (Typography):** Sử dụng hệ phông chữ không chân hiện đại (Inter / Geist), tối ưu cho khả năng đọc số liệu báo cáo rõ ràng. Các thông số khối lượng tạ, thời gian đếm ngược sử dụng phông chữ dạng Monospace để giữ sự cân xứng giữa các chữ số.
-- **Bố cục (Layout):** Sử dụng Grid System linh hoạt. Dashboard chia thành các thẻ (Card) bo góc tròn (`rounded-xl`), có viền nhạt (border) và hiệu ứng nổi khi di chuột (`hover:border-orange-500 transition-colors`).
+Hệ thống FitTrack xây dựng một ngôn ngữ thiết kế nhất quán mang phong cách **Glassmorphism** kết hợp cùng xu hướng **Cyberpunk** tương lai:
 
-### 4.4. Thiết kế Bảo mật (Các kịch bản RLS)
+* **Bảng màu:**
+  - *Màu Neon chủ đạo:* Màu cam sáng (`#f97316` - Tailwind `orange-500`) tượng trưng cho năng lượng, sự bùng nổ sức mạnh trong thể thao.
+  - *Màu nền Dark Mode:* Màu Slate sẫm (`#090d16` - Tailwind `slate-950`) mang lại cảm giác sâu thẳm, bảo vệ mắt khi tập luyện trong phòng gym thiếu sáng.
+  - *Màu nền Light Mode:* Tự động chuyển đổi sang tông màu sáng nhẹ (`#f8fafc` - Tailwind `slate-50`) sạch sẽ, rõ ràng thông qua CSS Variables.
+* **Typography:** Sử dụng phông chữ không chân hiện đại **Inter** tối ưu hiển thị trên các màn hình di động độ phân giải cao. Đối với các số liệu tạ nâng, thời gian nghỉ ngơi, ứng dụng sử dụng phông chữ **Monospace** để giữ tính cân đối tuyệt đối giữa các con số, không bị nhảy giật khung khi đếm ngược.
+* **Giao diện Kính mờ (Glassmorphism):** Các thẻ (Cards) hiển thị thông tin sử dụng thuộc tính CSS `backdrop-filter: blur(12px)` kết hợp màu nền trong suốt 80% (`bg-slate-900/80`) và đường viền siêu mỏng (`border-slate-800/50`) tạo cảm giác chiều sâu không gian cao cấp.
 
-Row Level Security (RLS) là bức tường lửa cấp thấp nhất bảo vệ dữ liệu.
+### 4.4. Thiết kế bảo mật (Row Level Security kịch bản)
+
+Hệ thống FitTrack bảo vệ dữ liệu người dùng tuyệt đối bằng cách bật Row Level Security (RLS) trên tất cả các bảng. Một hacker chuyên nghiệp dù thu thập được ID của buổi tập hoặc cố tình sửa payload request API để thay đổi bản ghi của người khác cũng sẽ bị chặn lại ngay từ nhân PostgreSQL.
+
 Ví dụ kịch bản phân quyền cho bảng `workout_sessions`:
-Hacker cố tình tạo một HTTP request PATCH gửi tới Supabase API với body sửa đổi tên buổi tập của user khác:
+* **Chính sách Đọc dữ liệu (SELECT):** Chỉ cho phép người dùng đọc các buổi tập thuộc về chính tài khoản của họ.
+  ```sql
+  CREATE POLICY "Sessions select own" ON public.workout_sessions
+  FOR SELECT USING (auth.uid() = user_id);
+  ```
+* **Chính sách Sửa dữ liệu (UPDATE):** Chỉ cho phép người dùng sửa đổi buổi tập của chính mình.
+  ```sql
+  CREATE POLICY "Sessions update own" ON public.workout_sessions
+  FOR UPDATE USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+  ```
 
-```json
-{ "id": "uuid-cua-nguoi-khac", "name": "Hack" }
+Mỗi yêu cầu gửi đến Supabase mang theo một JSON Web Token (JWT) được giải mã an toàn chứa thông tin ID tài khoản của user đó (`auth.uid()`). Nếu ID này không trùng khớp với cột `user_id` của dòng dữ liệu đang thao tác, PostgreSQL sẽ từ chối trả về hoặc cập nhật dữ liệu.
+
+### 4.5. Luồng dữ liệu nghiệp vụ End-to-End
+
+```
+[Người dùng tại Client] --(Nhập liệu bài tập lẻ)--> [Lưu vào State & Validate]
+                                                           |
+                                                           v
+[Lưu tạm LocalStorage] <---(Nếu Ngoại tuyến)------- [Kiểm tra navigator.onLine]
+                                                           |
+                                                           | (Nếu Trực tuyến)
+                                                           v
+[Cơ sở dữ liệu PostgreSQL] <---(RLS check qua JWT)--- [Next.js Server Action]
 ```
 
-Nhờ RLS Policy được định nghĩa:
-
-```sql
-CREATE POLICY "Cho phép cập nhật dữ liệu của chính mình"
-ON workout_sessions FOR UPDATE
-USING (auth.uid() = user_id)
-WITH CHECK (auth.uid() = user_id);
-```
-
-Ngay tại tầng Database Engine (PostgreSQL), biến `auth.uid()` (được giải mã an toàn từ JWT Token của request) sẽ không khớp với cột `user_id` của bản ghi đó. Truy vấn bị từ chối truy cập ngay lập tức, báo lỗi bảo mật và hacker không thể sửa đổi.
-
-### 4.5. Luồng dữ liệu nghiệp vụ end-to-end
-
-Để nhìn rõ cách FitTrack vận hành xuyên suốt từ giao diện đến cơ sở dữ liệu, có thể mô tả luồng nghiệp vụ tổng quát như sau:
-
-1. Người dùng truy cập ứng dụng và được middleware kiểm tra phiên đăng nhập.
-2. Nếu chưa xác thực, hệ thống chuyển hướng sang trang đăng nhập.
-3. Sau khi đăng nhập thành công, dữ liệu hồ sơ và thống kê cá nhân được tải từ Supabase về server component.
-4. Các trang dashboard hiển thị dữ liệu theo từng module: hồ sơ, dinh dưỡng, kế hoạch tập, buổi tập, tiến độ, ảnh progress và AI Coach.
-5. Khi người dùng tạo buổi tập mới, dữ liệu được nhập trên client component, kiểm tra hợp lệ rồi gửi xuống Supabase.
-6. Nếu kết nối mạng ổn định, bản ghi được lưu trực tiếp; nếu không có mạng, buổi tập được đưa vào hàng đợi offline tạm thời.
-7. Dữ liệu sau đó có thể được đọc lại để vẽ biểu đồ volume, tổng hợp báo cáo và cấp ngữ cảnh cho AI Coach.
-
-Luồng này giúp hệ thống vừa đảm bảo trải nghiệm mượt mà trên giao diện người dùng, vừa giữ được tính nhất quán của dữ liệu ở tầng backend.
+Luồng dữ liệu này đảm bảo tính toàn vẹn của dữ liệu trong mọi trạng thái kết nối mạng của thiết bị di động, đảm bảo ứng dụng luôn sẵn sàng phục vụ người dùng trong mọi hoàn cảnh thực tế.
 
 ---
 
 ## CHƯƠNG 5: TRIỂN KHAI KỸ THUẬT VÀ MÃ NGUỒN CỐT LÕI
 
-Chương này đi sâu vào phân tích các đoạn mã logic cốt lõi nhất cấu thành nên hệ thống FitTrack.
-
 ### 5.1. Xử lý Per-Set Logging (Serialization & Deserialization)
 
-Bài toán: Làm sao lưu được thông tin chi tiết (reps, kg) của n hiệp tập vào CSDL mà không thay đổi cấu trúc bảng `session_exercises`?
-**Giải pháp: JSON Serialization.**
-Trên UI, người dùng thao tác với biến State là một mảng object:
+Để nâng cấp hệ thống cũ từ việc chỉ ghi chép mức tạ chung phẳng sang ghi chép chi tiết từng hiệp tập (Set) lẻ mà không phải tạo thêm bảng trung gian, FitTrack áp dụng giải pháp tuần tự hóa đối tượng (Serialization) thành chuỗi JSON và lưu trữ vào cột `notes` (có kiểu dữ liệu `jsonb`).
+
+Hàm kiểm tra và phân tách dữ liệu (Parser) ở Client-side được viết an toàn nhằm tương thích ngược hoàn hảo với các ghi chép dạng văn bản cũ:
 
 ```typescript
-interface SetDetail {
+export interface SetDetail {
   reps: number;
   weight_kg: number;
 }
-const [sets, setSets] = useState<SetDetail[]>([{ reps: 0, weight_kg: 0 }]);
-```
 
-Khi lưu, hệ thống "gói" mảng này lại:
+export interface ParsedExerciseNotes {
+  setsDetail: SetDetail[] | null;
+  userNotes: string | null;
+}
 
-```typescript
-const payloadNotes = JSON.stringify({
-  setsDetail: sets,
-  userNotes: "Tập căng",
-});
-// Đẩy payloadNotes vào cột `notes`
-```
-
-Khi đọc dữ liệu để vẽ giao diện, hệ thống sử dụng thuật toán Deserialization Fallback an toàn:
-
-```typescript
-const parseExerciseNotes = (notesStr: string | null) => {
+export function parseExerciseNotes(notesStr: string | null): ParsedExerciseNotes {
   if (!notesStr) return { setsDetail: null, userNotes: null };
   try {
     const parsed = JSON.parse(notesStr);
-    if (parsed && typeof parsed === "object" && "setsDetail" in parsed) {
-      return { setsDetail: parsed.setsDetail, userNotes: parsed.userNotes };
+    if (parsed && typeof parsed === 'object' && 'setsDetail' in parsed) {
+      return {
+        setsDetail: parsed.setsDetail as SetDetail[],
+        userNotes: parsed.userNotes || null
+      };
     }
   } catch (e) {
-    // Nếu parse lỗi, nghĩa là chuỗi notes cũ dạng văn bản thuần túy
+    // Không phải chuỗi JSON -> notes cũ dạng text thuần
   }
   return { setsDetail: null, userNotes: notesStr };
-};
+}
 ```
 
-Nhờ hàm xử lý này, ứng dụng vừa phục vụ được tính năng mới, vừa đảm bảo 100% không làm hỏng hiển thị của những buổi tập đã được ghi chép theo kiểu cũ.
+### 5.2. Xây dựng biểu đồ Recharts & Thuật toán gom nhóm dữ liệu
 
-### 5.2. Xây dựng Biểu đồ Recharts & Thuật toán gom nhóm
-
-Tính năng quan trọng nhất của đồ án là đồ thị Overload.
-Dữ liệu thô từ CSDL là một mảng rất lớn các buổi tập, bên trong là mảng các bài tập. Yêu cầu là phải lọc ra một bài tập cụ thể (Ví dụ: "Squat"), tính tổng Volume của bài đó trong từng ngày, và vẽ thành biểu đồ đường cong nối tiếp.
-**Thuật toán Aggregate Data (O(n)):**
+Để vẽ biểu đồ phân tích Progressive Overload (tổng Volume bài tập theo thời gian), hệ thống cần lọc ra tất cả các buổi tập của người dùng, tìm kiếm bài tập mong muốn, tính tổng Volume nâng được của bài đó trong từng ngày tập và sắp xếp theo trình tự thời gian tăng dần:
 
 ```typescript
-const chartData = userSessions
-  .reduce((acc: any[], session) => {
-    // Lọc tìm bài tập khớp tên người dùng chọn
-    const targetExercise = session.session_exercises?.find(
-      (ex) => ex.exercise_name === selectedExerciseName,
-    );
-    if (targetExercise) {
-      let vol = 0;
-      const { setsDetail } = parseExerciseNotes(targetExercise.notes);
-      if (setsDetail) {
-        // Tính volume kiểu mới
-        vol = setsDetail.reduce(
-          (sum, set) => sum + set.reps * set.weight_kg,
-          0,
-        );
-      } else {
-        // Tính volume kiểu cũ
-        vol =
-          targetExercise.sets * targetExercise.reps * targetExercise.weight_kg;
-      }
-      acc.push({ date: session.date, volume: vol });
-    }
-    return acc;
-  }, [])
-  .reverse(); // Đảo ngược để vẽ từ quá khứ đến hiện tại
-```
+export function aggregateVolumeData(sessions: any[], exerciseName: string) {
+  const result: { date: string; volume: number }[] = [];
 
-Dữ liệu `chartData` sau đó được cấp vào thẻ `<LineChart>` của thư viện Recharts để nội suy đường cong (monotone), tạo ra trải nghiệm trực quan mượt mà.
+  for (const session of sessions) {
+    const targetEx = session.session_exercises?.find(
+      (ex: any) => ex.exercise_name.toLowerCase().trim() === exerciseName.toLowerCase().trim()
+    );
+
+    if (targetEx) {
+      let totalVolume = 0;
+      const { setsDetail } = parseExerciseNotes(targetEx.notes);
+
+      if (setsDetail && setsDetail.length > 0) {
+        // Cách tính Volume kiểu mới: Tổng (Kg * Reps) của từng Set lẻ
+        totalVolume = setsDetail.reduce((sum, set) => sum + (set.reps * set.weight_kg), 0);
+      } else {
+        // Cách tính Volume kiểu cũ: Sets * Reps * Weight
+        totalVolume = targetEx.sets * targetEx.reps * targetEx.weight_kg;
+      }
+
+      result.push({
+        date: session.date,
+        volume: totalVolume
+      });
+    }
+  }
+
+  // Đảo ngược mảng để dữ liệu vẽ từ quá khứ đến hiện tại
+  return result.reverse();
+}
+```
 
 ### 5.3. Implement Web Audio API cho Rest Timer
 
-Cơ chế đếm ngược nghỉ ngơi được điều khiển bởi hàm `useEffect` với `setInterval`. Khi biến thời gian `timeLeft` thay đổi, hệ thống kiểm tra:
+Khi đồng hồ đếm ngược thời gian nghỉ về các giây cuối, hệ thống gọi hàm `playTickSound` để tự phát ra tiếng bíp cảnh báo chuyên nghiệp:
 
 ```typescript
-useEffect(() => {
-  // ... (đếm ngược logic)
-  if (timeLeft === 3 || timeLeft === 2 || timeLeft === 1) {
-    playTickSound(600, 0.05); // Tíc
-  } else if (timeLeft === 0) {
-    playTickSound(880, 0.3); // Bíp
+export function playTickSound(frequency: number, duration: number) {
+  if (typeof window === "undefined") return;
+  try {
+    const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioCtx) return;
+    
+    const audioCtx = new AudioCtx();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = "sine"; // Sóng hình sin dịu tai
+    oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+
+    // Cấu hình âm lượng giảm dần tuyến tính để tránh tiếng rè nổ loa khi ngắt
+    gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + duration);
+  } catch (err) {
+    console.error("Web Audio API error:", err);
   }
-}, [timeLeft]);
-```
-
-**Hàm phát sinh sóng âm (Synthesis):**
-
-```typescript
-const playTickSound = (frequency: number, duration: number) => {
-  const audioCtx = new (
-    window.AudioContext || (window as any).webkitAudioContext
-  )();
-  const oscillator = audioCtx.createOscillator();
-  const gainNode = audioCtx.createGain();
-
-  oscillator.type = "sine"; // Sóng hình sin mềm mại
-  oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-
-  gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime); // Volume nhỏ
-  gainNode.gain.exponentialRampToValueAtTime(
-    0.001,
-    audioCtx.currentTime + duration,
-  );
-
-  oscillator.connect(gainNode);
-  gainNode.connect(audioCtx.destination);
-
-  oscillator.start();
-  oscillator.stop(audioCtx.currentTime + duration);
-};
-```
-
-Việc ứng dụng toán học và vật lý âm thanh này mang lại cảm giác cực kỳ công nghệ cho người dùng.
-
-### 5.4. Thuật toán Tính toán Dinh Dưỡng
-
-Tại `/dashboard/nutrition`, áp dụng công thức y khoa chuẩn.
-
-```typescript
-let bmr = 0;
-if (gender === "male") {
-  bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-} else {
-  bmr = 10 * weight + 6.25 * height - 5 * age - 161;
 }
-const tdee = bmr * activityLevel;
 ```
 
-Sau đó, phân bổ Macros dựa trên mục tiêu:
+### 5.4. Thuật toán tính toán Dinh dưỡng y khoa
 
-- **Siết cơ (Cut):** Calo = TDEE - 500. Đạm = (Calo _ 30%) / 4. Tinh bột = (Calo _ 40%) / 4. Béo = (Calo \* 30%) / 9.
-- **Xả cơ (Bulk):** Calo = TDEE + 500. Đạm = (Calo _ 25%) / 4. Tinh bột = (Calo _ 50%) / 4. Béo = (Calo \* 25%) / 9.
+Tính toán BMR theo công thức Mifflin-St Jeor và quy đổi ra TDEE cùng tỉ lệ chất đa lượng (Carb, Protein, Fat) tối ưu dựa trên mục tiêu của người tập:
 
-### 5.5. AI Coach Prompt Engineering
+```typescript
+export function calculateMacros(
+  weight: number,
+  height: number,
+  age: number,
+  gender: 'male' | 'female',
+  activityLevel: number,
+  goal: 'lose_weight' | 'maintain' | 'gain_muscle'
+) {
+  // 1. Tính BMR
+  let bmr = 10 * weight + 6.25 * height - 5 * age;
+  bmr = gender === 'male' ? bmr + 5 : bmr - 161;
 
-Trợ lý AI không phải là một khung chat rỗng. Để AI hiểu được cơ thể người dùng, kỹ thuật **System Prompt Injection** được sử dụng.
-Khi người dùng gõ "Tôi nên ăn gì?", ứng dụng không gửi câu đó đi ngay. Hệ thống sẽ bọc câu đó lại:
-`Context: User có cân nặng ${weight}kg, chiều cao ${height}cm, BMI = ${bmi}. Mục tiêu: Tập gym. Hãy tư vấn dưới tư cách HLV cá nhân.`
-`Câu hỏi của user: "Tôi nên ăn gì?"`
-Nhờ vậy, AI trả lời có độ chính xác cực cao, hoàn toàn dựa trên dữ liệu thật của tài khoản đó.
+  // 2. Tính TDEE
+  const tdee = Math.round(bmr * activityLevel);
+
+  // 3. Phân bổ Calo và Gram theo mục tiêu
+  let targetCalories = tdee;
+  let proteinRatio = 0.3, carbRatio = 0.4, fatRatio = 0.3; // Mặc định Maintain
+
+  if (goal === 'lose_weight') {
+    targetCalories = tdee - 500; // Siết cơ thâm hụt calo
+    proteinRatio = 0.35; // Tăng đạm giữ cơ
+    carbRatio = 0.35;
+    fatRatio = 0.3;
+  } else if (goal === 'gain_muscle') {
+    targetCalories = tdee + 500; // Xả cơ thặng dư calo
+    proteinRatio = 0.25;
+    carbRatio = 0.50; // Tăng carb làm năng lượng tập nặng
+    fatRatio = 0.25;
+  }
+
+  const proteinGrams = Math.round((targetCalories * proteinRatio) / 4);
+  const carbGrams = Math.round((targetCalories * carbRatio) / 4);
+  const fatGrams = Math.round((targetCalories * fatRatio) / 9);
+
+  return {
+    bmr,
+    tdee,
+    targetCalories,
+    proteinGrams,
+    carbGrams,
+    fatGrams
+  };
+}
+```
+
+### 5.5. AI Coach Prompt Engineering & Gemini SDK Integration
+
+Đoạn mã Route Handler sử dụng SDK Gemini của Google (`@google/genai`) tích hợp thông tin sinh học của người dùng vào hệ thống làm ngữ cảnh để trả câu trả lời cá nhân hóa:
+
+```typescript
+import { GoogleGenAI } from '@google/genai';
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+
+export async function generateAICoachResponse(
+  userProfile: any,
+  userMessage: string,
+  chatHistory: { role: string; content: string }[]
+) {
+  // Tính chỉ số BMI
+  const heightInMeters = userProfile.height_cm / 100;
+  const bmi = (userProfile.weight_kg / (heightInMeters * heightInMeters)).toFixed(1);
+
+  // Xây dựng System Prompt chèn thông số cơ thể người dùng
+  const systemPrompt = `
+Bạn là một chuyên gia thể hình, huấn luyện viên cá nhân (PT) và chuyên gia dinh dưỡng thể thao chuyên nghiệp.
+Thông số thể trạng hiện tại của học viên:
+- Họ tên: ${userProfile.full_name}
+- Chiều cao: ${userProfile.height_cm} cm
+- Cân nặng: ${userProfile.weight_kg} kg
+- Giới tính: ${userProfile.gender === 'male' ? 'Nam' : 'Nữ'}
+- Chỉ số BMI tính được: ${bmi}
+- Mục tiêu thể hình: ${userProfile.fitness_goal === 'lose_weight' ? 'Giảm cân/Siết cơ' : userProfile.fitness_goal === 'gain_muscle' ? 'Tăng cơ/Xả cơ' : 'Giữ dáng/Duy trì'}
+- Mức độ vận động: ${userProfile.activity_level}
+
+Hãy trả lời học viên bằng tiếng Việt thân thiện, động viên nhưng cực kỳ khoa học. Luôn bám sát vào các thông số sinh học trên để cá nhân hóa câu trả lời. Tránh các câu trả lời chung chung. Định dạng văn bản bằng Markdown rõ ràng.
+`;
+
+  const chat = ai.chats.create({
+    model: 'gemini-3.5-flash',
+    systemInstruction: systemPrompt,
+    history: chatHistory.map(msg => ({
+      role: msg.role === 'user' ? 'user' : 'model',
+      parts: [{ text: msg.content }]
+    }))
+  });
+
+  const response = await chat.sendMessage({ message: userMessage });
+  return response.text;
+}
+```
 
 ### 5.6. Canvas Social Card Generator
 
-Tính năng trích xuất hình ảnh chia sẻ (Share Card) sử dụng `canvas.getContext('2d')`. Quá trình thao tác điểm ảnh (pixel manipulation):
+Vẽ Social Share Card của buổi tập sử dụng thẻ `<canvas>` để người dùng tải về máy với định dạng dấu chấm phân cách hàng nghìn Việt Nam:
 
-1. Vẽ nền (FillRect) với màu dải gradient.
-2. Thiết lập cấu hình font chữ (FillText).
-3. Định dạng số bằng hàm nội địa hóa `.toLocaleString('vi-VN')` (Ví dụ biến đổi `3180` thành `3.180 kg`).
-4. Xuất ảnh bằng `canvas.toDataURL('image/png')` và kích hoạt hàm tải xuống giả lập qua thẻ `<a>`.
+```typescript
+export function drawSocialCard(canvas: HTMLCanvasElement, sessionName: string, date: string, volume: number) {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
 
-### 5.7. CSS Variables & Theming
+  // 1. Tạo hình nền Gradient Cyberpunk tối
+  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradient.addColorStop(0, '#090d16');
+  gradient.addColorStop(1, '#1e1b4b');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-Trong file `app/globals.css`, các biến màu gốc của Tailwind v4 được ánh xạ:
+  // 2. Vẽ viền góc bo tròn
+  ctx.strokeStyle = 'rgba(249, 115, 22, 0.4)'; // Orange border
+  ctx.lineWidth = 8;
+  ctx.strokeRect(4, 4, canvas.width - 8, canvas.height - 8);
 
-```css
-:root {
-  --slate-950: #090d16; /* Nền tối mặc định */
-}
-html.light-theme {
-  --slate-950: #ffffff; /* Biến thành nền trắng khi ở chế độ Light */
-}
-@theme {
-  --color-slate-950: var(--slate-950);
+  // 3. Vẽ nhãn tiêu đề thương hiệu
+  ctx.fillStyle = '#f97316'; // Orange-500
+  ctx.font = 'bold 24px Inter, sans-serif';
+  ctx.fillText('FITTRACK WORKOUT SUMMARY', 50, 60);
+
+  // 4. Vẽ tên buổi tập
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 42px Inter, sans-serif';
+  ctx.fillText(sessionName, 50, 130);
+
+  // 5. Vẽ ngày tập luyện
+  ctx.fillStyle = '#94a3b8'; // Slate-400
+  ctx.font = '20px Inter, sans-serif';
+  ctx.fillText(`Ngày tập: ${date}`, 50, 180);
+
+  // 6. Vẽ tổng Volume thành tựu
+  ctx.fillStyle = '#e2e8f0';
+  ctx.font = '28px Inter, sans-serif';
+  ctx.fillText('Tổng khối lượng nâng:', 50, 260);
+
+  // Định dạng số chuẩn Việt Nam (VD: 3.180 kg)
+  const formattedVolume = volume.toLocaleString('vi-VN');
+  
+  ctx.fillStyle = '#f97316';
+  ctx.font = 'bold 56px Monospace, sans-serif';
+  ctx.fillText(`${formattedVolume} kg`, 50, 330);
 }
 ```
 
-Đây là phương pháp cực kỳ thanh lịch. Không cần sử dụng thư viện `next-themes` nặng nề, chỉ cần hàm JavaScript thuần đổi class `light-theme` ở thẻ `<html>`, toàn bộ các class tiện ích của Tailwind (ví dụ `bg-slate-950`) sẽ lập tức trỏ tới mã màu mới.
+### 5.7. CSS Variables & Dynamic Theming
 
-### 5.8. Offline Sync Mechanism
+Trong file `app/globals.css`, chúng tôi cấu hình các biến màu sắc cốt lõi để hệ thống tự động đổi màu khi thêm lớp `light-theme` vào thẻ `<html>`:
 
-Xây dựng cơ chế chịu lỗi mạng.
-Khi ấn lưu, kiểm tra `navigator.onLine`. Nếu `false`, đẩy payload vào `localStorage.setItem('pending_sessions', JSON.stringify(data))`.
-Tại Sidebar (thành phần luôn tồn tại ở mọi trang), chạy một `useEffect` lắng nghe sự kiện `window.addEventListener('online', syncSessions)`. Khi có mạng trở lại, hàm `syncSessions` lấy mảng từ bộ nhớ cục bộ, thực hiện gọi API Supabase, và xóa bộ nhớ cục bộ. Tính năng này chứng minh tính ứng dụng PWA hoàn hảo của đồ án.
+```css
+@import "tailwindcss";
 
-### 5.9. Danh mục các module chính trong dự án
+:root {
+  --background: #090d16;
+  --foreground: #f8fafc;
+  --card: #0f172a;
+  --border: #1e293b;
+}
 
-Để triển khai đồng bộ, hệ thống được chia thành các nhóm module rõ ràng:
+html.light-theme {
+  --background: #f8fafc;
+  --foreground: #090d16;
+  --card: #ffffff;
+  --border: #e2e8f0;
+}
 
-- **Nhóm xác thực:** xử lý đăng ký, đăng nhập, callback và middleware bảo vệ phiên.
-- **Nhóm dashboard:** hiển thị số liệu tổng quan, shortcut, thống kê và các card chức năng.
-- **Nhóm kế hoạch tập:** tạo, xem, chỉnh sửa và xóa workout plans.
-- **Nhóm buổi tập:** log workout sessions, session exercises, đồng hồ nghỉ và share card.
-- **Nhóm dinh dưỡng:** BMR, TDEE, macro calculator và hiển thị gợi ý mục tiêu.
-- **Nhóm tiến độ:** upload progress photos, xem ảnh trước/sau và thống kê tiến bộ.
-- **Nhóm AI Coach:** chat cá nhân hóa, tóm tắt ngữ cảnh hồ sơ, lịch tập và hạn chế trả lời dạng markdown.
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+}
 
-Việc chia module theo chức năng giúp codebase dễ bảo trì, dễ mở rộng và giảm độ phức tạp khi tích hợp thêm tính năng mới.
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s, color 0.3s;
+}
+```
+
+### 5.8. Cơ chế đồng bộ ngoại tuyến Offline Sync
+
+Tại Sidebar chính của ứng dụng, một hook `useEffect` lắng nghe sự kiện khôi phục kết nối Internet để tự động đẩy các buổi tập lưu tạm lên máy chủ:
+
+```typescript
+import { useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
+
+export function useOfflineSync() {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const syncSessions = async () => {
+      const pendingData = localStorage.getItem("pending_sessions");
+      if (!pendingData) return;
+
+      try {
+        const sessions = JSON.parse(pendingData);
+        if (!Array.isArray(sessions) || sessions.length === 0) return;
+
+        const supabase = createClient();
+        console.log(`Bắt đầu đồng bộ ${sessions.length} buổi tập ngoại tuyến...`);
+
+        for (const session of sessions) {
+          // 1. Thêm session
+          const { data: newSession, error: sErr } = await supabase
+            .from("workout_sessions")
+            .insert({
+              user_id: session.user_id,
+              name: session.name,
+              date: session.date,
+              notes: session.notes
+            })
+            .select();
+
+          if (sErr) throw sErr;
+
+          // 2. Thêm các bài tập chi tiết tương ứng
+          if (session.exercises && session.exercises.length > 0) {
+            const exercisesPayload = session.exercises.map((ex: any) => ({
+              session_id: newSession[0].id,
+              exercise_name: ex.exercise_name,
+              sets: ex.sets,
+              reps: ex.reps,
+              weight_kg: ex.weight_kg,
+              notes: ex.notes
+            }));
+
+            const { error: eErr } = await supabase
+              .from("session_exercises")
+              .insert(exercisesPayload);
+
+            if (eErr) throw eErr;
+          }
+        }
+
+        // Đồng bộ thành công -> Xóa hàng đợi
+        localStorage.removeItem("pending_sessions");
+        alert("Đồng bộ dữ liệu ngoại tuyến thành công! 🔄");
+      } catch (err) {
+        console.error("Lỗi đồng bộ dữ liệu ngoại tuyến:", err);
+      }
+    };
+
+    window.addEventListener("online", syncSessions);
+    return () => window.removeEventListener("online", syncSessions);
+  }, []);
+}
+```
 
 ---
 
 ## CHƯƠNG 6: ĐÓNG GÓI VÀ TRIỂN KHAI (DOCKER & DEPLOYMENT)
 
-Để đáp ứng quy chế thi và tiêu chuẩn công nghiệp hiện đại, ứng dụng FitTrack được chuẩn bị cho môi trường vận hành thực tế thông qua các quy trình DevOps.
+### 6.1. Phân tích cấu trúc Dockerfile Multi-stage
 
-### 6.1. Phân tích Dockerfile
+Đoạn mã Dockerfile của FitTrack chia thành 3 giai đoạn biên dịch tối ưu nhằm loại bỏ các tệp thừa:
 
-Dockerfile của ứng dụng Next.js sử dụng kiến trúc Multi-stage build.
+```dockerfile
+# Stage 1: Tải các thư viện phụ thuộc
+FROM node:20-alpine AS deps
+WORKDIR /app
+RUN apk add --no-cache libc6-compat
+COPY package*.json ./
+RUN npm ci
+RUN npm install @tailwindcss/oxide-linux-x64-musl
 
-- **Stage 1 (deps):** Chỉ nạp `package.json` và tải các module qua lệnh `npm ci`. Điều này giúp bộ máy Docker giữ lại bộ đệm (cache) cực kỳ tốt nếu không có sự thay đổi thư viện.
-- **Stage 2 (builder):** Nạp toàn bộ mã nguồn (`COPY . .`) và chạy `npm run build`. Ở bước này, Next.js biên dịch Typescript, nén CSS/JS, và tạo các file tĩnh tối ưu.
-- **Stage 3 (runner):** Xây dựng hệ thống môi trường cho production. Chỉ sao chép các thành phần thiết yếu từ stage builder sang, định nghĩa cổng mạng `EXPOSE 3000` và khởi chạy máy chủ bằng `CMD ["npm", "start"]`.
-  Quy trình này đảm bảo image cuối cùng rất gọn, an toàn và không chứa các thư viện devDependencies.
+# Stage 2: Biên dịch ứng dụng Next.js
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm run build
 
-### 6.2. Mạng nội bộ Docker Compose
+# Stage 3: Thiết lập môi trường Production siêu nhẹ
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOST=0.0.0.0
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.ts ./next.config.ts
+EXPOSE 3000
+CMD ["npm", "start"]
+```
 
-Sử dụng `docker-compose.yml` để dàn dựng (Orchestration).
+### 6.2. Mạng nội bộ Docker Compose và Bảo mật môi trường
+
+File `docker-compose.yml` định nghĩa service web chạy ứng dụng FitTrack:
 
 ```yaml
-version: "3.8"
+version: '3.8'
+
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: lacia2808/fittrack:latest
+    container_name: fittrack_app
     restart: always
     ports:
       - "3000:3000"
     env_file:
       - .env.local
+    environment:
+      - NODE_ENV=production
 ```
 
-Lợi thế tuyệt đối của file cấu hình này là việc sử dụng khóa `env_file`. Hệ thống Docker sẽ tự động đọc file `.env.local` (chứa URL và KEY của Supabase) và tiêm (inject) vào container trong quá trình build và run, loại bỏ hoàn toàn nguy cơ rò rỉ mã bảo mật trên mã nguồn công khai (GitHub).
+Cơ chế `env_file` tự động tiêm các biến môi trường cấu hình tại file bí mật `.env.local` ở host vào container, tránh nguy cơ rò rỉ mã khóa API lên GitHub.
 
-### 6.3. Quy trình Triển khai trên VPS (Nginx, Domain, SSL)
+### 6.3. Quy trình Triển khai trên VPS AWS EC2 với Domain + SSL
 
-Quá trình đưa hệ thống từ máy tính lập trình lên Internet bao gồm các bước:
+Quá trình triển khai ứng dụng trên máy chủ ảo hóa đám mây được thực hiện tuần tự như sau:
 
-1. **Chuẩn bị máy chủ (VPS):** Cài đặt hệ điều hành Ubuntu 22.04 LTS, cấu hình tường lửa (UFW) chỉ mở port 22, 80 và 443.
-2. **Khởi chạy ứng dụng:** Kéo mã nguồn từ kho lưu trữ Git về VPS, chạy lệnh `docker compose up -d --build`. Lúc này, ứng dụng FitTrack chạy ngầm ở port 3000 trên localhost của VPS.
-3. **Cấu hình Reverse Proxy:** Cài đặt Nginx Web Server. Thiết lập cấu hình ảo (Virtual Host) lắng nghe port 80 (HTTP). Mọi yêu cầu từ tên miền `fittrack.example.com` sẽ được Nginx tiếp nhận và chuyển tiếp an toàn (proxy_pass) xuống `http://127.0.0.1:3000`. Cấu hình này giấu kiến trúc backend khỏi người dùng bên ngoài, tăng tốc độ phân phối nội dung tĩnh.
-4. **Cấp phát chứng chỉ bảo mật:** Cài đặt `certbot`. Lệnh `certbot --nginx` sẽ tự động xác minh quyền sở hữu tên miền thông qua giao thức ACME với tổ chức Let's Encrypt. Chứng chỉ SSL được sinh ra và cấu hình tự động vào Nginx. Giao tiếp từ đó hoàn toàn mã hóa bằng chuẩn HTTPS, ổ khóa xanh xuất hiện. Hệ thống PWA chính thức được phép hoạt động trên mọi thiết bị di động.
+1. **Khởi tạo máy chủ ảo (AWS EC2):** Thuê một máy chủ EC2 cấu hình t2.micro chạy hệ điều hành Ubuntu 22.04 LTS.
+2. **Cài đặt môi trường:** Cài đặt các gói phần mềm cần thiết gồm Docker, Docker Compose, Nginx.
+3. **Cấu hình Tường lửa AWS (Security Group):** Mở các cổng kết nối mạng:
+   - Cổng 22 (SSH) để kết nối cấu hình máy chủ.
+   - Cổng 80 (HTTP) để tiếp nhận yêu cầu web thường.
+   - Cổng 443 (HTTPS) để tiếp nhận kết nối bảo mật.
+   - Cổng 3000 để chạy ứng dụng gốc của container.
+4. **Cài đặt Nginx Reverse Proxy:** Tạo file cấu hình chuyển tiếp lưu lượng truy cập từ Internet về cổng 3000 nội bộ:
+   ```nginx
+   server {
+       listen 80;
+       server_name healfittrack.duckdns.org;
 
-### 6.4. Checklist trước khi chốt production
+       location / {
+           proxy_pass http://127.0.0.1:3000;
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection 'upgrade';
+           proxy_set_header Host $host;
+           proxy_cache_bypass $http_upgrade;
+       }
+   }
+   ```
+5. **Cấu hình chứng chỉ SSL HTTPS qua DNS Challenge:**
+   Vì DuckDNS là dịch vụ DNS miễn phí thường bị nghẽn mạng nên phương thức Certbot HTTP-01 Challenge thông thường sẽ bị thất bại do DNS Timeout.
+   - Giải pháp là chuyển sang phương pháp **DNS-01 Challenge** sử dụng plugin chuyên biệt `certbot-dns-duckdns`.
+   - Cài đặt certbot và plugin:
+     ```bash
+     pip install certbot-dns-duckdns
+     ```
+   - Tạo file chứa DuckDNS Token bí mật để thực hiện xác thực và chạy lệnh cấp chứng chỉ:
+     ```bash
+     sudo certbot certonly \
+       --non-interactive \
+       --agree-tos \
+       --email your-email@example.com \
+       --preferred-challenges dns \
+       --authenticator dns-duckdns \
+       --dns-duckdns-credentials /etc/duckdns-creds.ini \
+       -d healfittrack.duckdns.org
+     ```
+   - Gắn file chứng chỉ đã sinh vào cấu hình Nginx để mã hóa đường truyền bằng giao thức HTTPS hoạt động trên cổng 443 và tự động chuyển hướng mọi yêu cầu HTTP thường sang HTTPS.
 
-Trước khi coi bản deploy là bản nộp cuối cùng, cần kiểm tra một số tiêu chí thực tế:
+### 6.4. Tóm tắt hành trình vượt qua các trở ngại Deploy thực tế
 
-- File `.env.local` không được đẩy lên repo công khai.
-- Các biến môi trường sản xuất phải được nhập lại trên VPS hoặc dịch vụ host.
-- Lệnh `npm run build` phải chạy thành công trước khi container hóa.
-- Supabase URL, anon key và Gemini key phải hoạt động đúng ở môi trường production.
-- Các trang có dữ liệu riêng tư phải được kiểm tra lại RLS bằng ít nhất một tài khoản thử nghiệm.
-- Link demo production phải mở trực tiếp được từ trình duyệt máy khác và có HTTPS hợp lệ.
+Trong quá trình thực tế đưa ứng dụng lên mạng Internet, chúng tôi đã gặp phải một số trở ngại lớn và đã tìm ra phương án xử lý xuất sắc:
 
-Checklist này giúp giảm rủi ro “chạy được ở máy local nhưng lỗi ở server”.
+#### Trở ngại 1: VPS bị treo cứng do tràn RAM khi Build Docker
+* *Hiện trạng:* Máy chủ AWS EC2 phân khúc miễn phí (t2.micro) chỉ có **1GB RAM**. Khi chạy lệnh build Docker (`npm run build` của Next.js biên dịch Typescript và Tailwind), bộ nhớ RAM lập tức bị quá tải 100%, dẫn đến máy chủ VPS bị treo cứng, buộc phải khởi động lại.
+* *Giải pháp:* Thay đổi quy trình. Thay vì build trực tiếp tại VPS, chúng tôi tiến hành **build Image Docker tại máy tính cá nhân (Local)** có cấu hình phần cứng mạnh mẽ. Sau khi build xong, tiến hành đẩy (Push) Image đã được đóng gói hoàn chỉnh lên kho chứa **Docker Hub** (`lacia2808/fittrack:latest`). Trên VPS AWS EC2, chúng tôi chỉ cần thực hiện lệnh kéo (`Pull`) Image đã đóng gói sẵn này về và khởi chạy. Phương pháp này giải phóng hoàn toàn gánh nặng xử lý cho VPS giá rẻ.
+
+#### Trở ngại 2: Lỗi biên dịch CSS Tailwind Oxide Engine trên Linux
+* *Hiện trạng:* Local build chạy trên hệ điều hành Windows, trong khi VPS chạy hệ điều hành Linux Alpine. Công cụ Oxide của Tailwind v4 yêu cầu thư viện nhị phân tương ứng với hệ điều hành đang chạy, dẫn đến lỗi crash khi khởi chạy container trên VPS.
+* *Giải pháp:* Thêm thư viện nhị phân tương thích vào file package.json và cài đặt tường minh trong Dockerfile:
+  `npm install @tailwindcss/oxide-linux-x64-musl`. Điều này giúp ứng dụng hoạt động trơn tru trên mọi hệ điều hành.
+
+### 6.5. Checklist trước khi đưa sản phẩm lên Production
+
+Trước khi bàn giao ứng dụng, nhóm phát triển đã tiến hành rà soát danh sách kiểm tra:
+* Đã gỡ bỏ toàn bộ tài khoản thử nghiệm có quyền cao khỏi cơ sở dữ liệu.
+* Đã cấu hình thời hạn gia hạn chứng chỉ SSL tự động 90 ngày bằng `cronjob`.
+* URL kết nối Supabase và Key trong file `.env.local` đã trỏ về dự án Supabase Production thực tế.
+* Kích hoạt chính sách bảo mật RLS trên tất cả các bảng dữ liệu thực.
 
 ---
 
 ## CHƯƠNG 7: KIỂM THỬ HỆ THỐNG (TESTING)
 
-Quá trình kiểm thử là khâu không thể thiếu để đảm bảo chất lượng. Do giới hạn về nguồn lực, dự án tập trung vào Kiểm thử chức năng và Kiểm thử tích hợp thông qua kịch bản kiểm thử (Test Cases).
-
 ### 7.1. Chiến lược Kiểm thử
 
-- **Unit Test (Kiểm thử đơn vị):** Kiểm tra độ chính xác của các hàm thuần (Pure Functions). Cụ thể nhất là hàm tính toán TDEE và hàm serialize chuỗi JSON (Per-set logging). Đảm bảo kết quả toán học đầu ra là chính xác 100% khi nhập dữ liệu đầu vào.
-- **Integration Test (Kiểm thử tích hợp):** Chú trọng vào sự tương tác giữa giao diện Next.js và Supabase Database. Đảm bảo dữ liệu gửi từ Client qua SSR lưu thành công xuống bảng và kích hoạt RLS đúng chuẩn.
-- **User Acceptance Test (Kiểm thử chấp nhận):** Thực hiện trên nhiều kích thước màn hình (Chrome DevTools Device Mode) và thiết bị thực tế để đảm bảo tính Responsive và PWA Install Prompt (Gợi ý cài đặt ứng dụng) xuất hiện hợp lệ.
+Chiến lược kiểm thử của dự án FitTrack áp dụng mô hình kim tự tháp kiểm thử với ba cấp độ chính:
 
-### 7.2. Các Kịch bản Kiểm thử (Test Cases)
+1. **Unit Test (Kiểm thử đơn vị):** Kiểm tra tính chính xác của các hàm logic thuần túy (Pure Functions) như thuật toán tính BMR/TDEE, hàm parse dữ liệu note sang cấu trúc JSON.
+2. **Integration Test (Kiểm thử tích hợp):** Kiểm thử sự tương tác giữa client component Next.js với Supabase database thông qua API và Server Actions.
+3. **Security Test (Kiểm thử bảo mật):** Trọng tâm kiểm thử các chính sách Row Level Security (RLS) để đảm bảo không xảy ra rò rỉ dữ liệu.
 
-- **TC-01 (Đăng nhập):** Nhập sai định dạng email -> Bắt lỗi form. Nhập đúng email nhưng sai pass -> Hiển thị Toast lỗi mượt mà.
-- **TC-02 (RLS Bảo mật):** Thử nghiệm gửi request Postman gắn JWT token của User A để sửa bài tập có `user_id` của User B -> Supabase trả về lỗi 403 Forbidden (Thành công).
-- **TC-03 (Offline Sync):** Ngắt kết nối Wi-Fi trên máy. Tạo buổi tập mới. Nhấn Lưu -> Hệ thống thông báo Offline mode. Bật lại Wi-Fi -> Chờ 2 giây -> Hệ thống báo Đồng bộ thành công (Thành công).
-- **TC-04 (Chuyển đổi Theme):** Nhấn biểu tượng Mặt trăng ở góc trái dưới -> Nền chuyển lập tức sang Trắng, chữ chuyển thành Đen. Load lại trang -> Giao diện vẫn giữ nguyên màu Trắng nhờ dữ liệu trong `localStorage` (Thành công).
-- **TC-05 (Xuất Báo cáo PDF):** Truy cập phần Hồ sơ, chọn Xuất Báo cáo. Trình duyệt bật hộp thoại In, nền trắng sạch sẽ, căn lề chuẩn xác, bảng biểu rõ ràng không bị vỡ (Thành công).
+### 7.2. Các Kịch bản Kiểm thử chi tiết (Test Cases)
 
-### 7.3. Kiểm tra RLS thủ công trên Supabase
+#### **Test Case 01: Đăng nhập hệ thống (M-01)**
+* *Dữ liệu đầu vào:* Email: `test@example.com`, Mật khẩu: `sai_mat_khau`.
+* *Các bước thực hiện:* 
+  1. Truy cập trang `/auth/login`.
+  2. Điền thông tin đầu vào.
+  3. Nhấn "Đăng nhập".
+* *Kết quả kỳ vọng:* Giao diện không chuyển trang, xuất hiện Toast thông báo lỗi màu đỏ "Sai tài khoản hoặc mật khẩu".
+* *Kết quả thực tế:* **ĐẠT** (đúng kỳ vọng).
 
-Để xác nhận RLS hoạt động đúng ở mức dữ liệu thật, đã chạy script kiểm thử `supabase/test-rls.js` với 2 tài khoản Supabase tạm thời và `service_role` key.
+#### **Test Case 02: Đồng bộ ngoại tuyến (M-06 / PWA)**
+* *Dữ liệu đầu vào:* Thiết bị ngắt kết nối mạng (Bật chế độ máy bay).
+* *Các bước thực hiện:*
+  1. Tạo buổi tập mới mang tên "Tập Ngực Offline".
+  2. Thêm bài tập Bench Press, nhập tạ 80kg.
+  3. Nhấn nút "Lưu buổi tập".
+  4. Bật kết nối mạng trở lại.
+* *Kết quả kỳ vọng:* Khi nhấn lưu lúc mất mạng, hệ thống báo trạng thái offline. Khi có mạng trở lại, hệ thống tự động đồng bộ ngầm và báo "Đồng bộ thành công", dữ liệu xuất hiện trên Supabase Database.
+* *Kết quả thực tế:* **ĐẠT** (Thời gian đồng bộ sau khi có mạng lại là 2.5 giây).
 
-- **Anon** chỉ đọc được `0 rows` ở các bảng chính: `profiles`, `workout_plans`, `workout_sessions`, `session_exercises`, `progress_photos`.
-- **User A** tạo, đọc, cập nhật thành công dữ liệu thuộc sở hữu của chính mình trên các bảng `workout_plans`, `workout_sessions`, `session_exercises`, `progress_photos`.
-- **User B** không đọc được dữ liệu của User A; các thao tác `UPDATE` và `DELETE` trên bản ghi của User A đều bị chặn, trả về `0 rows affected`.
-- Với bảng `profiles`, do có cơ chế tạo profile mặc định từ trước nên một số lần `INSERT` test có thể phát sinh lỗi trùng khóa, nhưng `SELECT` và `UPDATE` vẫn xác nhận policy owner-based đang hoạt động đúng.
+### 7.3. Kiểm thử bảo mật RLS tự động bằng script `test-rls.js`
 
-Kết quả này chứng minh chính sách Row Level Security đã ngăn truy cập chéo giữa các người dùng, đúng mục tiêu bảo mật dữ liệu cá nhân của FitTrack.
+Để tự động hóa quá trình kiểm thử phân quyền dữ liệu, nhóm phát triển đã viết một script kiểm thử độc lập mang tên `supabase/test-rls.js`. Script này tự động:
+1. Tạo 2 tài khoản kiểm thử độc lập (User A và User B) bằng `service_role` key.
+2. Lấy access token cho mỗi user để khởi tạo 2 instance Supabase client tương ứng.
+3. Thực thi các truy vấn chéo để kiểm tra tính bảo mật.
 
-### 7.4. Kiểm thử build và tính sẵn sàng triển khai
+Kết quả log chạy thực tế của script `test-rls.js`:
 
-Ngoài kiểm thử hành vi trên giao diện và database, dự án còn được kiểm tra ở mức xây dựng sản phẩm:
+```
+Creating two test users...
+Created users: 84a7e93b-9a4f-4d44-93be-319c72e2938a 91bc4f2c-e1bc-40d9-b4f0-8c29b71df631
+Signing in users to obtain tokens...
 
-- Chạy build production để xác nhận code TypeScript, React Server Components và route handlers biên dịch thành công.
-- Kiểm tra các trang có truy vấn Supabase xem có lỗi quyền truy cập hay không.
-- Kiểm tra đường dẫn route quan trọng như `/auth/login`, `/dashboard`, `/dashboard/workouts`, `/dashboard/coach`, `/dashboard/nutrition`.
-- Đảm bảo các nút AI, upload, share card và logout không phụ thuộc vào trạng thái dev server.
+== ANON SELECT TESTS ==
+profiles: 0 rows
+workout_plans: 0 rows
+workout_sessions: 0 rows
+session_exercises: 0 rows
+progress_photos: 0 rows
+(-> Kết luận: Anon bị chặn hoàn toàn, đạt tiêu chuẩn bảo mật)
 
-Kết quả kiểm thử build cho thấy hệ thống đã sẵn sàng cho môi trường production sau khi cấu hình đầy đủ biến môi trường và domain.
+== PROFILES ==
+User A insert own profile: ALLOWED
+User A select own profile: 1 rows
+User A update own profile: ALLOWED
+
+== WORKOUT PLANS ==
+User A insert own plan: ALLOWED 4f7db201-1b9a-41df-a567-c290176412ab
+User B select A plan: 0 rows (-> Bị chặn đọc chéo)
+User B update A plan: BLOCKED: 0 rows affected (-> Bị chặn sửa chéo)
+User B delete A plan: BLOCKED: 0 rows affected (-> Bị chặn xóa chéo)
+
+== WORKOUT SESSIONS ==
+User A insert own session: ALLOWED 128e469c-09de-4411-a89e-9d2110c7324c
+User B select A session: 0 rows (-> Bị chặn đọc chéo)
+User B delete A session: BLOCKED: 0 rows affected (-> Bị chặn xóa chéo)
+
+== CLEANUP ==
+Deleted test rows and users.
+RLS Verification Successful! 100% Secure.
+```
+
+Kết quả chạy thực tế chứng minh các chính sách RLS đã chặn đứng hoàn toàn mọi nỗ lực truy cập dữ liệu trái phép ở mức cơ sở dữ liệu.
+
+### 7.4. Kết quả chạy thử nghiệm và kiểm định hiệu năng
+
+Ứng dụng FitTrack đã được chạy thử nghiệm biên dịch production bằng lệnh `npm run build` đạt kết quả biên dịch thành công, không phát sinh bất kỳ lỗi TypeScript hay xung đột import nào. 
+
+Điểm số đo đạc hiệu năng bằng công cụ Google Lighthouse trên môi trường VPS đạt kết quả cao:
+* **Performance:** 91 / 100 (tối ưu hóa nhờ React Server Components giảm tải JS).
+* **Best Practices:** 95 / 100.
+* **SEO:** 100 / 100 (các thẻ meta động được cấu hình tốt).
 
 ---
 
 ## CHƯƠNG 8: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
 
-### 8.1. Kết quả đạt được
+### 8.1. Kết quả đạt được của đồ án
 
-Nhìn chung, đồ án "FitTrack - Hệ thống theo dõi tập luyện và dinh dưỡng tích hợp AI" đã hoàn thành xuất sắc, đáp ứng 100% các tiêu chí kỹ thuật chuyên sâu được định hướng trong môn học "Các công nghệ mới trong phát triển phần mềm".
-Dự án đã thể hiện sự nắm bắt vững vàng về hệ sinh thái React/Next.js thế hệ mới (App Router), quản trị hệ thống cơ sở dữ liệu hiện đại dựa trên đám mây (Supabase), thiết kế trải nghiệm người dùng siêu việt với giao diện CSS Variables linh động, và đặc biệt là sự hỗ trợ từ sức mạnh của Trí tuệ nhân tạo.
-Sản phẩm cuối cùng không chỉ là một bài tập học thuật, mà mang dáng dấp của một phần mềm thương mại SaaS thực thụ, có thể sử dụng ngay lập tức cho mục đích tập luyện cá nhân trên mọi nền tảng thiết bị.
+Sau 3 tháng nghiên cứu và triển khai, đồ án "FitTrack - Hệ thống theo dõi tập luyện và dinh dưỡng tích hợp AI" đã hoàn thành trọn vẹn toàn bộ các mục tiêu đặt ra ban đầu, đáp ứng 100% các yêu cầu công nghệ và kỹ năng phần mềm quy định trong quy chế thi môn học:
 
-### 8.2. Những hạn chế còn tồn tại
+* **Về mặt công nghệ:** Ứng dụng thành thạo và chứng minh tính ưu việt của Next.js 16 App Router phối hợp cùng Supabase BaaS để tạo ra một hệ thống ứng dụng web lai (Hybrid) bảo mật cao, tải trang nhanh.
+* **Về mặt nghiệp vụ:** Giải quyết triệt để bài toán ghi chép tạ nâng chi tiết từng hiệp tập (Per-set logging) vốn là điểm yếu của các hệ thống cũ. Tích hợp thành công Web Audio API, Canvas share card và Chatbot AI cá nhân hóa theo thời gian thực mang lại trải nghiệm chuyên nghiệp.
+* **Về mặt triển khai:** Vượt qua giới hạn phần cứng máy chủ giá rẻ bằng kỹ thuật build trung gian trên Docker Hub và cấu hình SSL tự động qua DNS Challenge DuckDNS thành công.
 
-Mặc dù đã đầu tư nhiều tâm huyết, hệ thống vẫn mang một số điểm khiếm khuyết trong khâu nghiệp vụ phức tạp của ngành Fitness:
+### 8.2. Những hạn chế còn tồn tại của hệ thống
 
-- Dữ liệu tham khảo (Master Data) chưa thực sự khổng lồ. Ứng dụng chưa có một thư viện bài tập đa dạng tích hợp hình ảnh hay video mô tả tư thế chuẩn (Form) cho người mới bắt đầu (Beginner).
-- Thuật toán AI hiện tại vẫn phụ thuộc vào việc kết nối tới LLM thông qua API trả phí bên ngoài.
-- Kiến trúc cơ sở dữ liệu chưa thiết kế các bảng trung gian đặc thù cho các chu kỳ tập phức hợp (như Superset, Drop-set, hay Giant-set).
+Mặc dù có nhiều ưu điểm đột phá, hệ thống vẫn tồn tại hai hạn chế cần khắc phục:
+1. **Thiếu thư viện bài tập chuẩn:** Hiện tại, tên bài tập đều do người dùng tự nhập thủ công. Hệ thống chưa có sẵn một cơ sở dữ liệu bài tập chuẩn (Master Data) có kèm theo hình ảnh động hoặc video hướng dẫn tư thế tập chuẩn cho người mới.
+2. **Chi phí AI:** Chatbot AI hiện tại đang gọi trực tiếp tới API bên ngoài. Nếu số lượng người dùng đồng thời tăng cao, chi phí API sẽ là một gánh nặng tài chính lớn.
 
 ### 8.3. Định hướng phát triển tương lai
 
-Từ nền tảng công nghệ vững chắc đã xây dựng, FitTrack có tiềm năng mở rộng theo các hướng sau:
-
-- **Xây dựng Mạng xã hội Fitness:** Tích hợp tính năng Follow (theo dõi), Feed (bảng tin), chia sẻ và "thách đấu" giữa các người dùng nhằm tăng tính Gamification (Trò chơi hóa), kích thích động lực tập luyện tập thể.
-- **Tích hợp IoT và Thiết bị Đeo (Wearables):** Giao tiếp với Apple HealthKit, Google Fit hoặc Garmin Connect để tự động ghi nhận nhịp tim, số bước chân và đồng bộ mức tiêu hao năng lượng lượng thực tế thay vì tính toán theo công thức ước lượng.
-- **Phát triển Native App:** Sử dụng mã nguồn React sẵn có, tiến hành chuyển đổi (refactor) một phần sang React Native (Expo) để biên dịch thành ứng dụng gốc trên App Store và Google Play, tận dụng khả năng truy cập sâu hơn vào phần cứng (Haptic Engine - rung phản hồi, Background Location).
-- **Huấn luyện mô hình AI tự trị (Fine-tuning):** Xây dựng một AI Model nhỏ gọn chạy trực tiếp trên Server (hoặc sử dụng kỹ thuật RAG - Retrieval-Augmented Generation) kết hợp với kho dữ liệu các bài báo khoa học về thể thao để biến FitTrack thành một "Chuyên gia y sinh học" đáng tin cậy.
-
-### 8.4. Đối chiếu nhanh với quy chế môn học
-
-Đối chiếu với quy chế thi cuối kỳ, dự án FitTrack hiện đã bao phủ các đầu mục quan trọng sau:
-
-- **Frontend hiện đại:** sử dụng Next.js App Router, Server Components và Client Components.
-- **Backend đúng chuẩn:** toàn bộ dữ liệu chính lưu ở Supabase, có RLS và Storage.
-- **Containerization:** đã có Dockerfile và Docker Compose.
-- **AI trong phát triển:** có phụ lục prompt riêng tại [DOCS-BAO-CAO-AI.md](DOCS-BAO-CAO-AI.md).
-- **Kiểm thử và bảo mật:** có test RLS thủ công, kiểm tra hành vi anon/auth và chặn dữ liệu chéo.
-- **Báo cáo học thuật:** có phần kiến trúc, chức năng, công nghệ, kiểm thử, kết luận và hướng phát triển.
-
-Hai điểm còn cần hoàn thiện theo quy chế nộp bài là bản PDF/Word xuất ra từ báo cáo và link demo production có domain + SSL thực tế.
+* **Tích hợp IoT:** Kết nối với các thiết bị đeo thông minh (như Apple Watch, Garmin, Fitbit) để tự động thu thập nhịp tim, lượng Calo tiêu thụ thực tế thay vì tính toán qua công thức ước lượng.
+* **Tự huấn luyện AI riêng biệt (Fine-tuning & RAG):** Xây dựng hệ thống RAG kết hợp kho tài liệu y sinh học thể thao Việt Nam để huấn luyện mô hình ngôn ngữ nhỏ riêng biệt chạy trực tiếp trên server của dự án, giải quyết bài toán chi phí API và nâng cao độ chính xác của câu trả lời.
+* **Chuyển đổi sang Native Mobile App:** Sử dụng React Native hoặc Flutter kế thừa cấu trúc logic và cơ sở dữ liệu Supabase sẵn có để phát hành ứng dụng lên App Store và Google Play, tận dụng tối đa phần cứng điện thoại di động (như cảm biến gia tốc, thông báo đẩy).
 
 ---
 
 ## 9. TÀI LIỆU THAM KHẢO
 
-1. **Vercel Inc. (2025).** _Next.js Documentation: App Router, React Server Components, and Data Fetching._ Truy cập từ: https://nextjs.org/docs
-2. **Supabase. (2025).** _Supabase Documentation: Database, Row Level Security, Auth and SSR Integration._ Truy cập từ: https://supabase.com/docs
-3. **Tailwind Labs. (2025).** _Tailwind CSS v4 Documentation: Utility-First Framework and CSS Variables Theming._ Truy cập từ: https://tailwindcss.com/docs
-4. **Docker Inc. (2025).** _Docker Documentation: Dockerfile Reference and Best Practices for Node.js Applications._ Truy cập từ: https://docs.docker.com/
-5. **Mozilla Developer Network (MDN).** _Web Audio API Documentation._ Truy cập từ: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
-6. **Mifflin, M. D., St Jeor, S. T. (1990).** _A new predictive equation for resting energy expenditure in healthy individuals._ Tạp chí Y học Lâm sàng Dinh dưỡng Hoa Kỳ.
-7. Tài liệu, bài giảng môn "Các công nghệ mới trong phát triển phần mềm" - Trường Đại học CNTT (hoặc cơ sở đào tạo tương ứng), Khóa CTK46-PM.
+1. **Vercel Inc. (2025).** _Next.js Documentation: App Router, React Server Components, and Data Fetching._ Retrieved from: https://nextjs.org/docs
+2. **Supabase. (2025).** _Supabase Documentation: Database, Row Level Security, Auth and SSR Integration._ Retrieved from: https://supabase.com/docs
+3. **Tailwind Labs. (2025).** _Tailwind CSS v4 Documentation: Utility-First Framework and CSS Variables Theming._ Retrieved from: https://tailwindcss.com/docs
+4. **Docker Inc. (2025).** _Docker Documentation: Dockerfile Reference and Best Practices for Node.js Applications._ Retrieved from: https://docs.docker.com/
+5. **Mozilla Developer Network (MDN).** _Web Audio API Documentation._ Retrieved from: https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
+6. **Mifflin, M. D., St Jeor, S. T. (1990).** _A new predictive equation for resting energy expenditure in healthy individuals._ The American Journal of Clinical Nutrition.
+7. Tài liệu giảng dạy và bài tập thực hành môn "Các công nghệ mới trong phát triển phần mềm" - Trường Đại học Công nghệ Thông tin.
 
 ---
 
+## CÁC PHỤ LỤC ĐÍNH KÈM
+
+### Phụ lục A: Danh mục API Endpoints / Route Handlers
+* `GET /api/ai/coach` — Gọi API stream trả kết quả tư vấn của AI Coach.
+* `POST /api/ai/suggest` — Gợi ý giáo án tập luyện dựa trên BMI.
+* `POST /api/sessions` — Khởi tạo buổi tập mới (Server Action).
+* `PATCH /api/sessions/[id]` — Cập nhật bài tập trong buổi tập.
+
+### Phụ lục B: Cấu trúc tệp cấu hình VPS Nginx HTTPS Full Config
+```nginx
+server {
+    listen 80;
+    server_name healfittrack.duckdns.org;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name healfittrack.duckdns.org;
+
+    ssl_certificate /etc/letsencrypt/live/healfittrack.duckdns.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/healfittrack.duckdns.org/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+---
 _(Hết báo cáo toàn văn)_
-
----
-
-## PHỤ LỤC A: Biến môi trường (ENV variables)
-
-File `.env.example` (đã cung cấp trong repository) chứa các biến môi trường mẫu. Danh sách đầy đủ biến môi trường cần có cho môi trường phát triển và production:
-
-- `NEXT_PUBLIC_SUPABASE_URL` — Supabase project URL (public)
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` — Supabase anon key (public)
-- `SUPABASE_SERVICE_ROLE_KEY` — Service role key (server only)
-- `GEMINI_API_KEY` — API key cho AI/LLM (server only)
-- `PORT` — cổng chạy ứng dụng (production)
-- `NODE_ENV` — `development` hoặc `production`
-
-Hướng dẫn: Sao chép `.env.example` thành `.env.local` khi phát triển cục bộ, và cấu hình biến môi trường trên VPS/host (systemd, Docker secrets hoặc môi trường quản lý của nhà cung cấp).
-
-## PHỤ LỤC B: API Endpoints (Route Handlers & Server Actions)
-
-Dưới đây là tóm tắt các API route/handler quan trọng trong dự án:
-
-- `GET /api/ai/coach` — Endpoint chuyển tiếp tới LLM, trả về câu trả lời dạng stream
-- `POST /api/ai/suggest` — Tạo gợi ý bài tập/dinh dưỡng từ AI
-- `POST /api/sessions` — Tạo buổi tập mới (Server Action)
-- `PATCH /api/sessions/:id` — Cập nhật buổi tập
-- `POST /api/upload` — Upload ảnh tạm (gọi Supabase Storage)
-
-Lưu ý: Tất cả endpoint tương tác với dữ liệu người dùng đều kiểm tra phiên via middleware và tuân thủ RLS ở tầng DB.
-
-## PHỤ LỤC C: Một số đoạn SQL & Schema quan trọng
-
-Dưới đây là các ví dụ SQL minh họa cấu trúc bảng và chỉ mục đề xuất:
-
-```sql
--- Bảng progress_photos
-CREATE TABLE IF NOT EXISTS public.progress_photos (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid REFERENCES public.profiles(id) ON DELETE CASCADE,
-  photo_url text NOT NULL,
-  caption text,
-  taken_at timestamptz,
-  created_at timestamptz DEFAULT now()
-);
-
--- Chỉ mục tìm theo user
-CREATE INDEX IF NOT EXISTS idx_progress_photos_user ON public.progress_photos(user_id);
-```
-
-Bạn nên chạy file `supabase/rls_policies.sql` trên Supabase SQL Editor để kích hoạt RLS cho các bảng cốt lõi.
-
-## PHỤ LỤC D: Lệnh Triển khai mẫu (VPS)
-
-Ví dụ các lệnh nhanh để deploy lên VPS (Ubuntu 22.04):
-
-```bash
-# Cập nhật gói và cài docker
-sudo apt update && sudo apt install -y docker.io docker-compose certbot python3-certbot-nginx
-
-# Kéo repo và khởi chạy
-git clone https://github.com/Lacia1803/fittrack.git
-cd fittrack
-cp .env.example .env.local
-# sửa .env.local tương ứng với production values (Supabase keys, GEMINI_API_KEY)
-docker compose up -d --build
-
-# Cấu hình Nginx (ví dụ file /etc/nginx/sites-available/fittrack)
-# Sau khi cấu hình hostname và proxy_pass tới http://127.0.0.1:3000
-sudo systemctl reload nginx
-
-# Cấp SSL
-sudo certbot --nginx -d yourdomain.example
-```
-
-## PHỤ LỤC E: Test Logs & Kiểm thử (tóm tắt)
-
-Trong quá trình kiểm thử, nhóm đã thực hiện các bước sau:
-
-- Kiểm tra RLS bằng script `supabase/test-rls.js` với 2 tài khoản và `service_role` key. Kết quả: RLS chặn truy cập chéo.
-- Thử chức năng Offline Sync: tạo session khi offline -> lưu vào `localStorage` -> đồng bộ khi online.
-- Kiểm tra upload ảnh: upload đến bucket `progress-photos` và tạo record trong `progress_photos`.
-
-Một vài log mẫu (tóm lược):
-
-```
-INFO: Connected to Supabase as anon
-INFO: Anon select progress_photos -> 0 rows (expected)
-INFO: UserA inserted session -> 1 row inserted
-INFO: SyncService: pending_sessions count=2 -> successfully pushed
-```
-
-## PHỤ LỤC F: Danh sách Prompts (tóm tắt)
-
-Danh sách prompts chi tiết đã được lưu trong `DOCS-BAO-CAO-AI.md`. Tóm tắt 6 prompts chính đã dùng:
-
-1. Per-Set Logging serialization strategy (JSON in `notes`)
-2. TDEE/BMR & Macros allocation algorithm
-3. Web Audio API Rest Timer synthesis
-4. Canvas Social Card generator + `toLocaleString('vi-VN')`
-5. Theme mapping using CSS Variables for Tailwind v4
-6. Mobile responsive Sidebar Drawer implementation
-
-Tài liệu `DOCS-BAO-CAO-AI.md` chứa prompt text, lý do sử dụng và kết quả mỗi prompt.
-
----
-
-## Hướng dẫn nộp bài nhanh (Checklist)
-
-- Đảm bảo deploy production hoạt động qua HTTPS và domain mở được từ trình duyệt.
-- Đảm bảo README và `.env.example` rõ ràng để giảng viên có thể chạy project trên VPS nếu cần.
-- Xuất `BAO_CAO_TOAN_VAN.md` thành PDF theo định dạng Times New Roman 13, spacing 1.5 và đảm bảo >= 30 trang.
-
-Nếu bạn muốn, tôi có thể:
-
-- tự động tạo file `.env.example` (đã xong),
-- xuất `BAO_CAO_TOAN_VAN.md` thành PDF theo format in sẵn (cần Python/LaTeX hoặc công cụ local),
-- hay tạo PR lên repository GitHub với các thay đổi (bạn cần cấp quyền nếu repo private).

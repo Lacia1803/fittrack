@@ -2,9 +2,7 @@ version: '3.8'
 
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: lacia2808/fittrack:latest
     container_name: fittrack_app
     restart: always
     ports:
